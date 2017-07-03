@@ -227,24 +227,24 @@ img.user_icon{
 a[href^=tel]{color: inherit; text-decoration: none;}
 
 .rubber {
-  box-shadow: 0 0 0 3px #f1e113, 0 0 0 2px #ff5200 inset;  
-  border: 2px solid transparent;
-  border-radius: 4px;
-  display: inline-block;
-  padding: 5px 2px;
-  line-height: 22px;
-  color: #00ff16;
-  font-size: 24px;
-  font-family: 'Black Ops One';
-  text-transform: uppercase;
-  text-align: center;
-  opacity: 0.8;
-  width: 155px;
-  transform: rotate(15deg);
-  margin-top: 110px;
-  margin-left: 145px;
-  position: absolute;
-  
+    box-shadow: 0 0 0 3px #f1e113, 0 0 0 2px #ff5200 inset;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 5px 5px;
+    line-height: 22px;
+    color: #00ff16;
+    font-size: 24px;
+    font-family: 'Black Ops One';
+    text-transform: uppercase;
+    /* text-align: center; */
+    /* opacity: 0.8; */
+    /* width: 155px; */
+    /* transform: rotate(15deg); */
+    /* margin-top: 110px; */
+    /* margin-left: 145px; */
+    /* position: absolute; */
+    margin-bottom: 7px;
 }
 
 /*

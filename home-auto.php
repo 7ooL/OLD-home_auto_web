@@ -8,11 +8,6 @@
 <script type="text/javascript" src="home-auto.js"></script>
 </head>
 <body>
-
-
-
-	<div class="rubber" style="display: none;"></div>
-
 	<div id="button_content" class="icon">
 		<strong>Controls</strong>
 		<div id="buttons">
@@ -67,7 +62,7 @@
 	</div>
 
 	<div id="config_content">
-
+		<div class="rubber" style="display: none;"></div>
 		<div id="group">
 			<div id="profile" class="icon">
 				<strong>Profile</strong>
