@@ -11,118 +11,153 @@ body {
 	color: white;
 }
 
-#current_weather_icon {
 
-}
-#current_weather_icon img{
-    width: 90;
-    margin-left: -20;
+#button_content{
+	float:left;
+	margin-left: 5;
+	height: 100%;
 }
 
-#current_weather_degree{
-    position: absolute;
-    margin-left: 65;
-    margin-top: -65;
-    font-size: 1.8em;
-    letter-spacing: -0.05em;
-    color: #fff;
+#today{
+	float: right;
+	text-align: center;
+    margin-right: 0;
+    text-transform: capitalize;
+    height: 100%;
 }
 
 
-#current_weather_word {
-	position: absolute;
-	bottom: 0.3em;
+#month{
+	display: inline-block;
+	padding-top: 0.1em;
+}
+
+#digit{
+	display: inline-block;
+}
+#day{
 	color: #fd9f1b;
 }
 
+
+#current_weather_degree{
+    font-size: 4em;
+    letter-spacing: -0.05em;
+    padding-left: .1em;
+    padding-right: .1em;
+    color: #fff;
+}
+
+#current_weather_icon img{
+	margin: auto;
+}
+
+#current_weather_word {
+    color: #fd9f1b;
+    display: inline-block;
+    padding-left: .5em;
+
+}
+
 #current_weather_link {
-    position: absolute;
-    margin-left: 112;
-    margin-top: -20;
     z-index: 10;
     color: #fd9f1b;
+    display: inline-block;
+    padding-right: .5em;
+}
+
+#current_inside_degree{
+    font-size: 6em;
+    letter-spacing: -0.05em;
+    padding-left: .1em;
+    padding-right: .1em;
+    margin-top: -25px;
+    margin-bottom: -25px;
+}
+#current_inside_htsp{
+	color: #ff8181;
+}
+#current_inside_clsp{
+	color: #00e7ff
+}
+
+#current_weather_humid, #current_inside_humid{
+	text-transform: capitalize;
+	padding-bottom: 0.1em;
+}
+
+#humid_filter, #hvac_filter{
+	text-transform: capitalize;
+	font-size: 75%;
 }
 
 
-.datetime {
-	float: left;
+#profile{
+	width: 100%;
+}
+#light_scene{
+	width: 100%;
+}
+#heatpump{
+	width: 100%;
+}
+#humidifer{
+	width: 100%;
+}
+#inside{
+    width: 100%;
+}
+#schedule_table{
+	margin-left: auto;
+    margin-right: auto;
+
+}
+.box_content{
+	text-transform: uppercase;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
-.status {
-	float: left;
-	text-align: left;
-}
-
-.weather {
-	float: left;
-	text-align: left;
-}
-
-#clock {
-	float: left;
-	color: #fff;
-	padding-top: 6;
-}
-
-time.icon {
-	font-size: 1.2em; /* change icon size */
-	margin-right: 10px;
-	display: block;
-	width: 8em;
-	height: 8em;
-	border-radius: 1.2em;
-	overflow: hidden;
-	position: relative;
-	border-bottom: 1px solid;
-	border-bottom-color: rgba(255, 255, 255, 0.2);
-	background-color: rgba(255, 255, 255, 0.2);
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+#group{
+	display: flex;
 }
 
 div.icon{
-	font-size: 1.2em; /* change icon size */
-	display: block;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	height: 8em;
-	border-radius: 1.2em;
-	overflow: hidden;
-	position: relative;
-	border-bottom: 1px solid;
-	border-bottom-color: rgba(255, 255, 255, 0.2);
-	background-color: rgba(255, 255, 255, 0.2);
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    font-size: 1.2em;
+    display: block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    /* height: 8em; */
+    /* border-radius: 1.2em; */
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid;
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 div.icon strong {
-	position: absolute;
-	top: 0;
-	padding: 0.4em 0;
-	color: #2f2f2f;
-	background-color: #fd9f1b;
-	text-align: center;
-	width: 100%;
-}
-.status_box{
-	width: 370px;
+    top: 0;
+    padding-right: 1.0em;
+    color: #2f2f2f;
+    background-color: #737270;
+    text-align: center;
+    width: 100%;
 }
 
-.weather_box{
-	width: 8em;
-}
 
 div.icon * {
 	display: block;
-/*	width: 370px;*/
-	font-size: 1em;
 	font-weight: bold;
 	font-style: normal;
 }
 
 div.icon span {
-	margin-left: 20;
+	/* margin-left: 20; */
 	letter-spacing: -0.05em;
-	padding-top: 38px;
+	padding-top: .5em;
+	padding-bottom: .5em;
 	color: #fff;
 	text-transform: capitalize;
 }
@@ -134,137 +169,37 @@ div.icon span p {
 	width: 370px;
 }
 img.user_icon{
-	height: 47px;
 	padding: 2px;
-	float: left;
-}
-
-time.icon * {
-	display: block;
-	width: 100%;
-	font-size: 1em;
-	font-weight: bold;
-	font-style: normal;
-	text-align: center;
-}
-
-time.icon strong {
-	position: absolute;
-	top: 0;
-	padding: 0.4em 0;
-	color: #2f2f2f;
-	background-color: #fd9f1b;
-}
-
-time.icon em {
-	position: absolute;
-	bottom: 0.3em;
-	color: #fd9f1b;
-}
-
-
-time.icon span {
-    font-size: 3.0em;
-    letter-spacing: -0.05em;
-    padding-top: 35;
-    color: #fff;
-  }
-
-#gauge-container {
-	margin: 0 auto;
-	overflow: hidden;
-	width: 614px;
-	height: 324px;
-	background: transparent url("img/home-auto.png") no-repeat 50% 50%;
-}
-
-.k-gauge {
-	float: left;
-}
-
-#humid-gauge {
-	width: 142px;
-	height: 147px;
-	margin: 85px 0 0 38px;
-}
-
-#temp-gauge {
-	width: 216px;
-	height: 216px;
-	margin: 57px 0 0 20px;
-}
-
-#filter-gauge {
-	position: absolute;
-	width: 216px;
-	height: 216px;
-	margin: 57px 0 0 20px;
-}
-
-#hvac_profile_gauge {
-	float: left;
-	text-transform: uppercase;
-}
-
-#hvac_pump_gauge {
-	float: left;
-	position: absolute;
-	margin-left: 410px;
-	margin-top: 290;
-	white-space: nowrap;
-}
-
-.hpon {
-	color: red;
-}
-
-.hpoff {
-	color: #fff;
+	margin: auto;
 }
 
 .home {
-	position: absolute;
-	margin-top: 150;
-	margin-left: 458;
 	color: #FFA500;
-	font-size: 200%;
+	font-size: 175%;
 	text-shadow: 2px 2px 2px #AF3000;
 }
 
-.sleep {
-	position: absolute;
-	margin-top: 149;
-	margin-left: 455;
+.sleep, .cooling {
 	color: #40BFFF;
-	font-size: 200%;
+	font-size: 175%;
 	text-shadow: 2px 2px 2px #006FAF;
 }
 
-.wake {
-	position: absolute;
-	margin-top: 150;
-	margin-left: 460;
+.wake, .error {
 	color: #BF40FF;
-	font-size: 200%;
+	font-size: 175%;
 	text-shadow: 2px 2px 2px #6F00AF;
 }
 
-.away {
-	position: absolute;
-	margin-top: 149;
-	margin-left: 455px;
+.away, .unknown {
 	color: #FFFF40;
-	font-size: 200%;
+	font-size: 175%;
 	text-shadow: 2px 2px 2px #AFAF00;
-	color: white;
 }
 
-.vacation {
-	position: absolute;
-	margin-top: 155;
-	margin-left: 452;
+.vacation, .heating {
 	color: #FF4040;
-	font-size: 22;
+	font-size: 175%;
 	text-shadow: 2px 2px 2px #AF0000;
 }
 
@@ -275,6 +210,18 @@ time.icon span {
 	color: #00ff00;
 	font-size: 22;
 	text-shadow: 2px 2px 2px #009900;
+}
+
+.off {
+	color: #c0c0c0;
+	font-size: 175%;
+	text-shadow: 2px 2px 2px #808080;
+}
+
+.on{
+	color: #00ff00;
+	font-size: 175%;
+	text-shadow: 2px 2px 2px #008000;
 }
 
 a[href^=tel]{color: inherit; text-decoration: none;}
@@ -300,50 +247,36 @@ a[href^=tel]{color: inherit; text-decoration: none;}
   
 }
 
+/*
 #hvac_mode {
 	float: left;
 	position: relative;
 }
-
-#filter-gauge {
-	position: absolute !important;
-	margin-left: 465px;
-	margin-top: 107px;
-}
+*/
 
 .auto {
-	color: #ea7001;
-	margin-top: 255px;
-	right: 127px;
+	color: #ffffff;
 }
 
 .heat {
 	color: red;
-	margin-top: 255px;
-	right: 127px;
 }
 
 .cool {
 	color: #40BFFF;
-	margin-top: 255px;
-	right: 127px;
 }
 
 .fanonly {
-	color: white;
-	margin-top: 252px;
-	right: 132px;
-	font-size: 70%;
+	color: #ea7001;
 }
 
 .empty {
 	color: #000;
-	margin-top: 255px;
-	right: 125px;
 }
 
 #buttons {
 	text-align: center;
+	padding-top: .5em;
 }
 
 button {
@@ -482,15 +415,14 @@ button.depth:active {
 }
 
 #refresh {
-	position: fixed;
-	bottom: 10;
-	right: 10;
-	color: #e7e7e7;
+    position: absolute;
+    bottom: 10;
+    color: #e7e7e7;
+    font-size: 75%;
 }
 
-#people_home_box {
-	position: fixed;
-	bottom: 10;
+hr{
+	border-color: #ea7001;
 }
 
 
@@ -511,39 +443,21 @@ button.depth:active {
 	text-align: center;
 }
 
-#top_content {
-	display: inline-block;
-}
-
-#people_home_box {
-	float: left;
-	text-align: center;
-}
-
-
-#bottom_content {
-	display: inline-block;
-	padding-top: 10px;
-}
-
 #autorun_indicator, #hvac_indicator, #humid_indicator, #lights_indicator
 	{
 	margin-left: 10px;
 	margin-top: -3;
 }
 
-#hvac_hold_gauge {
-	position: absolute;
-	overflow: hidden;
-	margin-top: 185;
-	margin-left: 450;
-	padding: 1;
+
+#hvac_hold_mode {
+	font-size: 75%;
 }
 
 #hold_indicator {
-	overflow: hidden;
-	float: left;
+    display: inline-block;
 }
+
 
 .text-on {
 	color: white;
@@ -551,25 +465,14 @@ button.depth:active {
 }
 
 .text-off {
-	color: black;
+	color: #525151;
 	text-shadow: 1px 1px 1px #808080;
 }
 
 #led-hold-text {
-	overflow: hidden;
-	text-align: right;
-	padding-left: 3px;
-	font-size: 75%;
-}
+    padding-left: 3px;
+    display: inline-block;
 
-span>.led-off-big {
-	margin: 0 auto;
-	width: 24px;
-	height: 24px;
-	background-color: #9b9fa0;
-	border-radius: 50%;
-	box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #000000 0 -1px 9px,
-		#352e2e 0 2px 5px;
 }
 
 .led-off {
@@ -590,21 +493,12 @@ span>.led-off-big {
 	border-radius: 50%;
 	box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #23678a 0 -1px 9px,
 		#008cba 0 2px 5px;
-
-}
-.led-blue {
-	margin: 0 auto;
-	width: 24px;
-	height: 24px;
-	background-color: #13d7ec;
-	border-radius: 50%;
-	box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #154056 0 -1px 9px,
-		rgba(33,186,230,0.63) 0 2px 5px;
-	-webkit-animation: blinkBlue 1s infinite;
+			-webkit-animation: blinkBlue 1s infinite;
 	-moz-animation: blinkBlue 1s infinite;
 	-ms-animation: blinkBlue 1s infinite;
 	-o-animation: blinkBlue 1s infinite;
 	animation: blinkBlue 1s infinite;
+
 }
 
 @-webkit-keyframes blinkBlue {
@@ -631,129 +525,4 @@ span>.led-off-big {
 	from { background-color:#13d7ec;}
 	50% { background-color : #40bfff; box-shadow : rgba (0,0,0,0.2) 0 -1px 7px 1px, inset #185258 0 -1px 9px, #18254a 0 2px 0;}
 	to { background-color: #78a9ad;}
-}
-span>.led-green {
-	margin: 0 auto;
-	width: 24px;
-	height: 24px;
-	background-color: #ABFF00;
-	border-radius: 50%;
-	box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px,
-		#89FF00 0 2px 12px;
-	/*
-  -webkit-animation: blinkGreen 1s infinite;
-  -moz-animation: blinkGreen 1s infinite;
-  -ms-animation: blinkGreen 1s infinite;
-  -o-animation: blinkGreen 1s infinite;
-  animation: blinkGreen 1s infinite;
-  */
-}
-
-@-webkit-keyframes blinkGreen {
-	from { background-color:#ABFF00;}
-	50%{ background-color : #426200; box-shadow : rgba(0,0,0,0.2) 0 -1px 7px 1px, inset #283b00 0 -1px 9px, #184a1a 0 2px 0;}
-	to { background-color: #ABFF00;}
-}
-@-moz-keyframes blinkGreen {
-	from { background-color:#ABFF00;}
-	50%{ background-color : #426200; box-shadow : rgba(0,0,0,0.2) 0 -1px 7px 1px, inset #283b00 0 -1px 9px, #184a1a 0 2px 0;}
-	to { background-color: #ABFF00;}
-}
-@-ms-keyframes blinkGreen {
-	from { background-color:#ABFF00;}
-	50%{ background-color : #426200; box-shadow : rgba(0,0,0,0.2) 0 -1px 7px 1px, inset #283b00 0 -1px 9px, #184a1a 0 2px 0;}
-	to { background-color: #ABFF00;}
-}
-@-o-keyframes blinkGreen {
-	from { background-color:#ABFF00;}
-	50%{ background-color : #426200; box-shadow : rgba(0,0,0,0.2) 0 -1px 7px 1px, inset #283b00 0 -1px 9px, #184a1a 0 2px 0;}
-	to { background-color: #ABFF00;}
-}
-@keyframes blinkGreen {
-	from { background-color:#ABFF00;}
-	50%{ background-color : #426200; box-shadow : rgba(0,0,0,0.2) 0 -1px 7px 1px, inset #283b00 0 -1px 9px, #184a1a 0 2px 0;}
-	to { background-color: #ABFF00;}
-}
-
-
-.led-red {
-	margin: 0 auto;
-	width: 24px;
-	height: 24px;
-	background-color: #F00;
-	border-radius: 50%;
-	box-shadow: rgba(255, 10, 10, 0.60) 0 -1px 7px 1px, inset rgba(53, 4, 4, 0.6) 0 -1px 9px,
-		rgba(169, 23, 23, 0.5) 0 2px 12px;
-	-webkit-animation: blinkRed 1s infinite;
-	-moz-animation: blinkRed 1s infinite;
-	-ms-animation: blinkRed 1s infinite;
-	-o-animation: blinkRed 1s infinite;
-	animation: blinkRed 1s infinite;
-}
-
-@-webkit-keyframes blinkRed {
-	from { background-color:#F00;}
-	50%{ background-color : #A00; box-shadow : rgba (0,0,0,0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255,0,0,0.5) 0 2px 0;}
-	to { background-color: #F00;}
-}
-@-moz-keyframes blinkRed {
-	from { background-color:#F00;}
-	50%{ background-color : #A00; box-shadow : rgba (0,0,0,0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255,0,0,0.5) 0 2px 0;}
-	to { background-color: #F00;}
-}
-@-ms-keyframes blinkRed {
-	from { background-color:#F00;}
-	50%{ background-color : #A00; box-shadow : rgba (0,0,0,0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255,0,0,0.5) 0 2px 0;}
-	to { background-color: #F00;}
-}
-@-o-keyframes blinkRed {
-	from { background-color:#F00;}
-	50%{ background-color : #A00; box-shadow : rgba (0,0,0,0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255,0,0,0.5) 0 2px 0;}
-	to { background-color: #F00;}
-}
-@keyframes blinkRed {
-	from { background-color:#F00;}
-	50%{ background-color : #A00; box-shadow : rgba (0,0,0,0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255,0,0,0.5) 0 2px 0;}
-	to { background-color: #F00;}
-}
-
-.led-yellow {
-	margin: 0 auto;
-	width: 24px;
-	height: 24px;
-	background-color: #F00;
-	border-radius: 50%;
-	box-shadow: rgba(217, 255, 71, 0.60) 0 -1px 7px 1px, inset #808002 0 -1px 9px,
-		#FF0 0 2px 5px;
-	-webkit-animation: blinkYellow 1s infinite;
-	-moz-animation: blinkYellow 1s infinite;
-	-ms-animation: blinkYellow 1s infinite;
-	-o-animation: blinkYellow 1s infinite;
-	animation: blinkYellow 1s infinite;
-}
-
-@-webkit-keyframes blinkYellow {    
-	from { background-color: #FF0; }
-    50% { background-color: #efef1d; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 0; }
-    to { background-color: #FF0; }
-}
-@-moz-keyframes blinkYellow {
-	from { background-color: #FF0; }
-    50% { background-color: #efef1d; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 0; }
-    to { background-color: #FF0; }
-}
-@-ms-keyframes blinkYellow {
-	from { background-color: #FF0; }
-    50% { background-color: #efef1d; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 0; }
-    to { background-color: #FF0; }
-}
-@-o-keyframes blinkYellow {
-	from { background-color: #FF0; }
-    50% { background-color: #efef1d; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 0; }
-    to { background-color: #FF0; }
-}
-@keyframes blinkYellow {
-	from { background-color: #FF0; }
-    50% { background-color: #efef1d; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 0; }
-    to { background-color: #FF0; }
 }

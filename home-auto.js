@@ -9,11 +9,7 @@ jQuery(document).ready(function() {
 	date_time('clock'); // refresh every second
 	grabConfigFile(); // refresh every 10
 	$('#config_content').hide();
-	$('#hvac_info').hide();
-	createGaugeTemp(1,1,1,1);
-	creategaugeHumid(1,1);
-	createFilterGauge(1, 1);
-	
+
 })
 
 function getTime() {
@@ -164,7 +160,7 @@ function main(configs) {
    }
 	
 	// build people home list
-    document.getElementById('people_home').innerHTML = ""; //clear out names
+    document.getElementById('people_home').innerHTML = ""; // clear out names
     for(var name in settings.people_home) {
     	if ( settings.people_home[name] == "yes") {
     		checkImage('/html/home-auto/img/user_img/'+name+'_icon.ico', name);			
@@ -178,9 +174,9 @@ function main(configs) {
     } else {
     	var w_icon = settings.weather['icon'];	
     }
-    //'nt_'+settings.weather['icon']
+    // 'nt_'+settings.weather['icon']
     
-    document.getElementById('current_weather_icon').innerHTML = '<img src="/html/home-auto/img/weather_icons/white/png/64x64/'+w_icon+'.png"/>';
+    document.getElementById('current_weather_icon').innerHTML = '<img src="/html/home-auto/img/weather_icons/white/png/128x128/'+w_icon+'.png"/>';
     document.getElementById('current_weather_word').innerHTML = settings.weather['weather'];
     document.getElementById('current_weather_link').innerHTML = ' <a target="_blank" href="'+settings.weather['forecast_url']+'"><img src="/html/home-auto/img/more.png" width="15" height="15" border="0"></a>';
     document.getElementById('current_weather_degree').innerHTML = settings.weather['ot'];
@@ -188,58 +184,45 @@ function main(configs) {
     
 	// configure current scene, hide if there is none
 	if (settings.auto['currentscene'] != 'null') {
-        document.getElementById('lights_indicator').className = ('led-green');
-        document.getElementById('lights_led_text').innerHTML = 'Lights: '+ settings.auto['currentscene'];	
+		document.getElementById('lights_text').className = ('on');
+        document.getElementById('lights_text').innerHTML = settings.auto['currentscene'];	
 	} else {
-        document.getElementById('lights_indicator').className = ('led-off-big');
-        document.getElementById('lights_led_text').innerHTML = 'Lights: Manual';	
-	}
-	
-	if (settings.settings['autorun'] == 'off') {
-		if ( settings.settings['movie'] == 'on' ) {
-	        document.getElementById('autorun_indicator').className = ('led-yellow');
-	        document.getElementById('autorun_led_text').innerHTML = 'AutoRun is paused';
-		}else {
-			document.getElementById('autorun_indicator').className = ('led-red');
-			document.getElementById('autorun_led_text').innerHTML = 'AutoRun is turned OFF';	
-		}
-	}else {
-        document.getElementById('autorun_indicator').className = ('led-green');
-        document.getElementById('autorun_led_text').innerHTML = 'AutoRun is running';		
+		document.getElementById('lights_text').className = ('off');
+        document.getElementById('lights_text').innerHTML = 'Manual';	
 	}
 
 	if (settings.hvac['status'] == "error") {
 		console.log("home-auto-hvac offline")
-		document.getElementById('hvac_indicator').className = ('led-red');
-		document.getElementById('hvac_led_text').innerHTML = 'HVAC: system unreachable';
-		document.getElementById('humid_indicator').className = ('led-red');
-		document.getElementById('humid_led_text').innerHTML = 'HVAC: system unreachable';	
+		document.getElementById('hvac_text').className = ('error');
+		document.getElementById('hvac_text').innerHTML = 'system unreachable';
+		document.getElementById('humid_text').className = ('error');
+		document.getElementById('humid_text').innerHTML = 'system unreachable';	
 	}else {
     	// heat mode if active
 		if (settings.hvac_current['heat_mode'] == 'hpheat') {
-			document.getElementById('hvac_indicator').className = ('led-red');
-			document.getElementById('hvac_led_text').innerHTML = 'Heatpump Heating';	
+			document.getElementById('hvac_text').className = ('heating');
+			document.getElementById('hvac_text').innerHTML = 'Heating';	
 		}else if (settings.hvac_current['heat_mode'] == 'hpelectheat') {
-			document.getElementById('hvac_indicator').className = ('led-red');
-			document.getElementById('hvac_led_text').innerHTML = 'Heatpump Heating + Electric';	
+			document.getElementById('hvac_text').className = ('heating');
+			document.getElementById('hvac_text').innerHTML = 'Heating + Electric';	
 		}else if (settings.hvac_current['heat_mode'] == 'off') {
-			document.getElementById('hvac_indicator').className = ('led-off-big');
-			document.getElementById('hvac_led_text').innerHTML = 'Heatpump Off';	
+			document.getElementById('hvac_text').className = ('off');
+			document.getElementById('hvac_text').innerHTML = 'Off';	
 		}else if (settings.hvac_current['heat_mode'] == 'cool') {
-			document.getElementById('hvac_indicator').className = ('led-blue');
-			document.getElementById('hvac_led_text').innerHTML = 'Heatpump Cooling';	
+			document.getElementById('hvac_text').className = ('cooling');
+			document.getElementById('hvac_text').innerHTML = 'Cooling';	
 		}else {
-			document.getElementById('hvac_indicator').className = ('led-yellow');
-			document.getElementById('hvac_led_text').innerHTML = 'Heatpump '+settings.hvac_current['heat_mode'];
+			document.getElementById('hvac_text').className = ('unknown');
+			document.getElementById('hvac_text').innerHTML = settings.hvac_current['heat_mode'];
 			console.log("heat_mode set to:"+settings.hvac_current['heat_mode']);
 		}
 		// humidity status
 		if (settings.hvac_current['humid'] == 'on') {
-			document.getElementById('humid_indicator').className = ('led-green');
-			document.getElementById('humid_led_text').innerHTML = 'Hudmidifier Running';	
+			document.getElementById('humid_text').className = ('on');
+			document.getElementById('humid_text').innerHTML = 'Running';	
 		}else {
-			document.getElementById('humid_indicator').className = ('led-off-big');
-			document.getElementById('humid_led_text').innerHTML = 'Hudmidifier Off';	
+			document.getElementById('humid_text').className = ('off');
+			document.getElementById('humid_text').innerHTML = 'Off';	
 		}
 		// system mode
 		if (settings.hvac['mode'] == 'auto') {
@@ -261,33 +244,34 @@ function main(configs) {
 			// will be updated withn 10 sec
 			settings.hvac['mode'] = 'auto'
 		}
+		
 		// current profile running
 		if (settings.hvac_current['currentactivity'] != 'null') {
 			switch (settings.hvac_current['currentactivity']) {
 			case "home":
-				document.getElementById('hvac_profile_gauge').className = ('home');
+				document.getElementById('hvac_profile_mode').className = ('home');
 				break;
 			case "sleep":
-				document.getElementById('hvac_profile_gauge').className = ('sleep');
+				document.getElementById('hvac_profile_mode').className = ('sleep');
 				break;
 			case "away":
-				document.getElementById('hvac_profile_gauge').className = ('away');
+				document.getElementById('hvac_profile_mode').className = ('away');
 				break;
 			case "wake":
-				document.getElementById('hvac_profile_gauge').className = ('wake');
+				document.getElementById('hvac_profile_mode').className = ('wake');
 				break;
 			case "vacation":
-				document.getElementById('hvac_profile_gauge').className = ('vacation');
+				document.getElementById('hvac_profile_mode').className = ('vacation');
 				break;
 			case "manual":
-				document.getElementById('hvac_profile_gauge').className = ('manual');
+				document.getElementById('hvac_profile_mode').className = ('manual');
 				break;
 			default:
-				$("#hvac_profile_gauge").hide();
+				$("#hvac_profile_mode").hide();
 			}
-			document.getElementById('hvac_profile_gauge').innerHTML = settings.hvac_current['currentactivity'];
+			document.getElementById('hvac_profile_mode').innerHTML = settings.hvac_current['currentactivity'];
 		} else {
-			$("#hvac_profile_gauge").hide();	
+			$("#hvac_profile_mode").hide();	
 		}
 		// disaply hold information
 		if (settings.hvac_current['hold'] == 'on') {
@@ -299,29 +283,19 @@ function main(configs) {
 			document.getElementById('led-hold-text').className = ('text-off');
 			document.getElementById('led-hold-text').innerHTML = "Hold until 00:00"	
 		}
-		// draw the guages with new information
-	    // hvac dashboard
-		var tgauge = $("#temp-gauge").data("kendoRadialGauge");
-		tgauge.options.scale.ranges[0].from = parseInt(settings.hvac_current['htsp'])-10 
-		tgauge.options.scale.ranges[0].to = settings.hvac_current['htsp'];
-		tgauge.options.scale.ranges[2].from = settings.hvac_current['htsp'] 
-		tgauge.options.scale.ranges[2].to = settings.hvac_current['clsp'];
-		tgauge.options.scale.ranges[1].from = settings.hvac_current['clsp']
-		tgauge.options.scale.ranges[1].to = parseInt(settings.hvac_current['clsp'])+10;
-		tgauge.options.pointer[0].value = settings.hvac_current['rt'];
-		tgauge.options.pointer[1].value = settings.weather['ot'];
-		tgauge.redraw();
-		var hgauge = $("#humid-gauge").data("kendoRadialGauge");
-		hgauge.options.pointer[0].value = settings.hvac_current['rh'];
-		hgauge.options.pointer[1].value = settings.weather['oh'];
-		hgauge.redraw();
-		var filtergauge = $("#filter-gauge").data("kendoChart");
-		filtergauge.options.series[1].data[0] =  settings.hvac_current['filtrlvl'];
-		filtergauge.options.series[1].color = getColor(settings.hvac_current['filtrlvl']/100);
-		filtergauge.options.series[0].data[0] =  settings.hvac_current['humlvl'];
-		filtergauge.options.series[0].color = getColor(settings.hvac_current['humlvl']/100);
-		filtergauge.refresh();
-		$('#hvac_info').show();
+
+		document.getElementById('hvac_filter').innerHTML =  "filter "+settings.hvac_current['filtrlvl']+"%";
+		document.getElementById('humid_filter').innerHTML = "filter "+settings.hvac_current['humlvl']+"%";
+		document.getElementById('hvac_filter').style.color =  getColor(settings.hvac_current['filtrlvl']/100);
+		document.getElementById('humid_filter').style.color = getColor(settings.hvac_current['humlvl']/100);
+
+
+		
+		document.getElementById('current_weather_humid').innerHTML = "humidity "+settings.weather['oh']+"%";
+		document.getElementById('current_inside_humid').innerHTML = " humidity "+settings.hvac_current['rh']+"%";
+		document.getElementById('current_inside_degree').innerHTML = settings.hvac_current['rt'];
+		document.getElementById('current_inside_htsp').innerHTML = settings.hvac_current['htsp']
+		document.getElementById('current_inside_clsp').innerHTML = settings.hvac_current['clsp'];
 		
 	}
 	
@@ -354,7 +328,7 @@ function main(configs) {
 		
 
    
-    // populate todays schedule rows 1-7 are lights, rows 8-11 are HVAC, 11-20
+ // populate todays schedule rows 1-7 are lights, rows 8-11 are HVAC, 11-20
 	// are TV
     var icon=0, time=1, dialog=2, x=0, row, color, tcinner, dcinner;
     
@@ -580,179 +554,4 @@ function myCreateTableFunction(x,icon,time,dialog,color,tcinner,dcinner) {
 }
 
 
-function createGaugeTemp(rt,htsp,clsp,ot) {
-	
-    $("#temp-gauge").kendoRadialGauge({
-    	theme: "black",
-    	// renderAs: "canvas",
-    	pointer: [{
-            value: rt, // current temp
-            color: "#ea7001",
-            cap: { size: 0.15 }
-         
-        },{
-            value: ot, // current temp
-            color: "#cc0000",
-            cap: { size: 0.05 }
-         
-        }],
-
-        scale: {
-        	startAngle: -60,
-            endAngle: 240,
-
-            min: -10,
-            max: 110,
-
-            majorTicks: {
-                width: 1,
-                size: 14
-            },
-            majorUnit: 10,
-
-            minorTicks: {
-                size: 5
-            },
-
-            minorUnit: 2,
-    
-            ranges: [
-                {
-                    from: parseInt(htsp)-10, // heat setpoint
-                    to: htsp,
-                    color: "#cc0000"
-                }, {
-                    from: clsp, // cool setpoint
-                    to: parseInt(clsp)+10,
-                    color: "#0000cc"
-                }, {
-                    from: htsp, // activate range
-                    to: clsp,
-                    color: "#00cc00"
-                }
-            ],
-            labels: {
-                font: "11px Arial,Helvetica,sans-serif",
-                // position: "outside"
-            }
-               		
-       }
-    });
-}
-
-function creategaugeHumid(rh,oh) {
-	$("#humid-gauge").kendoRadialGauge({
-        theme: "black",
-        // renderAs: "canvas",
-
-        pointer: [{
-            value: rh,
-            color: "#ea7001",
-            cap: { size: 0.15 }
-        },{
-            value: oh,
-            color: "#cc0000"
-        }],
-
-        scale: {
-            startAngle: -45,
-            endAngle: 120,
-
-            min: 20,
-            max: 60,
-
-            majorUnit: 5,
-            majorTicks: {
-                width: 1,
-                size: 7
-            },
-
-            minorUnit: 1,
-            minorTicks: {
-                size: 5
-            },
-
-            ranges: [{ // full range from 32-53
-                from: 45,
-                to: 50,
-                color: "#cc0000" // top band
-            },{
-                from: 35,
-                to: 45,
-                color: "#00cc00" // middle band
-            },{
-                from: 30,
-                to: 35,
-                color: "#cc0000" // bottom band
-            }], 
-
-            labels: {
-                font: "11px Arial,Helvetica,sans-serif"
-            }
-        }
-    });
-		
-}
-
-function createFilterGauge(filtrlvl, humlvl) {
-	$("#filter-gauge").kendoChart({
-	
-        title: {
-            text: "Filters",
-            visible: false
-        },
-          legend: {
-            visible: false
-        },
-        chartArea: {
-            width: 80,
-            height: 40,
-            background: "transparent",
-  
-                },
-        seriesDefaults: {
-            type: "bar",
-            	   labels: {
-                       visible: false,
-                       background: "transparent"
-                   }
-        },
-        series: [{
-            name: "humidity Filter",
-            data: [humlvl]
-        }, {
-            name: "air Filter",
-            data: [filtrlvl]
-        }],
-        valueAxis: {
-            max: 100,
-            visible: true,
-            line: {
-                visible: false
-            },
-            minorGridLines: {
-                visible: false
-            },
-            labels: {
-                rotation: "auto",
-                	visible: false
-            }
-        },
-        categoryAxis: {
-            categories: ["Used"],
-            visible: false,
-            majorGridLines: {
-                visible: false
-            }
-        },
-        tooltip: {
-            visible: false,
-            template: "#= series.name #: #= value #"
-        },
-        transitions: true
-    });
-	
-	
-	
-}
 

@@ -9,139 +9,122 @@
 </head>
 <body>
 
+
+
+	<div class="rubber" style="display: none;"></div>
+
+	<div id="button_content" class="icon">
+		<strong>Controls</strong>
+		<div id="buttons">
+			<button id="autorun" onclick="toggleButton('autorun');">
+				&#10004&#xfe0e;
+				<div class="button_label">AutoRun</div>
+				<div id="disabled_autorun" class="disabled">Paused</div>
+			</button>
+			<button id="morning" onclick="toggleButton('morning');">
+				&#10004&#xfe0e;
+				<div class="button_label">Morning</div>
+				<div id="disabled_morning" class="disabled">Paused</div>
+			</button>
+			<button id="evening" onclick="toggleButton('evening');">
+				&#10004&#xfe0e;
+				<div class="button_label">Evening</div>
+				<div id="disabled_evening" class="disabled">Paused</div>
+			</button>
+			<button id="movie" onclick="toggleButton('movie');">
+				&#10004&#xfe0e;
+				<div class="button_label">Movie</div>
+			</button>
+			<button id="vacation" onclick="toggleButton('vacation');">
+				&#10004&#xfe0e;
+				<div class="button_label">Vacation</div>
+			</button>
+		</div>
+	</div>
+
+	<div id="today" class="icon">
+		<strong>Today</strong>
+
+		<div id="month"></div>
+		<div id="digit"></div>
+		<div id="day"></div>
+		<div id="clock"></div>
+
+		<div id="current_weather_icon"></div>
+		<div id="current_weather_word"></div>
+		<div id="current_weather_link"></div>
+
+		<div id="current_weather_degree"></div>
+		<div id="current_weather_humid"></div>
+		<div id="people_home_box">
+			<div class="people_box">
+				<hr>
+				Home Now <span id="people_home"></span>
+			</div>
+		</div>
+		<div id="refresh"></div>
+
+	</div>
+
 	<div id="config_content">
 
-
-		<div id="top_content">
-
-			<div class="rubber" style="display: none;"></div>
-			<div class="datetime">
-				<time class="icon">
-					<em id="day"></em> <strong id="month"></strong> <span id="digit"></span>
-					<div id="clock"></div>
-				</time>
-			</div>
-			<div class="status">
-				<div class="icon status_box">
-					<strong>Current Status</strong> <span id="current_status">
-						<div id="autorun_indicator">
-							<p id="autorun_led_text"></p>
-						</div>
-						<div id="lights_indicator">
-							<p id="lights_led_text"></p>
-						</div>
-						<div id="hvac_indicator">
-							<p id="hvac_led_text"></p>
-						</div>
-						<div id="humid_indicator">
-							<p id="humid_led_text"></p>
-						</div>
-					</span>
+		<div id="group">
+			<div id="profile" class="icon">
+				<strong>Profile</strong>
+				<div class="box_content">
+					<div id="hvac_profile_mode"></div>
 				</div>
 			</div>
-			<div class="weather">
-				<div class="icon weather_box">
-					<strong>Weather</strong> <span id="current_weather">
-						<div id="current_weather_icon"></div>
-						<div id="current_weather_degree"></div>
-						<div id="current_weather_word"></div>
-						<div id="current_weather_link"></div>
-					</span>
-
+			<div id="light_scene" class="icon">
+				<strong>Light Scene</strong>
+				<div class="box_content">
+					<div id="lights_text"></div>
 				</div>
 			</div>
-
 		</div>
-		<div id="center_content">
-			<div id="hvac_info">
-				<div id="example" class="k-content">
-					<div id="gauge-container">
-						<div id="humid-gauge"></div>
-						<div id="temp-gauge"></div>
-						<div id="filter-gauge"></div>
-						<div id="hvac_mode" class="k-gauge"></div>
-						<div id="hvac_profile_gauge"></div>
-						<div id="hvac_pump_gauge"></div>
-						<div id="hvac_hold_gauge">
-							<div id="hold_indicator" class="led-blue"></div>
-							<div id="led-hold-text"></div>
-						</div>
+
+		<div id="group">
+			<div id="heatpump" class="icon">
+				<strong>Heatpump</strong>
+				<div class="box_content">
+					<div id="hvac_text"></div>
+					<div id="hvac_mode"></div>
+					<div id="hvac_filter"></div>
+					<div id="hvac_hold_mode">
+						<div id="hold_indicator" class="led-blue"></div>
+						<div id="led-hold-text"></div>
 					</div>
 				</div>
 			</div>
-			<div id="buttons">
-				<button id="autorun" onclick="toggleButton('autorun');">
-					&#10004&#xfe0e;
-					<div class="button_label">AutoRun</div>
-					<div id="disabled_autorun" class="disabled">Paused</div>
-				</button>
-				<button id="morning" onclick="toggleButton('morning');">
-					&#10004&#xfe0e;
-					<div class="button_label">Morning</div>
-					<div id="disabled_morning" class="disabled">Paused</div>
-				</button>
-				<button id="evening" onclick="toggleButton('evening');">
-					&#10004&#xfe0e;
-					<div class="button_label">Evening</div>
-					<div id="disabled_evening" class="disabled">Paused</div>
-				</button>
-				<button id="movie" onclick="toggleButton('movie');">
-					&#10004&#xfe0e;
-					<div class="button_label">Movie</div>
-				</button>
-				<button id="vacation" onclick="toggleButton('vacation');">
-					&#10004&#xfe0e;
-					<div class="button_label">Vacation</div>
-				</button>
+			<div id="humidifer" class="icon">
+				<strong>Hudmifier</strong>
+				<div class="box_content">
+					<div id="humid_text"></div>
+					<div id="current_inside_humid"></div>
+					<div id="humid_filter"></div>
+				</div>
 			</div>
 		</div>
-		<div id="bottom_content">
+
+		<div id="group">
+			<div id="inside" class="icon">
+				<strong>Inside</strong>
+				<div id="current_inside_htsp"></div>
+				<div id="current_inside_degree"></div>
+				<div id="current_inside_clsp"></div>
+			</div>
+		</div>
+
+
 			<div id="schedule" class="hide_show"></div>
-			<div id="log">
+
+
+	</div>
+</body>
+</html>
+
+
 <?php
-error_reporting ( E_ALL );
-ini_set ( "display_errors", 1 );
-// echo getcwd() . "\n";
-// include("file_with_errors.php");
-// include("file_with_errors.php");
-function main_loop($file, $file_fd) {
-	$inotify = inotify_init ();
-	if ($inotify === false) {
-		fprintf ( STDERR, "Failed to obtain an inotify instance\n" );
-		return 1;
-	}
-	$watch = inotify_add_watch ( $inotify, $file, IN_MODIFY );
-	if ($watch === false) {
-		fprintf ( STDERR, "Failed to watch file '%s'", $file );
-		return 1;
-	}
-	while ( ($events = inotify_read ( $inotify )) !== false ) {
-		echo "Event received !\n";
-		foreach ( $events as $event ) {
-			if (! ($event ['mask'] & IN_MODIFY))
-				continue;
-			echo stream_get_contents ( $file_fd );
-			break;
-		}
-	}
-	// May not happen
-	inotify_rm_watch ( $inotify, $watch );
-	fclose ( $inotify );
-	fclose ( $file_fd );
-	return 0;
-}
-
-$file = "home-auto.log";
-if (! file_exists ( $file ) || ($fd = fopen ( $file, "r" )) === false) {
-	fprintf ( STDERR, "File '%s' does not exists or is not readable\n", $file );
-	// exit(1);
-}
-
-// fseek($fd, 0, SEEK_END);
-
-// exit(main_loop($file, $fd));
-// (main_loop($file, $fd);
-
 $aResult = array ();
 
 if (! isset ( $_POST ['functionname'] )) {
@@ -232,17 +215,5 @@ if (! isset ( $aResult ['error'] )) {
 
 ?>
 
-			</div>
-		</div>
-			<div id="people_home_box">
-				<div class="people_box">
-					<span id="people_home"></span>
-				</div>
-			</div>
-		<div id="refresh"></div>
 
-	</div>
-
-</body>
-</html>
 
