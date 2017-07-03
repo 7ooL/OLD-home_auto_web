@@ -96,6 +96,12 @@
 					</div>
 				</div>
 			</div>
+			<div id="inside" class="icon">
+				<strong>Inside</strong>
+				<div id="current_inside_htsp"></div>
+				<div id="current_inside_degree"></div>
+				<div id="current_inside_clsp"></div>
+			</div>
 			<div id="humidifer" class="icon">
 				<strong>Hudmifier</strong>
 				<div class="box_content">
@@ -106,17 +112,10 @@
 			</div>
 		</div>
 
-		<div id="group">
-			<div id="inside" class="icon">
-				<strong>Inside</strong>
-				<div id="current_inside_htsp"></div>
-				<div id="current_inside_degree"></div>
-				<div id="current_inside_clsp"></div>
-			</div>
-		</div>
 
 
-			<div id="schedule" class="hide_show"></div>
+
+		<div id="schedule" class="hide_show"></div>
 
 
 	</div>
