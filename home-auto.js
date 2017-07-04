@@ -166,16 +166,14 @@ function main(configs) {
     		checkImage('/html/home-auto/img/user_img/'+name+'_icon.ico', name);			
     	}
     }
-    
+      
     // build weather bar.
     var wstr = settings.weather['icon_url'];
     if (wstr.includes("nt_")) {
         var w_icon = "nt_"+settings.weather['icon'];
     } else {
     	var w_icon = settings.weather['icon'];	
-    }
-    // 'nt_'+settings.weather['icon']
-    
+    } 
     document.getElementById('current_weather_icon').innerHTML = '<img src="/html/home-auto/img/weather_icons/white/png/128x128/'+w_icon+'.png"/>';
     document.getElementById('current_weather_word').innerHTML = settings.weather['weather'];
     document.getElementById('current_weather_link').innerHTML = ' <a target="_blank" href="'+settings.weather['forecast_url']+'"><img src="/html/home-auto/img/more.png" width="15" height="15" border="0"></a>';
@@ -326,6 +324,17 @@ function main(configs) {
 		}
 	}
 		
+    //  create buttons for lock status 
+    document.getElementById('button_label_lock').innerHTML = settings.lock['status'];
+    if ( settings.lock['status'] == 'Locked' ) {
+    	document.getElementById('lock').className = ('depth button_green');
+    	document.getElementById('lock_symbol').innerHTML = '&#128274;';
+    } else if ( settings.lock['status'] == 'Unlocked' ) {
+    	document.getElementById('lock').className = ('depth button_red');
+    	document.getElementById('lock_symbol').innerHTML = '&#128275';
+    }else {
+    	document.getElementById('lock').className = ('depth button_gold');
+    }
 
    
  // populate todays schedule rows 1-7 are lights, rows 8-11 are HVAC, 11-20

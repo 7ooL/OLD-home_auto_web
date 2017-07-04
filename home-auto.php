@@ -8,6 +8,39 @@
 <script type="text/javascript" src="home-auto.js"></script>
 </head>
 <body>
+	<div id="door" class="icon">
+		<strong>Front Door</strong>
+		<div id="buttons">
+			<button id="lock" onclick="toggleButton('lock');">
+				<div id='lock_symbol'></div>
+				<div id="button_label_lock" class="button_label"></div>
+			</button>
+		</div>
+	</div>
+
+	<div id="today" class="icon">
+		<strong>Today</strong>
+
+		<div id="month"></div>
+		<div id="digit"></div>
+		<div id="day"></div>
+		<div id="clock"></div>
+
+		<div id="current_weather_icon"></div>
+		<div id="current_weather_word"></div>
+		<div id="current_weather_link"></div>
+
+		<div id="current_weather_degree"></div>
+		<div id="current_weather_humid"></div>
+		<div id="people_home_box">
+			<div class="people_box">
+				<hr>
+				Home Now <span id="people_home"></span>
+			</div>
+		</div>
+		<div id="refresh"></div>
+	</div>
+
 	<div id="button_content" class="icon">
 		<strong>Controls</strong>
 		<div id="buttons">
@@ -37,32 +70,11 @@
 		</div>
 	</div>
 
-	<div id="today" class="icon">
-		<strong>Today</strong>
 
-		<div id="month"></div>
-		<div id="digit"></div>
-		<div id="day"></div>
-		<div id="clock"></div>
-
-		<div id="current_weather_icon"></div>
-		<div id="current_weather_word"></div>
-		<div id="current_weather_link"></div>
-
-		<div id="current_weather_degree"></div>
-		<div id="current_weather_humid"></div>
-		<div id="people_home_box">
-			<div class="people_box">
-				<hr>
-				Home Now <span id="people_home"></span>
-			</div>
-		</div>
-		<div id="refresh"></div>
-
-	</div>
 
 	<div id="config_content">
 		<div class="rubber" style="display: none;"></div>
+
 		<div id="group">
 			<div id="profile" class="icon">
 				<strong>Profile</strong>
@@ -70,6 +82,7 @@
 					<div id="hvac_profile_mode"></div>
 				</div>
 			</div>
+
 			<div id="light_scene" class="icon">
 				<strong>Light Scene</strong>
 				<div class="box_content">
@@ -144,6 +157,9 @@ if (! isset ( $aResult ['error'] )) {
 				case 'vacation' :
 					$myfile = fopen ( "vacation/vacation.txt", "w" ) or die ( "ON: Unable to open file! vacation.txt" );
 					break;
+				case 'lock' :
+					$myfile = fopen ( "lock/lock.txt", "w" ) or die ( "ON: Unable to open file! vacation.txt" );
+					break;
 				default :
 					try {
 						if (! file_exists ( $fileName )) {
@@ -173,6 +189,9 @@ if (! isset ( $aResult ['error'] )) {
 					break;
 				case 'vacation' :
 					$myfile = fopen ( "vacation/vacation.txt", "w" ) or die ( "OFF: Unable to open file! vacation.txt" );
+					break;
+				case 'lock' :
+					$myfile = fopen ( "lock/lock.txt", "w" ) or die ( "OFF: Unable to open file! vacation.txt" );
 					break;
 				default :
 					try {

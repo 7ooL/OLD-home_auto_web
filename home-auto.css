@@ -11,11 +11,14 @@ body {
 	color: white;
 }
 
+#door{
+	float:left;
+}
 
 #button_content{
 	float:left;
-	margin-left: 5;
 	height: 100%;
+	clear: left;
 }
 
 #today{
@@ -95,6 +98,7 @@ body {
 #profile{
 	width: 100%;
 }
+
 #light_scene{
 	width: 100%;
 }
@@ -144,6 +148,7 @@ div.icon strong {
     background-color: #737270;
     text-align: center;
     width: 100%;
+    letter-spacing: -0.05em;
 }
 
 
@@ -247,12 +252,6 @@ a[href^=tel]{color: inherit; text-decoration: none;}
     margin-bottom: 7px;
 }
 
-/*
-#hvac_mode {
-	float: left;
-	position: relative;
-}
-*/
 
 .auto {
 	color: #ffffff;
@@ -276,7 +275,7 @@ a[href^=tel]{color: inherit; text-decoration: none;}
 
 #buttons {
 	text-align: center;
-	padding-top: .5em;
+	padding-top: .2em;
 }
 
 button {
@@ -366,6 +365,13 @@ button.depth:active {
 .button_green_disabled{
 	color: rgba(76,175,80,0.17);
 }
+#lock_symbol{
+	font-size: 122%;
+    margin-top: -3px;
+    padding-bottom: 6px;
+    font-family: Segoe UI Symbol;
+}
+
 /* dule seetings */
 #dule {
 	color: white;
