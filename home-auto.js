@@ -183,7 +183,31 @@ function main(configs) {
 	// configure current scene, hide if there is none
 	if (settings.auto['currentscene'] != 'null') {
 		document.getElementById('lights_text').className = ('on');
-        document.getElementById('lights_text').innerHTML = settings.auto['currentscene'];	
+		switch (settings.auto['currentscene']) {
+		case "morn_1":
+			document.getElementById('lights_text').innerHTML = "Morning";
+			break;
+		case "daytime_1":
+			document.getElementById('lights_text').innerHTML = "Daytime 1";
+				break;
+		case "scene_1":
+			document.getElementById('lights_text').innerHTML = "Evening 1";
+				break;
+		case "scene_2":
+			document.getElementById('lights_text').innerHTML = "Evening 2";
+				break;
+		case "scene_3":
+			document.getElementById('lights_text').innerHTML = "Evening 3";
+				break;
+		case "scene_4":
+			document.getElementById('lights_text').innerHTML = "Evening 4";
+				break;
+		case "scene_5":
+			document.getElementById('lights_text').innerHTML = "Evening 5";
+				break;
+		default:
+			document.getElementById('lights_text').innerHTML = settings.auto['currentscene'];
+		}
 	} else {
 		document.getElementById('lights_text').className = ('off');
         document.getElementById('lights_text').innerHTML = 'Manual';	
@@ -198,15 +222,21 @@ function main(configs) {
 	}else {
     	// heat mode if active
 		if (settings.hvac_current['heat_mode'] == 'hpheat') {
+			document.getElementById('hvac_icon').className = ('heating_icon');
+			document.getElementById('hvac_icon').innerHTML = '<i class="fa fa-fire" aria-hidden="true"></i>';
 			document.getElementById('hvac_text').className = ('heating');
 			document.getElementById('hvac_text').innerHTML = 'Heating';	
 		}else if (settings.hvac_current['heat_mode'] == 'hpelectheat') {
+			document.getElementById('hvac_icon').className = ('heating_icon hpelectheat');
+			document.getElementById('hvac_icon').innerHTML = '<i class="fa fa-fire" aria-hidden="true" style="display: inline-block;"></i> + <i class="fa fa-bolt" aria-hidden="true" style="display: inline-block;"></i>';
 			document.getElementById('hvac_text').className = ('heating');
 			document.getElementById('hvac_text').innerHTML = 'Heating + Electric';	
 		}else if (settings.hvac_current['heat_mode'] == 'off') {
 			document.getElementById('hvac_text').className = ('off');
 			document.getElementById('hvac_text').innerHTML = 'Off';	
 		}else if (settings.hvac_current['heat_mode'] == 'cool') {
+			document.getElementById('hvac_icon').className = ('cooling_icon');
+			document.getElementById('hvac_icon').innerHTML = '<i class="fa fa-snowflake-o" aria-hidden="true"></i>';	
 			document.getElementById('hvac_text').className = ('cooling');
 			document.getElementById('hvac_text').innerHTML = 'Cooling';	
 		}else {
@@ -248,26 +278,32 @@ function main(configs) {
 			switch (settings.hvac_current['currentactivity']) {
 			case "home":
 				document.getElementById('hvac_profile_mode').className = ('home');
+				document.getElementById('hvac_profile_mode').innerHTML = '<i class="fa fa-home" aria-hidden="true" style="display: inline-block;"></i> Home';
 				break;
 			case "sleep":
 				document.getElementById('hvac_profile_mode').className = ('sleep');
+				document.getElementById('hvac_profile_mode').innerHTML = '<i class="fa fa-bed" aria-hidden="true" style="display: inline-block;"></i> Sleep';
 				break;
 			case "away":
 				document.getElementById('hvac_profile_mode').className = ('away');
+				document.getElementById('hvac_profile_mode').innerHTML = 'Away <i class="fa fa-arrow-right" aria-hidden="true" style="display: inline-block;"></i>';
 				break;
 			case "wake":
 				document.getElementById('hvac_profile_mode').className = ('wake');
+				document.getElementById('hvac_profile_mode').innerHTML = 'Wake <i class="fa fa-sun-o" aria-hidden="true" style="display: inline-block;"></i>';
 				break;
 			case "vacation":
 				document.getElementById('hvac_profile_mode').className = ('vacation');
+				document.getElementById('hvac_profile_mode').innerHTML = '<i class="fa fa-suitcase" aria-hidden="true" style="display: inline-block;"></i> Vacation';
 				break;
 			case "manual":
 				document.getElementById('hvac_profile_mode').className = ('manual');
+				document.getElementById('hvac_profile_mode').innerHTML = 'Manual';
 				break;
 			default:
 				$("#hvac_profile_mode").hide();
 			}
-			document.getElementById('hvac_profile_mode').innerHTML = settings.hvac_current['currentactivity'];
+			
 		} else {
 			$("#hvac_profile_mode").hide();	
 		}
@@ -286,15 +322,12 @@ function main(configs) {
 		document.getElementById('humid_filter').innerHTML = "filter "+settings.hvac_current['humlvl']+"%";
 		document.getElementById('hvac_filter').style.color =  getColor(settings.hvac_current['filtrlvl']/100);
 		document.getElementById('humid_filter').style.color = getColor(settings.hvac_current['humlvl']/100);
-
-
 		
 		document.getElementById('current_weather_humid').innerHTML = "humidity "+settings.weather['oh']+"%";
-		document.getElementById('current_inside_humid').innerHTML = " humidity "+settings.hvac_current['rh']+"%";
+		document.getElementById('current_inside_humid').innerHTML = " humidity "+settings.hvac_current['rh']+'%';
 		document.getElementById('current_inside_degree').innerHTML = settings.hvac_current['rt'];
 		document.getElementById('current_inside_htsp').innerHTML = settings.hvac_current['htsp']
 		document.getElementById('current_inside_clsp').innerHTML = settings.hvac_current['clsp'];
-		
 	}
 	
 	
@@ -328,10 +361,10 @@ function main(configs) {
     document.getElementById('button_label_lock').innerHTML = settings.lock['status'];
     if ( settings.lock['status'] == 'Locked' ) {
     	document.getElementById('lock').className = ('depth button_green');
-    	document.getElementById('lock_symbol').innerHTML = '&#128274;';
+    	document.getElementById('lock_symbol').innerHTML = '<i class="fa fa-lock" aria-hidden="true"></i>';
     } else if ( settings.lock['status'] == 'Unlocked' ) {
     	document.getElementById('lock').className = ('depth button_red');
-    	document.getElementById('lock_symbol').innerHTML = '&#128275';
+    	document.getElementById('lock_symbol').innerHTML = '<i class="fa fa-unlock" aria-hidden="true"></i>';
     }else {
     	document.getElementById('lock').className = ('depth button_gold');
     }
@@ -360,64 +393,51 @@ function main(configs) {
     if (settings.settings["morning"] == 'on' && settings.settings["autorun"] == 'on') {
         color="gold";
         tcinner = settings.auto["morning_1_on_time"];
-        dcinner = "Lights morning 1 will activate, taking "+Math.round((settings.auto["morn_1_trans_time"]/60)/10)+" minutes to fade in.";
-        myCreateTableFunction(x,icon,time,dialog, color, tcinner, dcinner)
+        dcinner = "Scene morning 1 will activate, taking "+Math.round((settings.auto["morn_1_trans_time"]/60)/10)+" minutes to fade in.";
+        myCreateTableFunction(x,icon,time,dialog, tcinner, dcinner, "light")
         x = x +1; 
     } 
     
     if (settings.settings["morning"] == 'on' && settings.settings["autorun"] == 'on' ) {
         color = "gold"
         tcinner = settings.auto["daytime_1_on_time"];
-        dcinner= "Lights daytime 1 will activate, taking "+Math.round((settings.auto["daytime_1_trans_time"]/60)/10)+" minutes to fade in."; 
-        myCreateTableFunction(x,icon,time,dialog, color, tcinner, dcinner)
+        dcinner= "Scene daytime 1 will activate, taking "+Math.round((settings.auto["daytime_1_trans_time"]/60)/10)+" minutes to fade in."; 
+        myCreateTableFunction(x,icon,time,dialog, tcinner, dcinner, "light")
         x = x +1;
     } 
     // see if lights are coming on and if so add a row for them
     for ( var y = 1; y < 6 ; y++) {
     	if (settings.settings["evening"] == 'on' && settings.settings["autorun"] == 'on' ) {
             if (settings.auto["scene_"+y+"_on_time"] != 'null' ) {
-                color ="gold";
                 tcinner = settings.auto["scene_"+y+"_on_time"]
-                dcinner = "Lights evening "+y+" will activate, taking "+Math.round((settings.auto["scene_"+y+"_trans_time"]/60)/10)+" minutes to fade in."; 
-                myCreateTableFunction(x,icon,time,dialog, color, tcinner, dcinner)
+                dcinner = "Scene evening "+y+" will activate, taking "+Math.round((settings.auto["scene_"+y+"_trans_time"]/60)/10)+" minutes to fade in."; 
+                myCreateTableFunction(x,icon,time,dialog, tcinner, dcinner, "light")
                 x = x +1;
             } 
         }
     }
-    
-   
     // fill in hvac data for the day
     for ( var y = 1; y < 5 ; y++) {
         if (settings.hvac["event_"+y+"_on_time"] != 'null' ) {
-            color = "red";
             tcinner = settings.hvac["event_"+y+"_on_time"]+":00"
-            dcinner = "HVAC "+settings.hvac["event_"+y+"_activity"]+" profile will activate."; 
-            myCreateTableFunction(x,icon,time,dialog, color, tcinner, dcinner)
+            dcinner = settings.hvac["event_"+y+"_activity"]+" profile will activate."; 
+            myCreateTableFunction(x,icon,time,dialog, tcinner, dcinner, "hvac")
             x = x +1;
             } 
     }
-       
+    
     // fill in tv data for today
     var shows = JSON.parse(settings.extra['upcoming_shows']);
     for (var show in shows) {
-    	 color = "blue";
          tcinner = shows[show].starttime;
-         dcinner= "DVR '"+shows[show].title+"' - '"+shows[show].subtitle+"' will start to record.";
-         myCreateTableFunction(x,icon,time,dialog, color, tcinner, dcinner)
+         dcinner= shows[show].title+"' - '"+shows[show].subtitle+"' will start to record.";
+         myCreateTableFunction(x,icon,time,dialog, tcinner, dcinner, "tv")
          x = x +1;
     }
     
     sortTable("schedule_table",time);
     embelishRows("schedule_table",time);
     
-    
-    
-    // read log file and add to entry
-    
-    
-    
-    
- 
     // show todays schedule, after it has been generated
     $("#schedule").show();
 	// show all ids that are based on reading the config file
@@ -490,13 +510,15 @@ function embelishRows(name, col) {
      for(var i=0, len=table.rows.length; i<len; i++){
     	 cellTime = table.rows[i].cells[col].innerHTML;
     	 if (new Date('1970/01/01 ' + cellTime ) < new Date('1970/01/01 ' + currentTime)) {
-    		 table.rows[i].style.color = '#C0C0C0';
+    		// table.rows[i].style.color = '#C0C0C0';
     	     if (i == (table.rows.length-1)) {
-    	 	    table.rows[i].cells[0].className = "circle circle_black";
+    	 	    table.rows[i].cells[0].className = '';
+    	 	    table.rows[i].cells[0].style.fontSize = "18px";
     	 	    table.rows[i].className = "past_event";
       	 		}
     			 if (i >= 1) {
-   	 		        table.rows[i-1].cells[0].className = "circle circle_black";
+   	 		        table.rows[i-1].cells[0].className = '';
+   	 		        table.rows[i-1].cells[0].style.fontSize = "18px";
    	 		        table.rows[i-1].className = "past_event";
      	 		}
 
@@ -505,11 +527,13 @@ function embelishRows(name, col) {
     	    	table.rows[(i-1)].style.color = '#ff0000 ';
     		 }
     	 	 if (i > 1) {
-  	 		    table.rows[i-2].cells[0].className = "circle circle_black";
+  	 		    table.rows[i-2].cells[0].className = '';
+  	 		    table.rows[i-2].cells[0].style.fontSize = "18px";
   	 		    table.rows[i-2].className = "past_event";
     	 	 }
     	 	for (var y=0; y<(i-1); y++) {
-    	 	  	table.rows[y].cells[0].className = "circle circle_black";
+    	 	  	table.rows[y].cells[0].className = '';
+    	 	  	table.rows[y].cells[0].style.fontSize = "18px";
     	 	  	table.rows[y].className = "past_event";
   	 		}
     	 	
@@ -528,13 +552,9 @@ function sortTable(name,col){
     for(var i=0, len=tbl.rows.length; i<len; i++){
         var row = tbl.rows[i];
         var sortnr = row.cells[col].innerText;
-        // var sortnr = parseFloat(row.cells[col].textContent ||
-		// row.cells[col].innerText);
-        // if(!isNaN(sortnr)) store.push([sortnr, row]);
         store.push([sortnr, row]);
     }
     store.sort(function(x,y){
-        // return x[0] - y[0];
     	 return new Date('1970/01/01 ' + x[0]) - new Date('1970/01/01 ' + y[0]);
     });
     for(var i=0, len=store.length; i<len; i++){
@@ -543,22 +563,26 @@ function sortTable(name,col){
     store = null;
 }
 
-function myCreateTableFunction(x,icon,time,dialog,color,tcinner,dcinner) {
-	// build todays schedule
-// if (document.contains(document.getElementById("schedule_table"))) {
-        // document.getElementById("schedule_table").remove();
-    // }
-    // var schedule = document.getElementById("schedule")
-   // var tbl = document.createElement('table');
- // tbl.id = "schedule_table";
+function myCreateTableFunction(x,icon,time,dialog,tcinner,dcinner,type) {
     $("#schedule").hide();
     var tbl = document.getElementById("schedule_table")
     var row = tbl.insertRow(0);
     var iconCell = row.insertCell(icon);
     var timeCell = row.insertCell(time);
     var dialogCell = row.insertCell(dialog);
-	iconCell.className = "circle circle_"+color;
-    timeCell.innerHTML = tcinner;
+	iconCell.className = type;
+	switch(type) {
+    case "light":
+    	iconCell.innerHTML = '<i class="fa fa-lightbulb-o" aria-hidden="true"></i>'
+        break;
+    case "hvac":
+    	iconCell.innerHTML = '<i class="fa fa-thermometer-empty" aria-hidden="true"></i>'
+        break;
+    case "tv":
+    	iconCell.innerHTML = '<i class="fa fa-television" aria-hidden="true"></i>'
+        break;
+	}
+	timeCell.innerHTML = tcinner;
     dialogCell.innerHTML = dcinner;
 }
 

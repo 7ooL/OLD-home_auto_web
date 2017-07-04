@@ -2,6 +2,7 @@
 <head>
 <title>Home-Auto</title>
 <link rel="stylesheet" type="text/css" href="home-auto.css">
+<link rel="stylesheet" type="text/css" href="fonts/font-awesome.min.css">
 <link rel="shortcut icon" href="home-auto.ico">
 <script type="text/javascript" src="jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="kendo.all.min.js"></script>
@@ -95,6 +96,7 @@
 			<div id="heatpump" class="icon">
 				<strong>Heatpump</strong>
 				<div class="box_content">
+					<div id="hvac_icon"></div>
 					<div id="hvac_text"></div>
 					<div id="hvac_mode"></div>
 					<div id="hvac_filter"></div>
@@ -119,9 +121,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
 
 		<div id="schedule" class="hide_show"></div>
 

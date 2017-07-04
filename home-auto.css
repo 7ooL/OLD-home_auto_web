@@ -1,3 +1,5 @@
+@font-face { font-family: FontAwesome; src: url('fonts/FontAwesome.otf'); } 
+
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	background-color: #363636;
@@ -184,7 +186,23 @@ img.user_icon{
 	text-shadow: 2px 2px 2px #AF3000;
 }
 
-.sleep, .cooling {
+.cooling{
+	color: #40BFFF;	
+	text-shadow: 2px 2px 2px #006FAF;
+	display: inline-block;
+}
+.heating{
+	color: #FF4040;
+	text-shadow: 2px 2px 2px #AF0000;
+	display: inline-block;
+}
+#hvac_icon{
+	padding-top: 8px;
+}
+.hpelectheat{
+	margin-right: 22px;
+}
+.sleep, .cooling_icon {
 	color: #40BFFF;
 	font-size: 175%;
 	text-shadow: 2px 2px 2px #006FAF;
@@ -202,22 +220,13 @@ img.user_icon{
 	text-shadow: 2px 2px 2px #AFAF00;
 }
 
-.vacation, .heating {
+.vacation, .heating_icon {
 	color: #FF4040;
 	font-size: 175%;
 	text-shadow: 2px 2px 2px #AF0000;
 }
 
-.manual {
-	position: absolute;
-	margin-top: 155;
-	margin-left: 460;
-	color: #00ff00;
-	font-size: 22;
-	text-shadow: 2px 2px 2px #009900;
-}
-
-.off {
+.off, .manual {
 	color: #c0c0c0;
 	font-size: 175%;
 	text-shadow: 2px 2px 2px #808080;
@@ -365,11 +374,13 @@ button.depth:active {
 .button_green_disabled{
 	color: rgba(76,175,80,0.17);
 }
+
 #lock_symbol{
 	font-size: 122%;
-    margin-top: -3px;
-    padding-bottom: 6px;
-    font-family: Segoe UI Symbol;
+    margin-top: -8px;
+}
+#vutton_lock_label{
+	margin-top: -4px;
 }
 
 /* dule seetings */
@@ -384,31 +395,25 @@ button.depth:active {
 .active {
 	color: red;
 }
-
-.circle {
-	width: 20px;
-	height: 20px;
-	border-radius: 10px;
+td{
+	text-transform: capitalize;
 }
-
-.circle_blue {
-	background-color: #008CBA;
+.tv {
+	color: #008CBA;
+	font-size: 18px;
 } /* Blue */
-.circle_red {
-	background-color: #f44336;
+.hvac {
+	color: #f44336;
+	font-size: 18px;
 } /* Red */
-.circle_gray {
-	background-color: #C0C0C0;
-	color: black;
-} /* Gray */
-.circle_black {
-	background-color: #555555;
-} /* Black */
-.circle_gold {
-	background-color: #e5c100;
+.light {
+	color: #e5c100;
+	font-size: 18px;
 } /* Gold */
 .past_event {
 	display: none;
+	color: #555555;
+	
 }
 
 .time {
