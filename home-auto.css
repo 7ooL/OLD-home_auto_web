@@ -191,6 +191,13 @@ img.user_icon{
 	text-shadow: 2px 2px 2px #006FAF;
 	display: inline-block;
 }
+
+.unknown{
+	color: #FFFF40;
+	text-shadow: 2px 2px 2px #AFAF00;
+	display: inline-block;
+}
+
 .heating{
 	color: #FF4040;
 	text-shadow: 2px 2px 2px #AF0000;
@@ -198,6 +205,12 @@ img.user_icon{
 }
 #hvac_icon{
 	padding-top: 8px;
+}
+#humid_icon{
+	padding-top: 8px;
+}
+#lights_text, #hvac_profile_mode{
+	text-transform: capitalize;
 }
 .hpelectheat{
 	margin-right: 22px;
@@ -208,13 +221,13 @@ img.user_icon{
 	text-shadow: 2px 2px 2px #006FAF;
 }
 
-.wake, .error {
+.away, .error {
 	color: #BF40FF;
 	font-size: 175%;
 	text-shadow: 2px 2px 2px #6F00AF;
 }
 
-.away, .unknown {
+.wake, .unknown_icon {
 	color: #FFFF40;
 	font-size: 175%;
 	text-shadow: 2px 2px 2px #AFAF00;
@@ -401,15 +414,18 @@ td{
 .tv {
 	color: #008CBA;
 	font-size: 18px;
-} /* Blue */
+	text-align: center;
+} 
 .hvac {
 	color: #f44336;
 	font-size: 18px;
-} /* Red */
+	text-align: center;
+}
 .light {
 	color: #e5c100;
 	font-size: 18px;
-} /* Gold */
+	text-align: center;
+} 
 .past_event {
 	display: none;
 	color: #555555;

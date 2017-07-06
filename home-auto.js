@@ -232,6 +232,8 @@ function main(configs) {
 			document.getElementById('hvac_text').className = ('heating');
 			document.getElementById('hvac_text').innerHTML = 'Heating + Electric';	
 		}else if (settings.hvac_current['heat_mode'] == 'off') {
+			document.getElementById('hvac_icon').className = ('');
+			document.getElementById('hvac_icon').innerHTML = '';
 			document.getElementById('hvac_text').className = ('off');
 			document.getElementById('hvac_text').innerHTML = 'Off';	
 		}else if (settings.hvac_current['heat_mode'] == 'cool') {
@@ -240,9 +242,10 @@ function main(configs) {
 			document.getElementById('hvac_text').className = ('cooling');
 			document.getElementById('hvac_text').innerHTML = 'Cooling';	
 		}else {
+			document.getElementById('hvac_icon').className = ('unknown_icon');
+			document.getElementById('hvac_icon').innerHTML = '<i class="fa fa-question-circle-o" aria-hidden="true"></i>';
 			document.getElementById('hvac_text').className = ('unknown');
 			document.getElementById('hvac_text').innerHTML = settings.hvac_current['heat_mode'];
-			console.log("heat_mode set to:"+settings.hvac_current['heat_mode']);
 		}
 		// humidity status
 		if (settings.hvac_current['humid'] == 'on') {
@@ -301,7 +304,8 @@ function main(configs) {
 				document.getElementById('hvac_profile_mode').innerHTML = 'Manual';
 				break;
 			default:
-				$("#hvac_profile_mode").hide();
+				document.getElementById('hvac_profile_mode').className = ('manual');
+			    document.getElementById('hvac_profile_mode').innerHTML = settings.hvac_current['currentactivity'];
 			}
 			
 		} else {
@@ -541,9 +545,6 @@ function embelishRows(name, col) {
     	 }
      }
 }
-
-     
-
 
 // sort table 'name' by col 'col'
 function sortTable(name,col){

@@ -115,6 +115,7 @@
 			<div id="humidifer" class="icon">
 				<strong>Hudmifier</strong>
 				<div class="box_content">
+				    <div id="humid_icon"></div>
 					<div id="humid_text"></div>
 					<div id="current_inside_humid"></div>
 					<div id="humid_filter"></div>
