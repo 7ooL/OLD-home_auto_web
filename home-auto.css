@@ -78,6 +78,7 @@ body {
     padding-right: .1em;
     margin-top: -25px;
     margin-bottom: -25px;
+   
 }
 #current_inside_htsp{
 	color: #ff8181;
@@ -112,6 +113,7 @@ body {
 }
 #inside{
     min-width: 12em;
+    max-height: 10em;
 }
 #schedule_table{
 	margin-left: auto;
@@ -429,16 +431,6 @@ td{
 .past_event {
 	display: none;
 	color: #555555;
-	
-}
-
-.time {
-	background-color: #e7e7e7; /* Green */
-	border: none;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
 }
 
 #refresh {
@@ -552,4 +544,67 @@ hr{
 	from { background-color:#13d7ec;}
 	50% { background-color : #40bfff; box-shadow : rgba (0,0,0,0.2) 0 -1px 7px 1px, inset #185258 0 -1px 9px, #18254a 0 2px 0;}
 	to { background-color: #78a9ad;}
+}
+
+
+.timepicker_wrap {
+    z-index: 998;
+     display: none;
+    font-size: 12px;
+    top: 0;
+    margin: auto;
+}
+
+.te_tx,
+.ti_tx,
+.mi_tx{
+	width: 50px;
+    text-align: center;
+    overflow: hidden;
+}
+input{
+    text-align: center;
+    width: 50px;
+    background-color: rgba(0, 0, 139, 0);
+    border-color: rgba(236, 236, 0, 0);
+    color: #68b8ff;
+    font-size: 2em;
+}
+.save{
+    margin-top: 40px;
+    font-size: 4em;
+    color: #08fd86;
+    cursor: pointer;
+}
+
+.hvac_set{
+	position: absolute;
+    float: right;
+    right: 2;
+    top: 2;
+    color: black;
+    cursor: pointer;
+}
+.temp,
+.time,
+.mins {
+	width: 50px;
+    float: left;
+    /* margin: 0 10px; */
+    /* font-size: 20px; */
+    color: #f7e81f;
+    /* font-family: arial; */
+    /* font-weight: 700; */
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    margin: auto;
+    font-size: 3em;
+}
+.prev:hover,
+.save:hover,
+.next:hover {
+	color: #ff8000;
 }

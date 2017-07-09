@@ -7,8 +7,10 @@ jQuery(document).ready(function() {
 	$('#clock').show();
 	displayDate()
 	date_time('clock'); // refresh every second
-	grabConfigFile(); // refresh every 10
 	$('#config_content').hide();
+
+	// set off the main script
+	grabConfigFile(); // refresh every 10
 
 })
 
@@ -177,6 +179,8 @@ function main(configs) {
     document.getElementById('current_weather_icon').innerHTML = '<img src="/html/home-auto/img/weather_icons/white/png/128x128/'+w_icon+'.png"/>';
     document.getElementById('current_weather_word').innerHTML = settings.weather['weather'];
     document.getElementById('current_weather_link').innerHTML = ' <a target="_blank" href="'+settings.weather['forecast_url']+'"><img src="/html/home-auto/img/more.png" width="15" height="15" border="0"></a>';
+    // <i class="fa fa-plus-circle" aria-hidden="true" width="15" height="15"
+	// border="0"></i>
     document.getElementById('current_weather_degree').innerHTML = settings.weather['ot'];
     
     
@@ -361,7 +365,7 @@ function main(configs) {
 		}
 	}
 		
-    //  create buttons for lock status 
+    // create buttons for lock status
     document.getElementById('button_label_lock').innerHTML = settings.lock['status'];
     if ( settings.lock['status'] == 'Locked' ) {
     	document.getElementById('lock').className = ('depth button_green');
@@ -500,10 +504,231 @@ function toggleButton(thing) {
 
 }
 
+function hold_hvac() {
+	$("#hvac_display").toggle();
+	$(".hvac_edit").toggle();
+	if ($(".hvac_edit").css('display') == 'none' ){
+		$(".hvac_set").css('color', 'black');
+	} else {
+			
+		$(".hvac_set").css('color', 'red');
+
+		var d = new Date();
+		var ti = d.getHours();
+		var interval = 15 * 60 * 1000;    // 15 minutes in miliseconds
+		//var mi = d.getMinutes();
+		var mi = new Date(Math.ceil(d.getTime() / interval) * interval).getMinutes();
+		
+		var ele_next = $("div.hvac_edit");
+		var ele_par = $(this).parents(".time_pick");
+		var inputs = ele_par.find('input');
+		
+		ele_next.find(".te_tx input").val(parseFloat(document.getElementById('current_inside_degree').innerHTML));
+		if (ti < 10) {
+			ele_next.find(".ti_tx input").val("0" + ti);
+		} else {
+			ele_next.find(".ti_tx input").val(ti);
+		}
+		if (mi < 10) {
+			ele_next.find(".mi_tx input").val("0" + mi);
+		} else {
+			ele_next.find(".mi_tx input").val(mi);
+		}
+		
+		// increase hour if minutes are zero.
+		if ( mi == 0 ) {
+			change_time(null, 'next');
+		}
+		
+		// handle clicking on the arrow icons
+		var cur_next = ele_next.find(".action-next");
+		var cur_prev = ele_next.find(".action-prev");
+		$(cur_prev).add(cur_next).on("click", function() {
+			var cur_ele = $(this);
+			if (cur_ele.parent().attr("class") == "time") {
+				change_time(cur_ele);	
+			} else if (cur_ele.parent().attr("class") == "mins") {
+				change_mins(cur_ele);
+			} else if (cur_ele.parent().attr("class") == "temp") {
+				change_temp(cur_ele);
+			} else if (cur_ele.parent().attr("class") == "save") {
+				var ele = $(this);
+				var temp = ele_next.find(".te_tx input").val();
+				var tim = ele_next.find(".ti_tx input").val();
+				var mini = ele_next.find(".mi_tx input").val();
+				var args = Math.floor(d / 1000) + "," +temp + "," + tim + ":" + mini;
+				jQuery.ajax({
+					type: "POST",
+					url: 'home-auto.php',
+					dataType: 'json',
+					data: {functionname: "set_hvac_hold", arguments: args},
+					success: function (obj, textstatus) {
+						if( ('error' in obj) ) {            
+							console.log(obj.error);
+			                  	}
+			            	}
+				});
+				hold_hvac()
+			} 
+		});
+		
+		
+	
+		
+	}
+}
+
+
+function change_time(cur_ele, direction) {
+	var ele_next = $("div.hvac_edit");
+	var cur_cli = "time";
+	var cur_time = Number(ele_next.find("." + cur_cli + " .ti_tx input").val());
+	var ele_st = 0;
+	var ele_en = 23;
+	var step_size = 1;
+	if ((cur_ele && cur_ele.hasClass('action-next')) || direction === 'next') {
+		if (cur_time + step_size > ele_en) {
+			var min_value = ele_st;
+			if (min_value < 10) {
+				min_value = '0' + min_value;
+			} else {
+				min_value = String(min_value);
+			}
+			ele_next.find("." + cur_cli + " .ti_tx input")
+					.val(min_value);
+		} else {
+			cur_time = cur_time + step_size;
+			if (cur_time < 10) {
+				cur_time = "0" + cur_time;
+			}
+			ele_next.find("." + cur_cli + " .ti_tx input")
+					.val(cur_time);
+		}
+	} else if ((cur_ele && cur_ele.hasClass('action-prev'))	|| direction === 'prev') {
+		var minValue = ele_st;
+		if (cur_time - step_size < minValue) {
+			var max_value = ele_en;
+			if (max_value < 10) {
+				max_value = '0' + max_value;
+			} else {
+				max_value = String(max_value);
+			}
+			ele_next.find("." + cur_cli + " .ti_tx input")
+					.val(max_value);
+		} else {
+			cur_time = cur_time - step_size;
+			if (cur_time < 10) {
+				cur_time = "0" + cur_time;
+			}
+			ele_next.find("." + cur_cli + " .ti_tx input")
+					.val(cur_time);
+		}
+	}
+}
+
+// change temp
+function change_temp(cur_ele, direction) {
+	var ele_next = $("div.hvac_edit");
+	var cur_cli = "temp";
+	var cur_temp = Number(ele_next.find(
+			"." + cur_cli + " .te_tx input").val());
+	var ele_st = 60;
+	var ele_en = 80;
+	var step_size = 1;
+	if ((cur_ele && cur_ele.hasClass('action-next'))
+			|| direction === 'next') {
+		if (cur_temp + step_size > ele_en) {
+			ele_next.find("." + cur_cli + " .te_tx input")
+					.val(ele_st);
+		} else {
+			cur_temp = cur_temp + step_size;
+			if (cur_temp < 10) {
+				ele_next.find(
+						"." + cur_cli + " .te_tx input")
+						.val("0" + cur_temp);
+			} else {
+				ele_next.find(
+						"." + cur_cli + " .te_tx input")
+						.val(cur_temp);
+			}
+		}
+	} else if ((cur_ele && cur_ele.hasClass('action-prev'))
+			|| direction === 'prev') {
+		if (cur_temp - step_size <= ele_st) {
+			ele_next.find("." + cur_cli + " .te_tx input")
+					.val(ele_en + 1 - step_size);
+		} else {
+			cur_temp = cur_temp - step_size;
+			if (cur_temp < 10) {
+				ele_next.find(
+						"." + cur_cli + " .te_tx input")
+						.val("0" + cur_temp);
+			} else {
+				ele_next.find(
+						"." + cur_cli + " .te_tx input")
+						.val(cur_temp);
+			}
+		}
+	}
+}
+
+function change_mins(cur_ele, direction) {
+	var ele_next = $("div.hvac_edit");
+	var cur_cli = "mins";
+	var cur_mins = Number(ele_next.find(
+			"." + cur_cli + " .mi_tx input").val());
+	var ele_st = 0;
+	var ele_en = 59;
+	var step_size = 15;
+	var overflow_minutes = true;
+	if ((cur_ele && cur_ele.hasClass('action-next'))
+			|| direction === 'next') {
+		if (cur_mins + step_size > ele_en) {
+			ele_next.find("." + cur_cli + " .mi_tx input")
+					.val("00");
+			if (overflow_minutes) {
+				change_time(null, 'next');
+			}
+		} else {
+			cur_mins = cur_mins + step_size;
+			if (cur_mins < 10) {
+				ele_next.find(
+						"." + cur_cli + " .mi_tx input")
+						.val("0" + cur_mins);
+			} else {
+				ele_next.find(
+						"." + cur_cli + " .mi_tx input")
+						.val(cur_mins);
+			}
+		}
+	} else if ((cur_ele && cur_ele.hasClass('action-prev'))
+			|| direction === 'prev') {
+		if (cur_mins - step_size <= -1) {
+			ele_next.find("." + cur_cli + " .mi_tx input")
+					.val(ele_en + 1 - step_size);
+			if (overflow_minutes) {
+				change_time(null, 'prev');
+			}
+		} else {
+			cur_mins = cur_mins - step_size;
+			if (cur_mins < 10) {
+				ele_next.find(
+						"." + cur_cli + " .mi_tx input")
+						.val("0" + cur_mins);
+			} else {
+				ele_next.find(
+						"." + cur_cli + " .mi_tx input")
+						.val(cur_mins);
+			}
+		}
+	}
+}
+
 $(document).ready(function(){
     $(".hide_show").click(function(){
         $(".past_event").toggle();
      });
+    
 });
 
 // disable grey out past rows and highlight latest

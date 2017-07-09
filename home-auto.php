@@ -4,8 +4,8 @@
 <link rel="stylesheet" type="text/css" href="home-auto.css">
 <link rel="stylesheet" type="text/css" href="fonts/font-awesome.min.css">
 <link rel="shortcut icon" href="home-auto.ico">
-<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="kendo.all.min.js"></script>
+
+<script type="text/javascript" src="jquery-3.2.1.js"></script>
 <script type="text/javascript" src="home-auto.js"></script>
 </head>
 <body>
@@ -108,14 +108,53 @@
 			</div>
 			<div id="inside" class="icon">
 				<strong>Inside</strong>
-				<div id="current_inside_htsp"></div>
-				<div id="current_inside_degree"></div>
-				<div id="current_inside_clsp"></div>
+				<div class="box_content">
+					<i class="fa fa-cog hvac_set" aria-hidden="true" onclick="hold_hvac()"></i>
+					<div id="hvac_display" style="display: block;">
+						<div id="current_inside_htsp"></div>
+						<div id="current_inside_degree"></div>
+						<div id="current_inside_clsp"></div>
+					</div>
+					<div class="hvac_edit" style="display: none;" >
+						<div class='timepicker_wrap'>
+							<div class='hold_words'>Set and Hold Until:</div>
+							<div class='temp'>
+								Temp
+								<div class='next action-next'><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+								<div class='te_tx'>
+									<input type='text' class='timepicki-input' readonly>
+								</div>
+								<div class='prev action-prev'><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></div>
+							</div>
+							<div class='time'>
+								Hour
+								<div class='next action-next'><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+								<div class='ti_tx'>
+									<input type='text' class='timepicki-input' readonly>
+								</div>
+								<div class='prev action-prev'><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></div>
+							</div>
+							<div class='mins'>
+								Minute
+								<div class='next action-next'><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+								<div class='mi_tx'>
+									<input type='text' class='timepicki-input' readonly>
+								</div>
+								<div class='prev action-prev'><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></div>
+							</div>
+							<div class="save">
+								<i class="fa fa-check-circle action-prev" aria-hidden="true"></i>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+
+
 			<div id="humidifer" class="icon">
 				<strong>Hudmifier</strong>
 				<div class="box_content">
-				    <div id="humid_icon"></div>
+					<div id="humid_icon"></div>
 					<div id="humid_text"></div>
 					<div id="current_inside_humid"></div>
 					<div id="humid_filter"></div>
@@ -125,8 +164,8 @@
 
 		<div id="schedule" class="hide_show"></div>
 
-
 	</div>
+
 </body>
 </html>
 
@@ -147,11 +186,16 @@ $fileName = 'public.ini';
 if (! isset ( $aResult ['error'] )) {
 	
 	switch ($_POST ['functionname']) {
-		case 'on' :
+		case 'set_hvac_hold' :
+			$myfile = fopen ( "hvac/hvac_hold.txt", "w" ) or die ( "ON: Unable to open file! hvac_hold.txt" );
+			$txt = $_POST ['arguments'];
+			fwrite($myfile, $txt);
+			fclose($myfile);
+			break;
 			
+		case 'on' :
 			switch ($_POST ['arguments']) {
 				case 'movie' :
-					error_reporting ( E_ERROR | E_WARNING | E_PARSE | E_NOTICE );
 					$myfile = fopen ( "movie/movie.txt", "w" ) or die ( "ON: Unable to open file! movie.txt" );
 					break;
 				case 'vacation' :
@@ -182,6 +226,7 @@ if (! isset ( $aResult ['error'] )) {
 					break;
 			}
 			break;
+			
 		case 'off' :
 			switch ($_POST ['arguments']) {
 				case 'movie' :
@@ -218,13 +263,9 @@ if (! isset ( $aResult ['error'] )) {
 		
 		default :
 			$aResult ['error'] = 'No function found matching: ';
-			
 			break;
 	}
-	// echo ($aResult);
 }
-
-// echo json_encode ( $aResult );
 
 ?>
 
