@@ -120,29 +120,29 @@
 							<div class='hold_words'>Set and Hold Until:</div>
 							<div class='temp'>
 								Temp
-								<div class='next action-next'><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+								<div class='next action-next' onClick="change_temp('next');"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
 								<div class='te_tx'>
 									<input type='text' class='timepicki-input' readonly>
 								</div>
-								<div class='prev action-prev'><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></div>
+								<div class='prev action-prev' onClick="change_temp('prev');"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></div>
 							</div>
 							<div class='time'>
 								Hour
-								<div class='next action-next'><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+								<div class='next action-next' onClick="change_time('next');"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
 								<div class='ti_tx'>
 									<input type='text' class='timepicki-input' readonly>
 								</div>
-								<div class='prev action-prev'><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></div>
+								<div class='prev action-prev' onClick="change_time('prev');"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></div>
 							</div>
 							<div class='mins'>
 								Minute
-								<div class='next action-next'><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+								<div class='next action-next' onClick="change_mins('next');"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
 								<div class='mi_tx'>
 									<input type='text' class='timepicki-input' readonly>
 								</div>
-								<div class='prev action-prev'><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></div>
+								<div class='prev action-prev' onClick="change_mins('prev');"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></div>
 							</div>
-							<div class="save">
+							<div class="save" onClick="sendCommand('set_hvac_hold');">
 								<i class="fa fa-check-circle action-prev" aria-hidden="true"></i>
 							</div>
 						</div>

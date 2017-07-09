@@ -461,7 +461,6 @@ function getColor(value){
 
 // button actions
 function toggleButton(thing) {
-	
 	var previous = "";
 	var ajax = new XMLHttpRequest();
 	ajax.onreadystatechange = function() {
@@ -499,14 +498,43 @@ function toggleButton(thing) {
 		}
 	};
 	ajax.open("POST", "public.ini", true); // Use POST to avoid
-										// caching
+									// caching
 	ajax.send();
-
 }
+
+function sendCommand(job) {
+	
+	var ele_next = $("div.hvac_edit");
+	var temp = ele_next.find(".te_tx input").val();
+	var tim = ele_next.find(".ti_tx input").val();
+	var mini = ele_next.find(".mi_tx input").val();
+	var d = new Date();
+	var args = Math.floor(d / 1000) + "," +temp + "," + tim + ":" + mini;
+	console.log(args);
+	jQuery.ajax({
+		type: "POST",
+		url: 'home-auto.php',
+		dataType: 'json',
+		data: {functionname: job, arguments: args},
+		success: function (obj, textstatus) {
+			if( ('error' in obj) ) {            
+				console.log(obj.error);
+	                 	}
+	           	}
+	});
+	$("#hvac_display").toggle();
+	$(".hvac_edit").toggle();
+	if ($(".hvac_edit").css('display') == 'none' ){
+		$(".hvac_set").css('color', 'black');
+	} 
+}
+
+
 
 function hold_hvac() {
 	$("#hvac_display").toggle();
 	$(".hvac_edit").toggle();
+	
 	if ($(".hvac_edit").css('display') == 'none' ){
 		$(".hvac_set").css('color', 'black');
 	} else {
@@ -537,56 +565,20 @@ function hold_hvac() {
 		
 		// increase hour if minutes are zero.
 		if ( mi == 0 ) {
-			change_time(null, 'next');
-		}
-		
-		// handle clicking on the arrow icons
-		var cur_next = ele_next.find(".action-next");
-		var cur_prev = ele_next.find(".action-prev");
-		$(cur_prev).add(cur_next).on("click", function() {
-			var cur_ele = $(this);
-			if (cur_ele.parent().attr("class") == "time") {
-				change_time(cur_ele);	
-			} else if (cur_ele.parent().attr("class") == "mins") {
-				change_mins(cur_ele);
-			} else if (cur_ele.parent().attr("class") == "temp") {
-				change_temp(cur_ele);
-			} else if (cur_ele.parent().attr("class") == "save") {
-				var ele = $(this);
-				var temp = ele_next.find(".te_tx input").val();
-				var tim = ele_next.find(".ti_tx input").val();
-				var mini = ele_next.find(".mi_tx input").val();
-				var args = Math.floor(d / 1000) + "," +temp + "," + tim + ":" + mini;
-				jQuery.ajax({
-					type: "POST",
-					url: 'home-auto.php',
-					dataType: 'json',
-					data: {functionname: "set_hvac_hold", arguments: args},
-					success: function (obj, textstatus) {
-						if( ('error' in obj) ) {            
-							console.log(obj.error);
-			                  	}
-			            	}
-				});
-				hold_hvac()
-			} 
-		});
-		
-		
-	
-		
+			change_time('next');
+		}	
 	}
 }
 
 
-function change_time(cur_ele, direction) {
+function change_time(direction) {
 	var ele_next = $("div.hvac_edit");
 	var cur_cli = "time";
 	var cur_time = Number(ele_next.find("." + cur_cli + " .ti_tx input").val());
 	var ele_st = 0;
 	var ele_en = 23;
 	var step_size = 1;
-	if ((cur_ele && cur_ele.hasClass('action-next')) || direction === 'next') {
+	if (direction === 'next') {
 		if (cur_time + step_size > ele_en) {
 			var min_value = ele_st;
 			if (min_value < 10) {
@@ -594,17 +586,15 @@ function change_time(cur_ele, direction) {
 			} else {
 				min_value = String(min_value);
 			}
-			ele_next.find("." + cur_cli + " .ti_tx input")
-					.val(min_value);
+			ele_next.find("." + cur_cli + " .ti_tx input").val(min_value);
 		} else {
 			cur_time = cur_time + step_size;
 			if (cur_time < 10) {
 				cur_time = "0" + cur_time;
 			}
-			ele_next.find("." + cur_cli + " .ti_tx input")
-					.val(cur_time);
+			ele_next.find("." + cur_cli + " .ti_tx input").val(cur_time);
 		}
-	} else if ((cur_ele && cur_ele.hasClass('action-prev'))	|| direction === 'prev') {
+	} else if (direction === 'prev') {
 		var minValue = ele_st;
 		if (cur_time - step_size < minValue) {
 			var max_value = ele_en;
@@ -613,30 +603,26 @@ function change_time(cur_ele, direction) {
 			} else {
 				max_value = String(max_value);
 			}
-			ele_next.find("." + cur_cli + " .ti_tx input")
-					.val(max_value);
+			ele_next.find("." + cur_cli + " .ti_tx input").val(max_value);
 		} else {
 			cur_time = cur_time - step_size;
 			if (cur_time < 10) {
 				cur_time = "0" + cur_time;
 			}
-			ele_next.find("." + cur_cli + " .ti_tx input")
-					.val(cur_time);
+			ele_next.find("." + cur_cli + " .ti_tx input").val(cur_time);
 		}
 	}
 }
 
 // change temp
-function change_temp(cur_ele, direction) {
+function change_temp(direction) {
 	var ele_next = $("div.hvac_edit");
 	var cur_cli = "temp";
-	var cur_temp = Number(ele_next.find(
-			"." + cur_cli + " .te_tx input").val());
+	var cur_temp = Number(ele_next.find("." + cur_cli + " .te_tx input").val());
 	var ele_st = 60;
 	var ele_en = 80;
 	var step_size = 1;
-	if ((cur_ele && cur_ele.hasClass('action-next'))
-			|| direction === 'next') {
+	if ( direction === 'next') {
 		if (cur_temp + step_size > ele_en) {
 			ele_next.find("." + cur_cli + " .te_tx input")
 					.val(ele_st);
@@ -652,8 +638,7 @@ function change_temp(cur_ele, direction) {
 						.val(cur_temp);
 			}
 		}
-	} else if ((cur_ele && cur_ele.hasClass('action-prev'))
-			|| direction === 'prev') {
+	} else if ( direction === 'prev') {
 		if (cur_temp - step_size <= ele_st) {
 			ele_next.find("." + cur_cli + " .te_tx input")
 					.val(ele_en + 1 - step_size);
@@ -672,7 +657,7 @@ function change_temp(cur_ele, direction) {
 	}
 }
 
-function change_mins(cur_ele, direction) {
+function change_mins(direction) {
 	var ele_next = $("div.hvac_edit");
 	var cur_cli = "mins";
 	var cur_mins = Number(ele_next.find(
@@ -681,13 +666,12 @@ function change_mins(cur_ele, direction) {
 	var ele_en = 59;
 	var step_size = 15;
 	var overflow_minutes = true;
-	if ((cur_ele && cur_ele.hasClass('action-next'))
-			|| direction === 'next') {
+	if (direction === 'next') {
 		if (cur_mins + step_size > ele_en) {
 			ele_next.find("." + cur_cli + " .mi_tx input")
 					.val("00");
 			if (overflow_minutes) {
-				change_time(null, 'next');
+				change_time('next');
 			}
 		} else {
 			cur_mins = cur_mins + step_size;
@@ -701,13 +685,12 @@ function change_mins(cur_ele, direction) {
 						.val(cur_mins);
 			}
 		}
-	} else if ((cur_ele && cur_ele.hasClass('action-prev'))
-			|| direction === 'prev') {
+	} else if (direction === 'prev') {
 		if (cur_mins - step_size <= -1) {
 			ele_next.find("." + cur_cli + " .mi_tx input")
 					.val(ele_en + 1 - step_size);
 			if (overflow_minutes) {
-				change_time(null, 'prev');
+				change_time('prev');
 			}
 		} else {
 			cur_mins = cur_mins - step_size;
