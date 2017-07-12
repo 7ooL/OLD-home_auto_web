@@ -94,7 +94,11 @@
 
 		<div id="group">
 			<div id="heatpump" class="icon">
-				<strong>Heatpump</strong>
+				<strong>Heatpump
+					<div id="hvac_updating">
+						<i class="fa fa-refresh fa-spin fa-fw"></i>
+					</div>
+				</strong>
 				<div class="box_content">
 					<div id="hvac_icon"></div>
 					<div id="hvac_text"></div>
@@ -109,43 +113,12 @@
 			<div id="inside" class="icon">
 				<strong>Inside</strong>
 				<div class="box_content">
-					<i class="fa fa-cog hvac_set" aria-hidden="true" onclick="hold_hvac()"></i>
+					<i class="fa fa-cog hvac_set" aria-hidden="true"
+						data-popup-open="popup-1" onclick="hold_hvac()"></i>
 					<div id="hvac_display" style="display: block;">
 						<div id="current_inside_htsp"></div>
 						<div id="current_inside_degree"></div>
 						<div id="current_inside_clsp"></div>
-					</div>
-					<div class="hvac_edit" style="display: none;" >
-						<div class='timepicker_wrap'>
-							<div class='hold_words'>Set and Hold Until:</div>
-							<div class='temp'>
-								Temp
-								<div class='next action-next' onClick="change_temp('next');"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
-								<div class='te_tx'>
-									<input type='text' class='timepicki-input' readonly>
-								</div>
-								<div class='prev action-prev' onClick="change_temp('prev');"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></div>
-							</div>
-							<div class='time'>
-								Hour
-								<div class='next action-next' onClick="change_time('next');"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
-								<div class='ti_tx'>
-									<input type='text' class='timepicki-input' readonly>
-								</div>
-								<div class='prev action-prev' onClick="change_time('prev');"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></div>
-							</div>
-							<div class='mins'>
-								Minute
-								<div class='next action-next' onClick="change_mins('next');"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
-								<div class='mi_tx'>
-									<input type='text' class='timepicki-input' readonly>
-								</div>
-								<div class='prev action-prev' onClick="change_mins('prev');"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></div>
-							</div>
-							<div class="save" onClick="sendCommand('set_hvac_hold');">
-								<i class="fa fa-check-circle action-prev" aria-hidden="true"></i>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -164,6 +137,60 @@
 
 		<div id="schedule" class="hide_show"></div>
 
+
+
+		<div class="popup" data-popup="popup-1">
+			<div class="popup-inner">
+				<div class='timepicker_wrap'>
+					<div class='hold_words'>Set and Hold Until:</div>
+					<div id="hvac_box">
+						<div class='temp'>
+							Temp
+							<div class='next action-next' onClick="change_temp('next');">
+								<i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+							</div>
+							<div class='te_tx'>
+								<input type='text' class='timepicki-input' readonly>
+							</div>
+							<div class='prev action-prev' onClick="change_temp('prev');">
+								<i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+							</div>
+						</div>
+						<div id="havc_time_set">
+							<div class='time'>
+								Hour
+								<div class='next action-next' onClick="change_time('next');">
+									<i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+								</div>
+								<div class='ti_tx'>
+									<input type='text' class='timepicki-input' readonly>
+								</div>
+								<div class='prev action-prev' onClick="change_time('prev');">
+									<i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+								</div>
+							</div>
+							<div class='mins'>
+								Minute
+								<div class='next action-next' onClick="change_mins('next');">
+									<i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+								</div>
+								<div class='mi_tx'>
+									<input type='text' class='timepicki-input' readonly>
+								</div>
+								<div class='prev action-prev' onClick="change_mins('prev');">
+									<i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="save" onClick="sendCommand('set_hvac_hold');">
+						<i class="fa fa-check-circle action-prev" aria-hidden="true"></i>
+					</div>
+				</div>
+				<a class="popup-close" data-popup-close="popup-1" href="#">x</a>
+			</div>
+			
+		</div>
 	</div>
 
 </body>
@@ -189,10 +216,10 @@ if (! isset ( $aResult ['error'] )) {
 		case 'set_hvac_hold' :
 			$myfile = fopen ( "hvac/hvac_hold.txt", "w" ) or die ( "ON: Unable to open file! hvac_hold.txt" );
 			$txt = $_POST ['arguments'];
-			fwrite($myfile, $txt);
-			fclose($myfile);
+			fwrite ( $myfile, $txt );
+			fclose ( $myfile );
 			break;
-			
+		
 		case 'on' :
 			switch ($_POST ['arguments']) {
 				case 'movie' :
@@ -226,7 +253,7 @@ if (! isset ( $aResult ['error'] )) {
 					break;
 			}
 			break;
-			
+		
 		case 'off' :
 			switch ($_POST ['arguments']) {
 				case 'movie' :

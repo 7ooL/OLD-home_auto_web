@@ -315,6 +315,13 @@ function main(configs) {
 		} else {
 			$("#hvac_profile_mode").hide();	
 		}
+		// display updating if it is pending a refresh from havcauto.py
+		if (settings.hvac_current['updating'] == "yes") {
+			$("#hvac_updating").show();
+		} else {
+			$("#hvac_updating").hide();
+		}
+		
 		// disaply hold information
 		if (settings.hvac_current['hold'] == 'on') {
 			document.getElementById('hold_indicator').className = ('led-blue-small');
@@ -504,7 +511,7 @@ function toggleButton(thing) {
 
 function sendCommand(job) {
 	
-	var ele_next = $("div.hvac_edit");
+	var ele_next = $("div.timepicker_wrap");
 	var temp = ele_next.find(".te_tx input").val();
 	var tim = ele_next.find(".ti_tx input").val();
 	var mini = ele_next.find(".mi_tx input").val();
@@ -522,57 +529,45 @@ function sendCommand(job) {
 	                 	}
 	           	}
 	});
-	$("#hvac_display").toggle();
-	$(".hvac_edit").toggle();
-	if ($(".hvac_edit").css('display') == 'none' ){
-		$(".hvac_set").css('color', 'black');
-	} 
+	$('[data-popup-close]').click()
 }
 
 
 
 function hold_hvac() {
-	$("#hvac_display").toggle();
-	$(".hvac_edit").toggle();
-	
-	if ($(".hvac_edit").css('display') == 'none' ){
-		$(".hvac_set").css('color', 'black');
-	} else {
 			
-		$(".hvac_set").css('color', 'red');
-
-		var d = new Date();
-		var ti = d.getHours();
-		var interval = 15 * 60 * 1000;    // 15 minutes in miliseconds
-		//var mi = d.getMinutes();
-		var mi = new Date(Math.ceil(d.getTime() / interval) * interval).getMinutes();
-		
-		var ele_next = $("div.hvac_edit");
-		var ele_par = $(this).parents(".time_pick");
-		var inputs = ele_par.find('input');
-		
-		ele_next.find(".te_tx input").val(parseFloat(document.getElementById('current_inside_degree').innerHTML));
-		if (ti < 10) {
-			ele_next.find(".ti_tx input").val("0" + ti);
-		} else {
-			ele_next.find(".ti_tx input").val(ti);
-		}
-		if (mi < 10) {
-			ele_next.find(".mi_tx input").val("0" + mi);
-		} else {
-			ele_next.find(".mi_tx input").val(mi);
-		}
-		
-		// increase hour if minutes are zero.
-		if ( mi == 0 ) {
-			change_time('next');
-		}	
+	var d = new Date();
+	var ti = d.getHours();
+	var interval = 15 * 60 * 1000;    // 15 minutes in miliseconds
+	// var mi = d.getMinutes();
+	var mi = new Date(Math.ceil(d.getTime() / interval) * interval).getMinutes();
+	
+	var ele_next = $("div.timepicker_wrap");
+	var ele_par = $(this).parents(".time_pick");
+	var inputs = ele_par.find('input');
+	
+	ele_next.find(".te_tx input").val(parseFloat(document.getElementById('current_inside_degree').innerHTML));
+	if (ti < 10) {
+		ele_next.find(".ti_tx input").val("0" + ti);
+	} else {
+		ele_next.find(".ti_tx input").val(ti);
 	}
+	if (mi < 10) {
+		ele_next.find(".mi_tx input").val("0" + mi);
+	} else {
+		ele_next.find(".mi_tx input").val(mi);
+	}
+		
+	// increase hour if minutes are zero.
+	if ( mi == 0 ) {
+		change_time('next');
+	}	
+	
 }
 
 
 function change_time(direction) {
-	var ele_next = $("div.hvac_edit");
+	var ele_next = $("div.timepicker_wrap");
 	var cur_cli = "time";
 	var cur_time = Number(ele_next.find("." + cur_cli + " .ti_tx input").val());
 	var ele_st = 0;
@@ -616,7 +611,7 @@ function change_time(direction) {
 
 // change temp
 function change_temp(direction) {
-	var ele_next = $("div.hvac_edit");
+	var ele_next = $("div.timepicker_wrap");
 	var cur_cli = "temp";
 	var cur_temp = Number(ele_next.find("." + cur_cli + " .te_tx input").val());
 	var ele_st = 60;
@@ -658,7 +653,7 @@ function change_temp(direction) {
 }
 
 function change_mins(direction) {
-	var ele_next = $("div.hvac_edit");
+	var ele_next = $("div.timepicker_wrap");
 	var cur_cli = "mins";
 	var cur_mins = Number(ele_next.find(
 			"." + cur_cli + " .mi_tx input").val());
@@ -795,5 +790,22 @@ function myCreateTableFunction(x,icon,time,dialog,tcinner,dcinner,type) {
     dialogCell.innerHTML = dcinner;
 }
 
+$(function() {
+    // ----- OPEN
+    $('[data-popup-open]').on('click', function(e)  {
+        var targeted_popup_class = jQuery(this).attr('data-popup-open');
+        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+ 
+        e.preventDefault();
+    });
+ 
+    // ----- CLOSE
+    $('[data-popup-close]').on('click', function(e)  {
+        var targeted_popup_class = jQuery(this).attr('data-popup-close');
+        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+ 
+        e.preventDefault();
+    });
+});
 
 

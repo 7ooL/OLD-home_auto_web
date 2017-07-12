@@ -549,34 +549,43 @@ hr{
 
 .timepicker_wrap {
     z-index: 998;
-     display: none;
-    font-size: 12px;
-    top: 0;
-    margin: auto;
+}
+.hold_words {
+    color: black;
+    font-size: 2em;
 }
 
 .te_tx,
 .ti_tx,
 .mi_tx{
-	width: 50px;
+    /* width: 5em; */
     text-align: center;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 input{
     text-align: center;
-    width: 50px;
-    background-color: rgba(0, 0, 139, 0);
-    border-color: rgba(236, 236, 0, 0);
+    width: 1.3em;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
     color: #68b8ff;
-    font-size: 2em;
+    font-size: 3em;
 }
 .save{
-    margin-top: 40px;
+    margin-top: 1.5em;
     font-size: 4em;
     color: #08fd86;
     cursor: pointer;
+    float: right;
 }
-
+#hvac_updating{
+	display: inline-block
+}
+#hvac_time_set{
+	display: inline-block;
+}
+#hvac_box{
+	display: inline-flex;
+}
 .hvac_set{
 	position: absolute;
     float: right;
@@ -588,23 +597,78 @@ input{
 .temp,
 .time,
 .mins {
-	width: 50px;
-    float: left;
-    /* margin: 0 10px; */
-    /* font-size: 20px; */
-    color: #f7e81f;
+    width: 4em;
+    /* float: left; */
+    display: inline-block;
+    /* margin: 0px 50px; */
+    font-size: 1.5em;
+    color: #f71f95;
     /* font-family: arial; */
-    /* font-weight: 700; */
+    font-weight: 700;
 }
 
 .prev,
 .next {
     cursor: pointer;
     margin: auto;
-    font-size: 3em;
+    font-size: 2.5em;
 }
 .prev:hover,
 .save:hover,
 .next:hover {
 	color: #ff8000;
+}
+
+/* Outer */
+.popup {
+    width:100%;
+    height:100%;
+    display:none;
+    position:fixed;
+    top:0px;
+    left:0px;
+    background:rgba(0,0,0,0.75);
+}
+ 
+/* Inner */
+.popup-inner {
+    max-width: 700px;
+    /* width: 90%; */
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 2px 6px rgba(0,0,0,1);
+    border-radius: 3px;
+    background: #fff;
+}
+ 
+/* Close Button */
+.popup-close {
+    width: 60px;
+    height: 60px;
+    padding-top: 4px;
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    transition: ease 0.25s all;
+    -webkit-transform: translate(50%, -50%);
+    transform: translate(50%, -50%);
+    border-radius: 1000px;
+    background: rgba(255,0,0,0.8);
+    font-family: Arial, Sans-Serif;
+    font-size: 3em;
+    text-align: center;
+    line-height: 100%;
+    color: #fff;
+}
+ 
+.popup-close:hover {
+    -webkit-transform:translate(50%, -50%) rotate(180deg);
+    transform:translate(50%, -50%) rotate(180deg);
+    background: rgba(255,0,0,0.8);
+    text-decoration:none;
 }
