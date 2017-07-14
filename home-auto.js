@@ -183,31 +183,32 @@ function main(configs) {
 	// border="0"></i>
     document.getElementById('current_weather_degree').innerHTML = settings.weather['ot'];
     
-    
-	// configure current scene, hide if there is none
+   
+	// configure current lights scene display
+    var lightBulb = '<i class="fa fa-lightbulb-o" aria-hidden="true" style="display: inline-block;"></i>'
 	if (settings.auto['currentscene'] != 'null') {
 		document.getElementById('lights_text').className = ('on');
 		switch (settings.auto['currentscene']) {
 		case "morn_1":
-			document.getElementById('lights_text').innerHTML = "Morning";
+			document.getElementById('lights_text').innerHTML = lightBulb+" Morning";
 			break;
 		case "daytime_1":
-			document.getElementById('lights_text').innerHTML = "Daytime 1";
+			document.getElementById('lights_text').innerHTML = lightBulb+" Daytime 1";
 				break;
 		case "scene_1":
-			document.getElementById('lights_text').innerHTML = "Evening 1";
+			document.getElementById('lights_text').innerHTML = lightBulb+" Evening 1";
 				break;
 		case "scene_2":
-			document.getElementById('lights_text').innerHTML = "Evening 2";
+			document.getElementById('lights_text').innerHTML = lightBulb+" Evening 2";
 				break;
 		case "scene_3":
-			document.getElementById('lights_text').innerHTML = "Evening 3";
+			document.getElementById('lights_text').innerHTML = lightBulb+" Evening 3";
 				break;
 		case "scene_4":
-			document.getElementById('lights_text').innerHTML = "Evening 4";
+			document.getElementById('lights_text').innerHTML = lightBulb+" Evening 4";
 				break;
 		case "scene_5":
-			document.getElementById('lights_text').innerHTML = "Evening 5";
+			document.getElementById('lights_text').innerHTML = lightBulb+" Evening 5";
 				break;
 		default:
 			document.getElementById('lights_text').innerHTML = settings.auto['currentscene'];
@@ -280,32 +281,68 @@ function main(configs) {
 			settings.hvac['mode'] = 'auto'
 		}
 		
+		// define profile looks
+		var home = '<i class="fa fa-home" aria-hidden="true" style="display: inline-block;"></i> Home';
+		var sleep = '<i class="fa fa-bed" aria-hidden="true" style="display: inline-block;"></i> Sleep';
+		var away = 'Away <i class="fa fa-arrow-right" aria-hidden="true" style="display: inline-block;"></i>';
+        var wake = 'Wake <i class="fa fa-sun-o" aria-hidden="true" style="display: inline-block;"></i>';
+        var vacation = '<i class="fa fa-suitcase" aria-hidden="true" style="display: inline-block;"></i> Vacation';
+        var manual = 'Manual';
+	
+        $("#profile_chooser").html('');
+
+  		$("#profile_chooser").append('<div id="profile_box" class="wake">'+wake+
+  		  		'<div class="profile_temps"><div class="clsp"><i class="fa fa-caret-down" aria-hidden="true"></i>'+settings.profile_current['wake_clsp']+'</div>' +
+  		  		'<div class="htsp"><i class="fa fa-caret-up" aria-hidden="true"></i>'+settings.profile_current['wake_htsp']+'</div></div></div>');
+
+  		$("#profile_chooser").append('<div id="profile_box" class="home">'+home+
+  		  		'<div class="profile_temps"><div class="clsp"><i class="fa fa-caret-down" aria-hidden="true"></i>'+settings.profile_current['home_clsp']+'</div>' +
+  		  		'<div class="htsp"><i class="fa fa-caret-up" aria-hidden="true"></i>'+settings.profile_current['home_htsp']+'</div></div>');
+  		
+  		$("#profile_chooser").append('<div id="profile_box" class="away">'+away+
+  		  		'<div class="profile_temps"><div class="clsp"><i class="fa fa-caret-down" aria-hidden="true"></i>'+settings.profile_current['away_clsp']+'</div>' +
+  		  		'<div class="htsp"><i class="fa fa-caret-up" aria-hidden="true"></i>'+settings.profile_current['away_htsp']+'</div></div>');
+  		
+  		$("#profile_chooser").append('<div id="profile_box" class="sleep">'+sleep+
+  		  		'<div class="profile_temps"><div class="clsp"><i class="fa fa-caret-down" aria-hidden="true"></i>'+settings.profile_current['sleep_clsp']+'</div>' +
+  		  		'<div class="htsp"><i class="fa fa-caret-up" aria-hidden="true"></i>'+settings.profile_current['sleep_htsp']+'</div></div>');
+  		
+  		$("#profile_chooser").append('<div id="profile_box" class="manual">'+manual+
+  		  		'<div class="profile_temps"><div class="clsp"><i class="fa fa-caret-down" aria-hidden="true"></i>'+settings.profile_current['manual_clsp']+'</div>' +
+  		  		'<div class="htsp"><i class="fa fa-caret-up" aria-hidden="true"></i>'+settings.profile_current['manual_htsp']+'</div></div>');
+  		
+  		$("#profile_chooser").append('<div id="profile_box" class="vacation">'+vacation+
+  		  		'<div class="profile_temps"><div class="clsp"><i class="fa fa-caret-down" aria-hidden="true"></i>'+settings.profile_current['vacmaxt']+'</div>' +
+  		  		'<div class="htsp"><i class="fa fa-caret-up" aria-hidden="true"></i>'+settings.profile_current['vacmint']+'</div></div>');
+  		
+  	   	
+        
 		// current profile running
 		if (settings.hvac_current['currentactivity'] != 'null') {
 			switch (settings.hvac_current['currentactivity']) {
 			case "home":
 				document.getElementById('hvac_profile_mode').className = ('home');
-				document.getElementById('hvac_profile_mode').innerHTML = '<i class="fa fa-home" aria-hidden="true" style="display: inline-block;"></i> Home';
+				document.getElementById('hvac_profile_mode').innerHTML = home;
 				break;
 			case "sleep":
 				document.getElementById('hvac_profile_mode').className = ('sleep');
-				document.getElementById('hvac_profile_mode').innerHTML = '<i class="fa fa-bed" aria-hidden="true" style="display: inline-block;"></i> Sleep';
+				document.getElementById('hvac_profile_mode').innerHTML = sleep;
 				break;
 			case "away":
 				document.getElementById('hvac_profile_mode').className = ('away');
-				document.getElementById('hvac_profile_mode').innerHTML = 'Away <i class="fa fa-arrow-right" aria-hidden="true" style="display: inline-block;"></i>';
+				document.getElementById('hvac_profile_mode').innerHTML = away;
 				break;
 			case "wake":
 				document.getElementById('hvac_profile_mode').className = ('wake');
-				document.getElementById('hvac_profile_mode').innerHTML = 'Wake <i class="fa fa-sun-o" aria-hidden="true" style="display: inline-block;"></i>';
+				document.getElementById('hvac_profile_mode').innerHTML = wake;
 				break;
 			case "vacation":
 				document.getElementById('hvac_profile_mode').className = ('vacation');
-				document.getElementById('hvac_profile_mode').innerHTML = '<i class="fa fa-suitcase" aria-hidden="true" style="display: inline-block;"></i> Vacation';
+				document.getElementById('hvac_profile_mode').innerHTML = vacation;
 				break;
 			case "manual":
 				document.getElementById('hvac_profile_mode').className = ('manual');
-				document.getElementById('hvac_profile_mode').innerHTML = 'Manual';
+				document.getElementById('hvac_profile_mode').innerHTML = manual;
 				break;
 			default:
 				document.getElementById('hvac_profile_mode').className = ('manual');

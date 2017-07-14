@@ -1,3 +1,4 @@
+
 <html>
 <head>
 <title>Home-Auto</title>
@@ -80,14 +81,14 @@
 			<div id="profile" class="icon">
 				<strong>Profile</strong>
 				<div class="box_content">
-					<div id="hvac_profile_mode"></div>
+					<div id="hvac_profile_mode" data-popup-open="popup-2"></div>
 				</div>
 			</div>
 
 			<div id="light_scene" class="icon">
 				<strong>Light Scene</strong>
 				<div class="box_content">
-					<div id="lights_text"></div>
+					<div id="lights_text" data-popup-open="popup-3"></div>
 				</div>
 			</div>
 		</div>
@@ -113,11 +114,10 @@
 			<div id="inside" class="icon">
 				<strong>Inside</strong>
 				<div class="box_content">
-					<i class="fa fa-cog hvac_set" aria-hidden="true"
-						data-popup-open="popup-1" onclick="hold_hvac()"></i>
 					<div id="hvac_display" style="display: block;">
 						<div id="current_inside_htsp"></div>
-						<div id="current_inside_degree"></div>
+						<div id="current_inside_degree" data-popup-open="popup-1"
+							onclick="hold_hvac()"></div>
 						<div id="current_inside_clsp"></div>
 					</div>
 				</div>
@@ -189,8 +189,24 @@
 				</div>
 				<a class="popup-close" data-popup-close="popup-1" href="#">x</a>
 			</div>
-			
 		</div>
+
+
+		<div class="popup" data-popup="popup-2">
+			<div class="popup-inner">
+				<div id="profile_chooser"></div>
+				<a class="popup-close" data-popup-close="popup-2" href="#">x</a>
+			</div>
+		</div>
+
+		<div class="popup" data-popup="popup-3">
+			<div class="popup-inner">
+				<p>lights</p>
+				<a class="popup-close" data-popup-close="popup-3" href="#">x</a>
+			</div>
+		</div>
+
+
 	</div>
 
 </body>

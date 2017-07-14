@@ -78,6 +78,7 @@ body {
     padding-right: .1em;
     margin-top: -25px;
     margin-bottom: -25px;
+	cursor: pointer;
    
 }
 #current_inside_htsp{
@@ -213,6 +214,7 @@ img.user_icon{
 }
 #lights_text, #hvac_profile_mode{
 	text-transform: capitalize;
+	cursor: pointer;
 }
 .hpelectheat{
 	margin-right: 22px;
@@ -251,6 +253,31 @@ img.user_icon{
 	color: #00ff00;
 	font-size: 175%;
 	text-shadow: 2px 2px 2px #008000;
+}
+#profile_box{
+	font-size: 3em;
+}
+
+.profile_temps{
+	display: inline-block;
+}
+
+#profile_chooser{
+	text-align: right;
+}
+.htsp{
+
+    color: red;
+    margin-left: 10px;
+    font-size: .4em;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0);
+}
+.clsp{
+
+    color: #13d7ec;
+    margin-left: 10px;
+    font-size: .4em;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0);
 }
 
 a[href^=tel]{color: inherit; text-decoration: none;}
@@ -563,12 +590,18 @@ hr{
     /* overflow: hidden; */
 }
 input{
-    text-align: center;
-    width: 1.3em;
     background-color: rgba(0, 0, 0, 0);
     border-color: rgba(0, 0, 0, 0);
     color: #68b8ff;
     font-size: 3em;
+    line-height: 100%;
+    -webkit-appearance: none;
+    display: block;
+    float: left;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    padding: 0;
 }
 .save{
     margin-top: 1.5em;
@@ -586,14 +619,7 @@ input{
 #hvac_box{
 	display: inline-flex;
 }
-.hvac_set{
-	position: absolute;
-    float: right;
-    right: 2;
-    top: 2;
-    color: black;
-    cursor: pointer;
-}
+
 .temp,
 .time,
 .mins {
