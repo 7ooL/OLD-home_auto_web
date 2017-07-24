@@ -201,7 +201,7 @@
 
 		<div class="popup" data-popup="popup-3">
 			<div class="popup-inner">
-				<p>lights</p>
+				<div id="light_chooser"></div>
 				<a class="popup-close" data-popup-close="popup-3" href="#">x</a>
 			</div>
 		</div>

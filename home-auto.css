@@ -604,11 +604,11 @@ input{
     padding: 0;
 }
 .save{
-    margin-top: 1.5em;
     font-size: 4em;
     color: #08fd86;
     cursor: pointer;
-    float: right;
+    background-color: rgb(45, 56, 93);
+    border-radius: 40px;
 }
 #hvac_updating{
 	display: inline-block
