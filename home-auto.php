@@ -82,6 +82,7 @@
 				<strong>Profile</strong>
 				<div class="box_content">
 					<div id="hvac_profile_mode" data-popup-open="popup-2"></div>
+					<div id="nextHVAC" class="nextEvent"></div>
 				</div>
 			</div>
 
@@ -89,6 +90,7 @@
 				<strong>Light Scene</strong>
 				<div class="box_content">
 					<div id="lights_text" data-popup-open="popup-3"></div>
+					<div id="nextLight" class="nextEvent"></div>
 				</div>
 			</div>
 		</div>
@@ -144,9 +146,6 @@
 				</div>
 			</div>
 		</div>
-
-
-		<div id="schedule" class="hide_show"></div>
 
 
 

@@ -71,6 +71,15 @@ body {
 #dvr{
 	text-transform: none;
 }
+.nextEvent{
+    color: rgb(246, 167, 28);
+    text-transform: none;
+    font-size: .6em;
+}
+.nextIcon{
+	color: red;
+	padding-right: .5em;
+}
 #current_weather_degree{
     font-size: 4em;
     letter-spacing: -0.05em;
@@ -473,13 +482,12 @@ td{
 } 
 .hvac {
 	color: #f44336;
-	font-size: 18px;
-	text-align: center;
+	padding-right: .5em;
+	font-size: 1em;
+
 }
 .light {
 	color: #e5c100;
-	font-size: 18px;
-	text-align: center;
 } 
 .past_event {
 	display: none;
