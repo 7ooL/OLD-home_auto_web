@@ -135,6 +135,17 @@
 			</div>
 		</div>
 
+
+		<div id="group">
+			<div id="dvr_schedule" class="icon">
+				<strong>MythTV DVR</strong>
+				<div class="box_content">
+					<div id="dvr"></div>
+				</div>
+			</div>
+		</div>
+
+
 		<div id="schedule" class="hide_show"></div>
 
 

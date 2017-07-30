@@ -294,7 +294,7 @@ function main(configs) {
 		var away = 'Away <i class="fa fa-arrow-right" aria-hidden="true" style="display: inline-block;"></i>';
 		var wake = 'Wake <i class="fa fa-sun-o" aria-hidden="true" style="display: inline-block;"></i>';
 		var vacation = '<i class="fa fa-suitcase" aria-hidden="true" style="display: inline-block;"></i> Vacation';
-		var manual = 'Manual';
+		var manual = 'Manual <i class="fa fa-hand-pointer-o" aria-hidden="true" style="display: inline-block;"></i>';
 		
 
 		// configure the profile disaply / chooser / edit window
@@ -448,8 +448,6 @@ function main(configs) {
 	var table = document.getElementById("schedule_table").createCaption();
 	table.innerHTML = "<b>Upcoming Events</b>";
 
-
-	// $("#schedule").hide();
 	var tbl = document.getElementById("schedule_table")
 
 	if (settings.settings["morning"] == 'on' && settings.settings["autorun"] == 'on') {
@@ -479,7 +477,7 @@ function main(configs) {
 		}
 	}
 	// fill in hvac data for the day
-	for ( var y = 1; y < 5 ; y++) {
+	for ( var y = 0; y < 5 ; y++) {
 		if (settings.hvac["event_"+y+"_on_time"] != 'null' ) {
 			tcinner = settings.hvac["event_"+y+"_on_time"]+":00"
 			dcinner = settings.hvac["event_"+y+"_activity"]+" profile will activate."; 
@@ -489,13 +487,68 @@ function main(configs) {
 	}
 
 	// fill in tv data for today
-	var shows = JSON.parse(settings.extra['upcoming_shows']);
+	var shows = JSON.parse(settings.dvr['0_shows']);
 	for (var show in shows) {
 		tcinner = shows[show].starttime;
 		dcinner= shows[show].title+"' - '"+shows[show].subtitle+"' will start to record.";
 		myCreateTableFunction(x,icon,time,dialog, tcinner, dcinner, "tv")
 		x = x +1;
 	}
+	
+	// get tv data for a few days
+
+	for ( var y = 0; y < 3 ; y++) {
+		var iDiv = document.createElement('div');
+		iDiv.id = 'day_'+y;
+		iDiv.className = 'day_box';
+		var dvrDay = document.createElement('div');
+		dvrDay.id = 'day_header';
+		if ( y == 0) {
+			dvrDay.innerHTML = "Today";
+		}
+		if ( y == 1) {
+			dvrDay.innerHTML = " Tomorrow";
+		}
+		if ( y == 2) {
+			var d = new Date();
+			var weekday = new Array(7);
+			weekday[0] = "Sunday";
+			weekday[1] = "Monday";
+			weekday[2] = "Tuesday";
+			weekday[3] = "Wednesday";
+			weekday[4] = "Thursday";
+			weekday[5] = "Friday";
+			weekday[6] = "Saturday";
+			d.setDate(d.getDate()+2);
+			dvrDay.innerHTML = weekday[d.getDay()];
+		}
+		
+		iDiv.appendChild(dvrDay)
+		document.getElementById('dvr').appendChild(iDiv);
+		var shows = JSON.parse(settings.dvr[y+"_shows"]);
+        var x = 0;
+		for (var show in shows) {
+			var tvDiv = document.createElement('div');
+			tvDiv.id = 'show';
+			var dvrIcon = document.createElement('div');
+			dvrIcon.id = 'dvrIcon';
+			dvrIcon.className = 'tv';
+			dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
+			tvDiv.appendChild(dvrIcon);
+			var showTime = document.createElement('div');
+			showTime.className = "showTime";
+			showTime.innerHTML = shows[show].starttime;
+			tvDiv.appendChild(showTime);
+			var showName = document.createElement('div');
+			showName.className = "showName";
+			showName.innerHTML = shows[show].title+" - "+shows[show].subtitle;
+			
+			tvDiv.appendChild(showName);
+			iDiv.appendChild(tvDiv);
+		}
+		
+	}
+	
 
 	sortTable("schedule_table",time);
 	embelishRows("schedule_table",time);
