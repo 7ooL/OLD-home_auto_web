@@ -495,58 +495,62 @@ function main(configs) {
 		x = x +1;
 	}
 	
+	// remove dvr content before adding it again on reload
+	var myNode = document.getElementById("dvr");
+	while (myNode.firstChild) {
+	    myNode.removeChild(myNode.firstChild);
+	}
 	// get tv data for a few days
-
 	for ( var y = 0; y < 3 ; y++) {
-		var iDiv = document.createElement('div');
-		iDiv.id = 'day_'+y;
-		iDiv.className = 'day_box';
-		var dvrDay = document.createElement('div');
-		dvrDay.id = 'day_header';
-		if ( y == 0) {
-			dvrDay.innerHTML = "Today";
-		}
-		if ( y == 1) {
-			dvrDay.innerHTML = " Tomorrow";
-		}
-		if ( y == 2) {
-			var d = new Date();
-			var weekday = new Array(7);
-			weekday[0] = "Sunday";
-			weekday[1] = "Monday";
-			weekday[2] = "Tuesday";
-			weekday[3] = "Wednesday";
-			weekday[4] = "Thursday";
-			weekday[5] = "Friday";
-			weekday[6] = "Saturday";
-			d.setDate(d.getDate()+2);
-			dvrDay.innerHTML = weekday[d.getDay()];
-		}
-		
-		iDiv.appendChild(dvrDay)
-		document.getElementById('dvr').appendChild(iDiv);
 		var shows = JSON.parse(settings.dvr[y+"_shows"]);
-        var x = 0;
-		for (var show in shows) {
-			var tvDiv = document.createElement('div');
-			tvDiv.id = 'show';
-			var dvrIcon = document.createElement('div');
-			dvrIcon.id = 'dvrIcon';
-			dvrIcon.className = 'tv';
-			dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
-			tvDiv.appendChild(dvrIcon);
-			var showTime = document.createElement('div');
-			showTime.className = "showTime";
-			showTime.innerHTML = shows[show].starttime;
-			tvDiv.appendChild(showTime);
-			var showName = document.createElement('div');
-			showName.className = "showName";
-			showName.innerHTML = shows[show].title+" - "+shows[show].subtitle;
+		if ( ! jQuery.isEmptyObject(shows) ) {
+			var iDiv = document.createElement('div');
+			iDiv.id = 'day_'+y;
+			iDiv.className = 'day_box';
+			var dvrDay = document.createElement('div');
+			dvrDay.id = 'day_header';
+			if ( y == 0) {
+				dvrDay.innerHTML = "Today";
+			}
+			if ( y == 1) {
+				dvrDay.innerHTML = " Tomorrow";
+			}
+			if ( y == 2) {
+				var d = new Date();
+				var weekday = new Array(7);
+				weekday[0] = "Sunday";
+				weekday[1] = "Monday";
+				weekday[2] = "Tuesday";
+				weekday[3] = "Wednesday";
+				weekday[4] = "Thursday";
+				weekday[5] = "Friday";
+				weekday[6] = "Saturday";
+				d.setDate(d.getDate()+2);
+				dvrDay.innerHTML = weekday[d.getDay()];
+			}
 			
-			tvDiv.appendChild(showName);
-			iDiv.appendChild(tvDiv);
+			iDiv.appendChild(dvrDay)
+			document.getElementById('dvr').appendChild(iDiv);
+			var x = 0;
+			for (var show in shows) {
+				var tvDiv = document.createElement('div');
+				tvDiv.id = 'show';
+				var dvrIcon = document.createElement('div');
+				dvrIcon.id = 'dvrIcon';
+				dvrIcon.className = 'tv';
+				dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
+					tvDiv.appendChild(dvrIcon);
+				var showTime = document.createElement('div');
+				showTime.className = "showTime";
+				showTime.innerHTML = shows[show].starttime;
+				tvDiv.appendChild(showTime);
+				var showName = document.createElement('div');
+				showName.className = "showName";
+				showName.innerHTML = shows[show].title+" - "+shows[show].subtitle;
+				tvDiv.appendChild(showName);
+				iDiv.appendChild(tvDiv);
+			}
 		}
-		
 	}
 	
 
