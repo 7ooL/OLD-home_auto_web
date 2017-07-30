@@ -46,30 +46,36 @@ body {
 	color: #fd9f1b;
 }
 
-.showTime{
+.schTime{
 	font-size: 12px;
     padding-right: 1em;
     
 }
-.showName{
+.schName{
 	font-size: 12px;
 }
 
-#show{
+#event{
     display: -webkit-box;
 }
 #day_header{
     padding-top: .5em;
     padding-bottom: .25em;
-    display: inline-block;
     color: #d7982a;
+    text-align: center !important;
 }
-#dvrIcon{
-	display: inline-block;
+#dvrIcon, #lightIcon{
 	padding-right: .5em;
 }
-#dvr{
+#schedule{
 	text-transform: none;
+	display: inline-block;
+}
+.day_box{
+    text-align: left;
+}
+#the_schedule{
+	width: 100%;
 }
 .nextEvent{
     color: rgb(246, 167, 28);
@@ -440,7 +446,7 @@ button.depth:active {
 	color: #f44336;
 } /* Red */
 .button_gray {
-	color: #303030;
+	color: rgba(255, 255, 255, 0.38);
 } /* Gray */
 .button_gold {
 	color: #e5c100;
@@ -476,9 +482,10 @@ td{
 	text-transform: capitalize;
 }
 .tv {
-	color: #008CBA;
+    color: #00e7ff;
 	font-size: 18px;
 	text-align: center;
+	width: 20px;
 } 
 .hvac {
 	color: #f44336;
@@ -486,9 +493,19 @@ td{
 	font-size: 1em;
 
 }
-.light {
-	color: #e5c100;
+.lightScene {
+	color: #ffff00;
+	font-size: 175%;
+	text-shadow: 2px 2px 2px #9e360f;
 } 
+
+.light {
+	color: #ffff00;
+	font-size: 18px;
+	text-align: center;
+	width: 20px;
+}
+ 
 .past_event {
 	display: none;
 	color: #555555;
@@ -732,3 +749,14 @@ input{
     background: rgba(255,0,0,0.8);
     text-decoration:none;
 }
+
+#config{
+    min-width: 75px;
+}
+
+#config_text{
+	font-size: 2em;
+	color: #000;	
+}
+
+

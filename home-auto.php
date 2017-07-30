@@ -73,7 +73,6 @@
 	</div>
 
 
-
 	<div id="config_content">
 		<div class="rubber" style="display: none;"></div>
 
@@ -139,14 +138,13 @@
 
 
 		<div id="group">
-			<div id="dvr_schedule" class="icon">
-				<strong>MythTV DVR</strong>
+			<div id="the_schedule" class="icon">
+				<strong>Schedule</strong>
 				<div class="box_content">
-					<div id="dvr"></div>
+					<div id="schedule"></div>
 				</div>
 			</div>
 		</div>
-
 
 
 		<div class="popup" data-popup="popup-1">

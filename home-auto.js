@@ -185,9 +185,9 @@ function main(configs) {
 
 
 	// configure current lights scene display
-	var lightBulb = '<i class="fa fa-lightbulb-o light" aria-hidden="true" style="display: inline-block;"></i>'
+	var lightBulb = '<i class="fa fa-lightbulb-o" aria-hidden="true" style="display: inline-block;"></i>'
 		if (settings.auto['currentscene'] != 'null') {
-			document.getElementById('lights_text').className = ('on');
+			document.getElementById('lights_text').className = ('lightScene');
 			switch (settings.auto['currentscene']) {
 			case "morn_1":
 				document.getElementById('lights_text').innerHTML = lightBulb+" Morning";
@@ -492,63 +492,126 @@ function main(configs) {
 //	document.getElementById("hvacIcon").innerHTML = '<i class="fa fa-thermometer-full hvac" aria-hidden="true" style="display: inline-block;"></i>'
 	
 	// remove dvr content before adding it again on reload
-	var myNode = document.getElementById("dvr");
+	var myNode = document.getElementById("schedule");
 	while (myNode.firstChild) {
 	    myNode.removeChild(myNode.firstChild);
 	}
-	// get tv data for a few days
+	// get schedule data for a few days
 	for ( var y = 0; y < 3 ; y++) {
-		var shows = JSON.parse(settings.dvr[y+"_shows"]);
-		if ( ! jQuery.isEmptyObject(shows) ) {
-			var iDiv = document.createElement('div');
-			iDiv.id = 'day_'+y;
-			iDiv.className = 'day_box';
-			var dvrDay = document.createElement('div');
-			dvrDay.id = 'day_header';
-			if ( y == 0) {
-				dvrDay.innerHTML = "Today";
-			}
-			if ( y == 1) {
-				dvrDay.innerHTML = " Tomorrow";
-			}
-			if ( y == 2) {
-				var d = new Date();
-				var weekday = new Array(7);
-				weekday[0] = "Sunday";
-				weekday[1] = "Monday";
-				weekday[2] = "Tuesday";
-				weekday[3] = "Wednesday";
-				weekday[4] = "Thursday";
-				weekday[5] = "Friday";
-				weekday[6] = "Saturday";
-				d.setDate(d.getDate()+2);
-				dvrDay.innerHTML = weekday[d.getDay()];
-			}
-			
-			iDiv.appendChild(dvrDay)
-			document.getElementById('dvr').appendChild(iDiv);
-			var x = 0;
-			for (var show in shows) {
-				var tvDiv = document.createElement('div');
-				tvDiv.id = 'show';
-				var dvrIcon = document.createElement('div');
-				dvrIcon.id = 'dvrIcon';
-				dvrIcon.className = 'tv';
-				dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
-					tvDiv.appendChild(dvrIcon);
-				var showTime = document.createElement('div');
-				showTime.className = "showTime";
-				showTime.innerHTML = shows[show].starttime;
-				tvDiv.appendChild(showTime);
-				var showName = document.createElement('div');
-				showName.className = "showName";
-				showName.innerHTML = shows[show].title+" - "+shows[show].subtitle;
-				tvDiv.appendChild(showName);
-				iDiv.appendChild(tvDiv);
-			}
+
+		var d = new Date();
+		
+		var att = document.createAttribute("data-datetime");  
+		
+		var mornDay = d.getDay()-1;
+		if ( mornDay == -1 ) {
+			mornDay = 6;
 		}
+	
+		var dayDiv = document.createElement('div');
+		dayDiv.id = 'day_'+y;
+		dayDiv.className = 'day_box';
+		
+		var dayHeader = document.createElement('div');
+		dayHeader.id = 'day_header';
+		if ( y == 0) {
+			dayHeader.innerHTML = "Today";
+		}
+		if ( y == 1) {
+			dayHeader.innerHTML = " Tomorrow";
+			if ( mornDay == 6 ) {
+				   mornDay = 0;
+			   }
+			d.setDate(d.getDate() + 1);
+		}
+		if ( y == 2) {
+			var weekday = new Array(7);
+			weekday[0] = "Sunday";
+			weekday[1] = "Monday";
+			weekday[2] = "Tuesday";
+			weekday[3] = "Wednesday";
+			weekday[4] = "Thursday";
+			weekday[5] = "Friday";
+			weekday[6] = "Saturday";
+			
+			dayHeader.innerHTML = weekday[d.getDay()];
+			if ( mornDay == 6 ) {
+				   mornDay = 1;
+			   }
+			d.setDate(d.getDate() + 2);
+		}
+		dayDiv.appendChild(dayHeader)
+			
+		var lightIcon = document.createElement('div');
+		lightIcon.id = 'lightIcon';
+		lightIcon.className = 'light';
+		lightIcon.innerHTML = '<i class="fa fa-sun-o" aria-hidden="true" style="display: inline-block;"></i>'
+		
+		var mornName = document.createElement('div');
+		mornName.className = 'schName';
+		mornName.innerHTML = 'Scheduled wake up time'
+			
+		var mornTime = document.createElement('div');
+		mornTime.className = 'schTime';
+		mornTime.innerHTML = settings.mornings[mornDay+"_morning"]
+		
+		var timeSplit = settings.mornings[mornDay+"_morning"].split(":");
+	    d.setHours(timeSplit[0])
+	    d.setMinutes(timeSplit[1])
+	    d.setSeconds(timeSplit[2])
+		att.value = d
+		
+		var lightDiv = document.createElement('div');
+		lightDiv.id = 'event';
+		lightDiv.setAttributeNode(att); 
+		lightDiv.appendChild(lightIcon)
+		lightDiv.appendChild(mornTime)
+		lightDiv.appendChild(mornName)
+		dayDiv.appendChild(lightDiv);
+		
+		var shows = JSON.parse(settings.dvr[y+"_shows"]);
+		for (var show in shows) {
+			var dvrIcon = document.createElement('div');
+			dvrIcon.id = 'dvrIcon';
+			dvrIcon.className = 'tv';
+			dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
+			var showTime = document.createElement('div');
+			showTime.className = "schTime";
+			var timeSplit = shows[show].starttime.split(":");
+			var nd = new Date(d);
+		    nd.setHours(timeSplit[0])
+		    nd.setMinutes(timeSplit[1])
+		    nd.setSeconds(timeSplit[2])
+		    var att = document.createAttribute("data-datetime");  
+			att.value = nd
+			showTime.innerHTML = shows[show].starttime;
+			var showName = document.createElement('div');
+			showName.className = "schName";
+			showName.innerHTML = shows[show].title+" - "+shows[show].subtitle;
+			
+			var showDiv = document.createElement('div');
+			showDiv.id = 'event';
+			showDiv.setAttributeNode(att);
+			showDiv.appendChild(dvrIcon);
+			showDiv.appendChild(showTime);
+			showDiv.appendChild(showName);	
+			dayDiv.appendChild(showDiv);
+			
+		}
+		document.getElementById('schedule').appendChild(dayDiv);
 	}
 	
+	for ( var x = 0; x < 3 ; x++) {
+		var board = $('#day_'+x);
+		var boards = board.children('#event').detach().get();
+		
+		boards.sort(function(a, b) {
+		return new Date($(a).data("datetime")) - new Date($(b).data("datetime"));
+		  });
+
+		board.append(boards);
+		  
+	}
 
 	// show all ids that are based on reading the config file
 	$("#config_content").show();
