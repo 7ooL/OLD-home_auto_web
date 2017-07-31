@@ -214,6 +214,52 @@
 			</div>
 		</div>
 
+		<div class="popup" data-popup="popup-4">
+			<div class="popup-inner">
+				<div id="schedule_changer">
+
+					<div class='hold_words'>Wake up time:</div>
+
+						<div id="morn_time_set">
+							<div class='time'>
+								Hour
+								<div class='next action-next' onClick="change_time('next');">
+									<i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+								</div>
+								<div class='ti_tx'>
+									<input type='text' class='timepicki-input' readonly>
+								</div>
+								<div class='prev action-prev' onClick="change_time('prev');">
+									<i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+								</div>
+							</div>
+							<div class='mins'>
+								Minute
+								<div class='next action-next' onClick="change_mins('next');">
+									<i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+								</div>
+								<div class='mi_tx'>
+									<input type='text' class='timepicki-input' readonly>
+								</div>
+								<div class='prev action-prev' onClick="change_mins('prev');">
+									<i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+								</div>
+							</div>
+						</div>
+				
+						<small>This is the time you want to wake up. It will trigger the
+							bedroom/mainfloor lights and the HVAC wake profile 30 minutes
+							before.</small>
+					</p>
+					</li>
+					<div class="save" onClick="sendCommand('set_morning');">
+						<i class="fa fa-check-circle action-prev" aria-hidden="true"></i>
+					</div>
+
+				</div>
+				<a class="popup-close" data-popup-close="popup-4" href="#">x</a>
+			</div>
+		</div>
 
 	</div>
 

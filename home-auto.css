@@ -58,14 +58,29 @@ body {
 #event{
     display: -webkit-box;
 }
+
 #day_header{
     padding-top: .5em;
     padding-bottom: .25em;
     color: #d7982a;
     text-align: center !important;
 }
-#dvrIcon, #lightIcon{
-	padding-right: .5em;
+#dvrIcon{
+	padding-right: 12px;
+}
+#lightIcon {
+	padding-right: 12px;
+    min-width: 20px;
+}
+#hvacIcon {
+	padding-right: 12px;
+    min-width: 20px;
+    padding-right: 7px;
+    margin-left: 5px;
+}
+#wakeIcon{
+	padding-right: 4px;
+	margin-left: -2px;
 }
 #schedule{
 	text-transform: none;
@@ -489,10 +504,8 @@ td{
 } 
 .hvac {
 	color: #f44336;
-	padding-right: .5em;
 	font-size: 1em;
-
-}
+ }
 .lightScene {
 	color: #ffff00;
 	font-size: 175%;
@@ -503,7 +516,7 @@ td{
 	color: #ffff00;
 	font-size: 18px;
 	text-align: center;
-	width: 20px;
+
 }
  
 .past_event {
@@ -758,5 +771,12 @@ input{
 	font-size: 2em;
 	color: #000;	
 }
+#schedule_changer{
+	color: #000;
+}
 
-
+.edit{
+	color: #000;
+	padding-left: 10px;
+	cursor: pointer;
+}

@@ -468,12 +468,17 @@ function main(configs) {
 	}
 	// get next hvac event for the day
 	var nextHVAC ;
+	var d = new Date(); 
+	var today = d.getDay()-1;
+	if ( today == -1 ) {
+		today = 6;
+	}
 	for ( var y = 0; y < 5 ; y++) {
-		if (settings.hvac["event_"+y+"_on_time"] != 'null' ) {
+		if (settings.hvac["day_"+today+"_event_"+y+"_on_time"] != 'null' ) {	
 			var a = new Date('1970/01/01 ' + getTime());
-			var b = new Date('1970/01/01 ' + settings.hvac["event_"+y+"_on_time"]+":00");
+			var b = new Date('1970/01/01 ' + settings.hvac["day_"+today+"_event_"+y+"_on_time"]+":00");
 			if ( a < b ) {
-				nextHVAC = settings.hvac["event_"+y+"_activity"]+' at '+settings.hvac["event_"+y+"_on_time"]+':00';
+				nextHVAC = settings.hvac["day_"+today+"_event_"+y+"_activity"]+' at '+settings.hvac["day_"+today+"_event_"+y+"_on_time"]+':00';
 				break;
 			}
 		} 
@@ -499,9 +504,7 @@ function main(configs) {
 	// get schedule data for a few days
 	for ( var y = 0; y < 3 ; y++) {
 
-		var d = new Date();
-		
-		var att = document.createAttribute("data-datetime");  
+		var d = new Date(); 
 		
 		var mornDay = d.getDay()-1;
 		if ( mornDay == -1 ) {
@@ -514,8 +517,39 @@ function main(configs) {
 		
 		var dayHeader = document.createElement('div');
 		dayHeader.id = 'day_header';
+		var conf = '<div class="edit" data-popup-open="popup-4" style="display: inline-block;"><i class="fa fa-cog" aria-hidden="true" style="display: inline-block;"</i></div'
 		if ( y == 0) {
 			dayHeader.innerHTML = "Today";
+			for ( var x = 1; x < 6; x++) {
+				var lightIcon = document.createElement('div');
+				lightIcon.id = 'lightIcon';
+				lightIcon.className = 'light';
+				lightIcon.innerHTML = '<i class="fa fa-lightbulb-o" aria-hidden="true" style="display: inline-block;"></i>';
+					
+				var sceneName = document.createElement('div');
+				sceneName.className = 'schName';
+				sceneName.innerHTML = 'Evening '+x+' will trigger (dynamic)';
+				
+				var sceneTime = document.createElement('div');
+				sceneTime.className = 'schTime';
+				sceneTime.innerHTML = settings.auto["scene_"+x+"_on_time"];
+				
+				var timeSplit = settings.auto["scene_"+x+"_on_time"].split(":");
+				d.setHours(timeSplit[0]);
+				d.setMinutes(timeSplit[1]);
+				d.setSeconds(timeSplit[2]);
+				var att = document.createAttribute("data-datetime");
+				att.value = d
+			
+				var lightDiv = document.createElement('div');
+				lightDiv.id = 'event';
+				lightDiv.setAttributeNode(att); 
+				lightDiv.appendChild(lightIcon);
+				lightDiv.appendChild(sceneTime);
+				lightDiv.appendChild(sceneName);
+				dayDiv.appendChild(lightDiv);
+			}
+			
 		}
 		if ( y == 1) {
 			dayHeader.innerHTML = " Tomorrow";
@@ -543,32 +577,81 @@ function main(configs) {
 		dayDiv.appendChild(dayHeader)
 			
 		var lightIcon = document.createElement('div');
-		lightIcon.id = 'lightIcon';
+		lightIcon.id = 'wakeIcon';
 		lightIcon.className = 'light';
 		lightIcon.innerHTML = '<i class="fa fa-sun-o" aria-hidden="true" style="display: inline-block;"></i>'
+			
+		var hvacIcon = document.createElement('div');
+		hvacIcon.id = 'wakeIcon';
+		hvacIcon.className = 'hvac';
+		hvacIcon.innerHTML = '<i class="fa fa-thermometer-half" aria-hidden="true" style="display: inline-block;"></i>';
 		
 		var mornName = document.createElement('div');
 		mornName.className = 'schName';
-		mornName.innerHTML = 'Scheduled wake up time'
+		mornName.innerHTML = 'Scheduled wake up time'+conf;
 			
 		var mornTime = document.createElement('div');
 		mornTime.className = 'schTime';
-		mornTime.innerHTML = settings.mornings[mornDay+"_morning"]
+		mornTime.innerHTML = settings.mornings[mornDay+"_morning"];
 		
 		var timeSplit = settings.mornings[mornDay+"_morning"].split(":");
-	    d.setHours(timeSplit[0])
-	    d.setMinutes(timeSplit[1])
-	    d.setSeconds(timeSplit[2])
-		att.value = d
+	    d.setHours(timeSplit[0]);
+	    d.setMinutes(timeSplit[1]);
+	    d.setSeconds(timeSplit[2]);
+	    var att = document.createAttribute("data-datetime");
+		att.value = d;
 		
 		var lightDiv = document.createElement('div');
 		lightDiv.id = 'event';
 		lightDiv.setAttributeNode(att); 
-		lightDiv.appendChild(lightIcon)
-		lightDiv.appendChild(mornTime)
-		lightDiv.appendChild(mornName)
+		lightDiv.appendChild(hvacIcon);
+		lightDiv.appendChild(lightIcon);
+		lightDiv.appendChild(mornTime);
+		lightDiv.appendChild(mornName);
 		dayDiv.appendChild(lightDiv);
 		
+		// add havc events
+		var td = d.getDay()-1;
+		if ( td == -1 ) {
+			td = 6;
+		}
+		for ( var z = 0; z < 5 ; z++) {
+			if (settings.hvac["day_"+td+"_event_"+z+"_on_time"] != 'null' ) {
+				if (settings.hvac["day_"+td+"_event_"+z+"_activity"] != 'wake' ) {
+					var hvacIcon = document.createElement('div');
+					hvacIcon.id = 'hvacIcon';
+					hvacIcon.className = 'hvac';
+					hvacIcon.innerHTML = '<i class="fa fa-thermometer-half" aria-hidden="true" style="display: inline-block;"></i>';
+					
+					var profileName = document.createElement('div');
+					profileName.className = 'schName';
+					profileName.innerHTML = settings.hvac["day_"+td+"_event_"+z+"_activity"]+' will trigger'+conf;
+			
+					var profileTime = document.createElement('div');
+					profileTime.className = 'schTime';
+					profileTime.innerHTML = settings.hvac["day_"+td+"_event_"+z+"_on_time"]+':00';
+		
+					var timeSplit = settings.hvac["day_"+td+"_event_"+z+"_on_time"].split(":");
+					var nd = new Date(d);
+					console.log(nd)
+					nd.setHours(timeSplit[0]);
+					nd.setMinutes(timeSplit[1]);
+					nd.setSeconds(0);
+					var att = document.createAttribute("data-datetime");
+					att.value = nd
+			
+					var	havcDiv = document.createElement('div');
+					havcDiv.id = 'event';
+					havcDiv.setAttributeNode(att); 
+					havcDiv.appendChild(hvacIcon);
+					havcDiv.appendChild(profileTime);
+					havcDiv.appendChild(profileName);
+					dayDiv.appendChild(havcDiv);
+				}
+			}
+		}
+
+		// get dvr shows 
 		var shows = JSON.parse(settings.dvr[y+"_shows"]);
 		for (var show in shows) {
 			var dvrIcon = document.createElement('div');
