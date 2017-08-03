@@ -21,7 +21,7 @@
 	</div>
 
 	<div id="today" class="icon">
-		<strong>Today</strong>
+		<strong>Weather</strong>
 
 		<div id="month"></div>
 		<div id="digit"></div>
@@ -138,11 +138,11 @@
 
 
 		<div id="group">
-			<div id="the_schedule" class="icon">
-				<strong>Schedule</strong>
-				<div class="box_content">
-					<div id="schedule"></div>
-				</div>
+			<div id="the_schedule_0" class="icon">
+			</div>
+			<div id="the_schedule_1" class="icon">
+			</div>
+			<div id="the_schedule_2" class="icon">
 			</div>
 		</div>
 
@@ -217,9 +217,7 @@
 		<div class="popup" data-popup="popup-4">
 			<div class="popup-inner">
 				<div id="schedule_changer">
-
 					<div class='hold_words'>Wake up time:</div>
-
 						<div id="morn_time_set">
 							<div class='time'>
 								Hour

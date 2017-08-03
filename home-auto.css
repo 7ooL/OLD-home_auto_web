@@ -59,37 +59,20 @@ body {
     display: -webkit-box;
 }
 
-#day_header{
-    padding-top: .5em;
-    padding-bottom: .25em;
-    color: #d7982a;
-    text-align: center !important;
-}
-#dvrIcon{
-	padding-right: 12px;
-}
-#lightIcon {
+#schIcon {
 	padding-right: 12px;
     min-width: 20px;
 }
-#hvacIcon {
-	padding-right: 12px;
-    min-width: 20px;
-    padding-right: 7px;
-    margin-left: 5px;
-}
-#wakeIcon{
-	padding-right: 4px;
-	margin-left: -2px;
-}
-#schedule{
+
+#schedule_0, #schedule_1, #schedule_2{
 	text-transform: none;
 	display: inline-block;
+	 padding: 5px;
 }
 .day_box{
     text-align: left;
 }
-#the_schedule{
+#the_schedule_0, #the_schedule_1, #the_schedule_2{
 	width: 100%;
 }
 .nextEvent{
@@ -275,13 +258,13 @@ img.user_icon{
 .hpelectheat{
 	margin-right: 22px;
 }
-.sleep, .cooling_icon {
+.cooling_icon {
 	color: #40BFFF;
 	font-size: 175%;
 	text-shadow: 2px 2px 2px #006FAF;
 }
 
-.away, .error {
+.sleep, .error {
 	color: #BF40FF;
 	font-size: 175%;
 	text-shadow: 2px 2px 2px #6F00AF;
@@ -305,7 +288,7 @@ img.user_icon{
 	text-shadow: 2px 2px 2px #808080;
 }
 
-.on{
+.away, .on{
 	color: #00ff00;
 	font-size: 175%;
 	text-shadow: 2px 2px 2px #008000;
