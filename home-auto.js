@@ -440,7 +440,7 @@ function main(configs) {
 		var a = new Date('1970/01/01 ' + getTime());
 		var b = new Date('1970/01/01 ' + settings.auto["morning_1_on_time"]+":00");
 		if ( a < b ) {
-			nextLight = 'morning 1 at '+settings.auto["morning_1_on_time"]+', fade '+Math.round((settings.auto["morn_1_trans_time"]/60)/10)+' minutes';
+			nextLight = 'morning 1 at '+settings.auto["morning_1_on_time"];
 		}
 	}
 	if (nextLight == null ) {
@@ -448,7 +448,7 @@ function main(configs) {
 			var a = new Date('1970/01/01 ' + getTime());
 			var b = new Date('1970/01/01 ' + settings.auto["daytime_1_on_time"]+":00");
 			if ( a < b ) {
-				nextLight = 'daytime 1 at '+settings.auto["daytime_1_on_time"]+', fade '+Math.round((settings.auto["daytime_1_trans_time"]/60)/10)+' minutes';
+				nextLight = 'daytime 1 at '+settings.auto["daytime_1_on_time"];
 			}
 		}
 	}
@@ -459,7 +459,7 @@ function main(configs) {
 					var a = new Date('1970/01/01 ' + getTime());
 					var b = new Date('1970/01/01 ' + settings.auto["scene_"+y+"_on_time"]+":00");
 					if ( a < b ) {
-						nextLight = 'evening '+y+' at '+settings.auto["scene_"+y+"_on_time"]+', fade '+Math.round((settings.auto["scene_"+y+"_trans_time"]/60)/10)+' minutes.';
+						nextLight = 'evening '+y+' at '+settings.auto["scene_"+y+"_on_time"];
 						break;
 					}
 				} 
@@ -508,13 +508,12 @@ function main(configs) {
 
 		var d = new Date(); 
 		
-		
 		// convert current day javaScript monday(0) to Carrier Sunday(6)
 		var mornDay = d.getDay()-1;
 		if ( mornDay == -1 ) {
 			mornDay = 6;
 		}
-	
+
 		var dayDiv = document.createElement('div');
 		dayDiv.id = 'day_'+y;
 		dayDiv.className = 'day_box';
@@ -525,7 +524,9 @@ function main(configs) {
 		if ( y == 0) {
 
 			dayHeader.innerHTML = "Today";
-			for ( var x = 1; x < 6; x++) {
+			
+			// made impossible so not to run
+			for ( var x = 7; x < 6; x++) {
 				var lightIcon = document.createElement('div');
 				lightIcon.id = 'lightIcon';
 				lightIcon.className = 'light';
@@ -560,11 +561,12 @@ function main(configs) {
 			dayHeader.innerHTML = " Tomorrow";
 			
 			mornDay = mornDay+1
+	
 			if ( mornDay == 7 ) {
 				   mornDay = 0;
 			   }
 			
-			d.setDate(d.getDate() + 1);
+			d.setDate(d.getDate() + 1);	
 		}
 		if ( y == 2) {
 			mornDay = mornDay+2
@@ -621,10 +623,10 @@ function main(configs) {
 		dayDiv.appendChild(lightDiv);
 		
 		// add havc events
-		var td = d.getDay()-1;
-		if ( td == -1 ) {
-			td = 6;
-		}
+		var td = d.getDay();
+	//	if ( td == -1 ) {
+			//td = 6;
+		//}
 		for ( var z = 0; z < 5 ; z++) {
 			if (settings.hvac["day_"+td+"_event_"+z+"_on_time"] != 'null' ) {
 				if (settings.hvac["day_"+td+"_event_"+z+"_activity"] != 'wake' ) {
@@ -716,6 +718,7 @@ function main(configs) {
 		return new Date($(a).data("datetime")) - new Date($(b).data("datetime"));
 		  });
 		day.append(days);	
+		console.log('y == '+y+' md:' +mornDay + ' d:' +d);
 	}
 	
 
