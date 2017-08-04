@@ -436,19 +436,22 @@ function main(configs) {
 	document.getElementById("nextHVAC").innerHTML = '';
 	// get next light event
 	var nextLight = null;
+	console.log(nextLight);
 	if (settings.settings["morning"] == 'on' && settings.settings["autorun"] == 'on') {
 		var a = new Date('1970/01/01 ' + getTime());
-		var b = new Date('1970/01/01 ' + settings.auto["morning_1_on_time"]+":00");
+		var b = new Date('1970/01/01 ' + settings.auto["morning_1_on_time"]);
 		if ( a < b ) {
 			nextLight = 'morning 1 at '+settings.auto["morning_1_on_time"];
+			console.log(nextLight);
 		}
 	}
 	if (nextLight == null ) {
 		if (settings.settings["morning"] == 'on' && settings.settings["autorun"] == 'on' ) {
 			var a = new Date('1970/01/01 ' + getTime());
-			var b = new Date('1970/01/01 ' + settings.auto["daytime_1_on_time"]+":00");
+			var b = new Date('1970/01/01 ' + settings.auto["daytime_1_on_time"]);
 			if ( a < b ) {
 				nextLight = 'daytime 1 at '+settings.auto["daytime_1_on_time"];
+				console.log(nextLight);
 			}
 		}
 	}
@@ -457,9 +460,10 @@ function main(configs) {
 			if (settings.settings["evening"] == 'on' && settings.settings["autorun"] == 'on' ) {
 				if (settings.auto["scene_"+y+"_on_time"] != 'null' ) {
 					var a = new Date('1970/01/01 ' + getTime());
-					var b = new Date('1970/01/01 ' + settings.auto["scene_"+y+"_on_time"]+":00");
+					var b = new Date('1970/01/01 ' + settings.auto["scene_"+y+"_on_time"]);
 					if ( a < b ) {
 						nextLight = 'evening '+y+' at '+settings.auto["scene_"+y+"_on_time"];
+						console.log(nextLight);
 						break;
 					}
 				} 
@@ -469,10 +473,7 @@ function main(configs) {
 	// get next hvac event for the day
 	var nextHVAC ;
 	var d = new Date(); 
-	var today = d.getDay()-1;
-	if ( today == -1 ) {
-		today = 6;
-	}
+	var today = d.getDay();
 	for ( var y = 0; y < 5 ; y++) {
 		if (settings.hvac["day_"+today+"_event_"+y+"_on_time"] != 'null' ) {	
 			var a = new Date('1970/01/01 ' + getTime());
@@ -718,7 +719,7 @@ function main(configs) {
 		return new Date($(a).data("datetime")) - new Date($(b).data("datetime"));
 		  });
 		day.append(days);	
-		console.log('y == '+y+' md:' +mornDay + ' d:' +d);
+	//	console.log('y == '+y+' md:' +mornDay + ' d:' +d);
 	}
 	
 
