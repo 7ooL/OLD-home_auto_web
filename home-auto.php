@@ -75,6 +75,8 @@
 
 	<div id="config_content">
 		<div class="rubber" style="display: none;"></div>
+		<div id="updating" style="display: inline-block;">Pending Changes <i class="fa fa-refresh fa-spin fa-fw"></i>
+		</div>
 
 		<div id="group">
 			<div id="profile" class="icon">
@@ -96,11 +98,7 @@
 
 		<div id="group">
 			<div id="heatpump" class="icon">
-				<strong>Heatpump
-					<div id="hvac_updating">
-						<i class="fa fa-refresh fa-spin fa-fw"></i>
-					</div>
-				</strong>
+				<strong>Heatpump</strong>
 				<div class="box_content">
 					<div id="hvac_icon"></div>
 					<div id="hvac_text"></div>
@@ -138,12 +136,9 @@
 
 
 		<div id="group">
-			<div id="the_schedule_0" class="icon">
-			</div>
-			<div id="the_schedule_1" class="icon">
-			</div>
-			<div id="the_schedule_2" class="icon">
-			</div>
+			<div id="the_schedule_0" class="icon"></div>
+			<div id="the_schedule_1" class="icon"></div>
+			<div id="the_schedule_2" class="icon"></div>
 		</div>
 
 
@@ -154,38 +149,44 @@
 					<div id="hvac_box">
 						<div class='temp'>
 							Temp
-							<div class='next action-next' onClick="change_temp('next');">
+							<div class='next action-next'
+								onClick="change_temp('next', 'set_hvac_hold');">
 								<i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
 							</div>
 							<div class='te_tx'>
 								<input type='text' class='timepicki-input' readonly>
 							</div>
-							<div class='prev action-prev' onClick="change_temp('prev');">
+							<div class='prev action-prev'
+								onClick="change_temp('prev', 'set_hvac_hold');">
 								<i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
 							</div>
 						</div>
 						<div id="havc_time_set">
 							<div class='time'>
 								Hour
-								<div class='next action-next' onClick="change_time('next');">
+								<div class='next action-next'
+									onClick="change_time('next', 'set_hvac_hold');">
 									<i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
 								</div>
 								<div class='ti_tx'>
 									<input type='text' class='timepicki-input' readonly>
 								</div>
-								<div class='prev action-prev' onClick="change_time('prev');">
+								<div class='prev action-prev'
+									onClick="change_time('prev', 'set_hvac_hold');">
 									<i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
 								</div>
 							</div>
 							<div class='mins'>
 								Minute
-								<div class='next action-next' onClick="change_mins('next');">
+								<div class='next action-next'
+									onClick="change_mins('next', 'set_hvac_hold');">
 									<i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
 								</div>
 								<div class='mi_tx'>
 									<input type='text' class='timepicki-input' readonly>
 								</div>
-								<div class='prev action-prev' onClick="change_mins('prev');">
+								<div class='prev action-prev'
+									onClick="change_mins('prev', 'set_hvac_hold');">
 									<i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
 								</div>
 							</div>
@@ -216,46 +217,44 @@
 
 		<div class="popup" data-popup="popup-4">
 			<div class="popup-inner">
-				<div id="schedule_changer">
-					<div class='hold_words'>Wake up time:</div>
-						<div id="morn_time_set">
-							<div class='time'>
-								Hour
-								<div class='next action-next' onClick="change_time('next');">
-									<i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
-								</div>
-								<div class='ti_tx'>
-									<input type='text' class='timepicki-input' readonly>
-								</div>
-								<div class='prev action-prev' onClick="change_time('prev');">
-									<i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
-								</div>
+				<div class="schedule_changer">
+					<div id="morn_time_set">
+						<div class='time'>
+							Hour
+							<div class='next action-next'
+								onClick="change_time('next', 'set_morning');">
+								<i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
 							</div>
-							<div class='mins'>
-								Minute
-								<div class='next action-next' onClick="change_mins('next');">
-									<i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
-								</div>
-								<div class='mi_tx'>
-									<input type='text' class='timepicki-input' readonly>
-								</div>
-								<div class='prev action-prev' onClick="change_mins('prev');">
-									<i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
-								</div>
+							<div class='ti_tx'>
+								<input type='text' class='timepicki-input' readonly>
+							</div>
+							<div class='prev action-prev'
+								onClick="change_time('prev', 'set_morning');">
+								<i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
 							</div>
 						</div>
-				
-						<small>This is the time you want to wake up. It will trigger the
-							bedroom/mainfloor lights and the HVAC wake profile 30 minutes
-							before.</small>
-					</p>
-					</li>
-					<div class="save" onClick="sendCommand('set_morning');">
-						<i class="fa fa-check-circle action-prev" aria-hidden="true"></i>
+						<div class='mins'>
+							Minute
+							<div class='next action-next'
+								onClick="change_mins('next', 'set_morning');">
+								<i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+							</div>
+							<div class='mi_tx'>
+								<input type='text' class='timepicki-input' readonly>
+							</div>
+							<div class='prev action-prev'
+								onClick="change_mins('prev', 'set_morning');">
+								<i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+							</div>
+						</div>
+						<p>
+							<small>This is the time you want to wake up. It will trigger the
+								bedroom/mainfloor lights and the HVAC wake profile 30 minutes
+								before.</small>
+						</p>
+						<a class="popup-close" data-popup-close="popup-4" href="#">x</a>
 					</div>
-
 				</div>
-				<a class="popup-close" data-popup-close="popup-4" href="#">x</a>
 			</div>
 		</div>
 
@@ -283,6 +282,12 @@ if (! isset ( $aResult ['error'] )) {
 	switch ($_POST ['functionname']) {
 		case 'set_hvac_hold' :
 			$myfile = fopen ( "hvac/hvac_hold.txt", "w" ) or die ( "ON: Unable to open file! hvac_hold.txt" );
+			$txt = $_POST ['arguments'];
+			fwrite ( $myfile, $txt );
+			fclose ( $myfile );
+			break;
+		case 'set_morning' :
+			$myfile = fopen ( "morn/set_morn.txt", "w" ) or die ( "ON: Unable to open file! hvac_hold.txt" );
 			$txt = $_POST ['arguments'];
 			fwrite ( $myfile, $txt );
 			fclose ( $myfile );

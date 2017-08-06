@@ -187,7 +187,7 @@ function main(configs) {
 	// configure current lights scene display
 	var lightBulb = '<i class="fa fa-lightbulb-o" aria-hidden="true" style="display: inline-block;"></i>'
 		if (settings.auto['currentscene'] != 'null') {
-			document.getElementById('lights_text').className = ('lightScene');
+			document.getElementById('lights_text').className = ('lightScene edit');
 			switch (settings.auto['currentscene']) {
 			case "morn_1":
 				document.getElementById('lights_text').innerHTML = lightBulb+" Morning";
@@ -330,31 +330,31 @@ function main(configs) {
 		if (settings.hvac_current['currentactivity'] != 'null') {
 			switch (settings.hvac_current['currentactivity']) {
 			case "home":
-				document.getElementById('hvac_profile_mode').className = ('home');
+				document.getElementById('hvac_profile_mode').className = ('home edit');
 				document.getElementById('hvac_profile_mode').innerHTML = home;
 				break;
 			case "sleep":
-				document.getElementById('hvac_profile_mode').className = ('sleep');
+				document.getElementById('hvac_profile_mode').className = ('sleep edit');
 				document.getElementById('hvac_profile_mode').innerHTML = sleep;
 				break;
 			case "away":
-				document.getElementById('hvac_profile_mode').className = ('away');
+				document.getElementById('hvac_profile_mode').className = ('away edit');
 				document.getElementById('hvac_profile_mode').innerHTML = away;
 				break;
 			case "wake":
-				document.getElementById('hvac_profile_mode').className = ('wake');
+				document.getElementById('hvac_profile_mode').className = ('wake edit');
 				document.getElementById('hvac_profile_mode').innerHTML = wake;
 				break;
 			case "vacation":
-				document.getElementById('hvac_profile_mode').className = ('vacation');
+				document.getElementById('hvac_profile_mode').className = ('vacation edit');
 				document.getElementById('hvac_profile_mode').innerHTML = vacation;
 				break;
 			case "manual":
-				document.getElementById('hvac_profile_mode').className = ('manual');
+				document.getElementById('hvac_profile_mode').className = ('manual edit');
 				document.getElementById('hvac_profile_mode').innerHTML = manual;
 				break;
 			default:
-				document.getElementById('hvac_profile_mode').className = ('manual');
+				document.getElementById('hvac_profile_mode').className = ('manual edit');
 			document.getElementById('hvac_profile_mode').innerHTML = settings.hvac_current['currentactivity'];
 
 			}
@@ -363,12 +363,12 @@ function main(configs) {
 			$("#hvac_profile_mode").hide();	
 		}
 		// display updating if it is pending a refresh from havcauto.py
-		if (settings.hvac_current['updating'] == "yes") {
-			$("#hvac_updating").show();
+		if ( (settings.hvac_current['updating'] == "yes") || (settings.mornings['updating'] == "yes")) {
+			$("#updating").show();
 		} else {
-			$("#hvac_updating").hide();
+			$("#updating").hide();
 		}
-
+		
 		// disaply hold information
 		if (settings.hvac_current['hold'] == 'on') {
 			document.getElementById('hold_indicator').className = ('led-blue-small');
@@ -388,6 +388,7 @@ function main(configs) {
 		document.getElementById('current_weather_humid').innerHTML = "humidity "+settings.weather['oh']+"%";
 		document.getElementById('current_inside_humid').innerHTML = " humidity "+settings.hvac_current['rh']+'%';
 		document.getElementById('current_inside_degree').innerHTML = settings.hvac_current['rt'];
+		document.getElementById('current_inside_degree').className = "edit";
 		document.getElementById('current_inside_htsp').innerHTML = settings.hvac_current['htsp']
 		document.getElementById('current_inside_clsp').innerHTML = settings.hvac_current['clsp'];
 	}
@@ -436,13 +437,11 @@ function main(configs) {
 	document.getElementById("nextHVAC").innerHTML = '';
 	// get next light event
 	var nextLight = null;
-	console.log(nextLight);
 	if (settings.settings["morning"] == 'on' && settings.settings["autorun"] == 'on') {
 		var a = new Date('1970/01/01 ' + getTime());
 		var b = new Date('1970/01/01 ' + settings.auto["morning_1_on_time"]);
 		if ( a < b ) {
 			nextLight = 'morning 1 at '+settings.auto["morning_1_on_time"];
-			console.log(nextLight);
 		}
 	}
 	if (nextLight == null ) {
@@ -451,7 +450,6 @@ function main(configs) {
 			var b = new Date('1970/01/01 ' + settings.auto["daytime_1_on_time"]);
 			if ( a < b ) {
 				nextLight = 'daytime 1 at '+settings.auto["daytime_1_on_time"];
-				console.log(nextLight);
 			}
 		}
 	}
@@ -463,7 +461,6 @@ function main(configs) {
 					var b = new Date('1970/01/01 ' + settings.auto["scene_"+y+"_on_time"]);
 					if ( a < b ) {
 						nextLight = 'evening '+y+' at '+settings.auto["scene_"+y+"_on_time"];
-						console.log(nextLight);
 						break;
 					}
 				} 
@@ -518,10 +515,9 @@ function main(configs) {
 		var dayDiv = document.createElement('div');
 		dayDiv.id = 'day_'+y;
 		dayDiv.className = 'day_box';
-		
+				
 		var dayHeader = document.createElement('strong');
-//		var conf = '<div class="edit" data-popup-open="popup-4" style="display: inline-block;"><i class="fa fa-cog" aria-hidden="true" style="display: inline-block;"</i></div>'
-
+			
 		if ( y == 0) {
 
 			dayHeader.innerHTML = "Today";
@@ -546,8 +542,8 @@ function main(configs) {
 				d.setMinutes(timeSplit[1]);
 				d.setSeconds(timeSplit[2]);
 				var att = document.createAttribute("data-datetime");
-				att.value = d
-			
+				att.value = d;
+					
 				var lightDiv = document.createElement('div');
 				lightDiv.id = 'event';
 				lightDiv.setAttributeNode(att); 
@@ -559,7 +555,7 @@ function main(configs) {
 			
 		}
 		if ( y == 1) {
-			dayHeader.innerHTML = " Tomorrow";
+			dayHeader.innerHTML = "Tomorrow";
 			
 			mornDay = mornDay+1
 	
@@ -572,10 +568,10 @@ function main(configs) {
 		if ( y == 2) {
 			mornDay = mornDay+2
 			if ( mornDay == 8 ) {
-				   mornDay = 2;
+				   mornDay = 1;
 			   }
 			if ( mornDay == 7 ) {
-				   mornDay = 1;
+				   mornDay = 0;
 			   }
 			var weekday = new Array(7);
 			weekday[0] = "Sunday";
@@ -590,8 +586,7 @@ function main(configs) {
 			d.setDate(d.getDate() + 2);
 			dayHeader.innerHTML = weekday[d.getDay()];
 		}
-		
-	
+
 		// add wake event based on global morning times			
 		var lightIcon = document.createElement('div');
 		lightIcon.id = 'schIcon';
@@ -603,6 +598,9 @@ function main(configs) {
 			
 		var mornTime = document.createElement('div');
 		mornTime.className = 'schTime';
+		var dayAtt = document.createAttribute("data-day-num"); 
+		dayAtt.value = mornDay;
+		mornTime.setAttributeNode(dayAtt);
 		mornTime.innerHTML = settings.mornings[mornDay+"_morning"];
 		
 		var timeSplit = settings.mornings[mornDay+"_morning"].split(":");
@@ -612,12 +610,19 @@ function main(configs) {
 	    var att = document.createAttribute("data-datetime");
 		att.value = d;
 		var att2 = document.createAttribute("data-popup-open");
-		att2.value = "popup-4"
-		
+		att2.value = "popup-4";
+		var att3 = document.createAttribute("data-var");
+		att3.value = dayHeader.innerHTML;
+		var dayAtt2 = document.createAttribute("data-day-num"); 
+		dayAtt2.value = mornDay;
+					
 		var lightDiv = document.createElement('div');
 		lightDiv.id = 'event';
+		lightDiv.className = 'edit';
 		lightDiv.setAttributeNode(att);
 		lightDiv.setAttributeNode(att2);
+		lightDiv.setAttributeNode(att3);
+		lightDiv.setAttributeNode(dayAtt2);
 		lightDiv.appendChild(lightIcon);
 		lightDiv.appendChild(mornTime);
 		lightDiv.appendChild(mornName);
@@ -706,7 +711,7 @@ function main(configs) {
 		bc.className = 'box_content';
 		var sc = document.createElement('div');
 		sc.id = 'schedule_'+y;
-		
+			
 		document.getElementById('the_schedule_'+y).appendChild(dayHeader);
 		document.getElementById('the_schedule_'+y).appendChild(bc);
 		document.getElementById('the_schedule_'+y).appendChild(sc);
@@ -719,7 +724,7 @@ function main(configs) {
 		return new Date($(a).data("datetime")) - new Date($(b).data("datetime"));
 		  });
 		day.append(days);	
-	//	console.log('y == '+y+' md:' +mornDay + ' d:' +d);
+		//console.log('y == '+y+' md:' +mornDay + ' d:' +d);	
 	}
 	
 
@@ -779,13 +784,26 @@ function toggleButton(thing) {
 }
 
 function sendCommand(job) {
+	if ( job == 'set_morning' ) {
+		var ele_next = $("div.schedule_changer");
+	//	 $("div.save_gm[data-day-num='"+dayNum+"']")[0].innerText.split(':');
+		var day = ele_next.find(".save_gm").data("dayNum");
+		var tim = ele_next.find(".ti_tx input").val();
+		var mini = ele_next.find(".mi_tx input").val();
+		var d = new Date();
+		var args = Math.floor(d / 1000) + "," +day + "," + tim + ":" + mini;
+	}
+	else {
+		var ele_next = $("div.timepicker_wrap");
+		var temp = ele_next.find(".te_tx input").val();
+		var tim = ele_next.find(".ti_tx input").val();
+		var mini = ele_next.find(".mi_tx input").val();
+		var d = new Date();
+		var args = Math.floor(d / 1000) + "," +temp + "," + tim + ":" + mini;
+		// display updating if it is pending a refresh from havcauto.py
+	}
+	
 
-	var ele_next = $("div.timepicker_wrap");
-	var temp = ele_next.find(".te_tx input").val();
-	var tim = ele_next.find(".ti_tx input").val();
-	var mini = ele_next.find(".mi_tx input").val();
-	var d = new Date();
-	var args = Math.floor(d / 1000) + "," +temp + "," + tim + ":" + mini;
 	console.log(args);
 	jQuery.ajax({
 		type: "POST",
@@ -812,8 +830,6 @@ function hold_hvac() {
 	var mi = new Date(Math.ceil(d.getTime() / interval) * interval).getMinutes();
 
 	var ele_next = $("div.timepicker_wrap");
-	var ele_par = $(this).parents(".time_pick");
-	var inputs = ele_par.find('input');
 
 	ele_next.find(".te_tx input").val(parseFloat(document.getElementById('current_inside_degree').innerHTML));
 	if (ti < 10) {
@@ -829,14 +845,19 @@ function hold_hvac() {
 
 	// increase hour if minutes are zero.
 	if ( mi == 0 ) {
-		change_time('next');
+		change_time('next', 'set_hvac_hold');
 	}	
 
 }
 
 
-function change_time(direction) {
-	var ele_next = $("div.timepicker_wrap");
+function change_time(direction, job) {
+	if ( job == 'set_morning' ) {
+		var ele_next = $("div.schedule_changer");
+	}
+	else {
+		var ele_next = $("div.timepicker_wrap");
+	}
 	var cur_cli = "time";
 	var cur_time = Number(ele_next.find("." + cur_cli + " .ti_tx input").val());
 	var ele_st = 0;
@@ -879,8 +900,13 @@ function change_time(direction) {
 }
 
 //change temp
-function change_temp(direction) {
-	var ele_next = $("div.timepicker_wrap");
+function change_temp(direction, job) {
+	if ( job == 'set_morning' ) {
+		var ele_next = $("div.schedule_changer");
+	}
+	else {
+		var ele_next = $("div.timepicker_wrap");
+	}
 	var cur_cli = "temp";
 	var cur_temp = Number(ele_next.find("." + cur_cli + " .te_tx input").val());
 	var ele_st = 60;
@@ -921,21 +947,28 @@ function change_temp(direction) {
 	}
 }
 
-function change_mins(direction) {
-	var ele_next = $("div.timepicker_wrap");
+function change_mins(direction, job) {
+	if ( job == 'set_morning' ) {
+		var ele_next = $("div.schedule_changer");
+		var step_size = 1;
+	}
+	else {
+		var ele_next = $("div.timepicker_wrap");
+		var step_size = 15;
+	}
 	var cur_cli = "mins";
 	var cur_mins = Number(ele_next.find(
 			"." + cur_cli + " .mi_tx input").val());
 	var ele_st = 0;
 	var ele_en = 59;
-	var step_size = 15;
+	
 	var overflow_minutes = true;
 	if (direction === 'next') {
 		if (cur_mins + step_size > ele_en) {
 			ele_next.find("." + cur_cli + " .mi_tx input")
 			.val("00");
 			if (overflow_minutes) {
-				change_time('next');
+				change_time('next', job);
 			}
 		} else {
 			cur_mins = cur_mins + step_size;
@@ -954,7 +987,7 @@ function change_mins(direction) {
 			ele_next.find("." + cur_cli + " .mi_tx input")
 			.val(ele_en + 1 - step_size);
 			if (overflow_minutes) {
-				change_time('prev');
+				change_time('prev', job);
 			}
 		} else {
 			cur_mins = cur_mins - step_size;
@@ -971,20 +1004,61 @@ function change_mins(direction) {
 	}
 }
 
-$(document).ready(function(){
-	$(".hide_show").click(function(){
-		$(".past_event").toggle();
-	});
+function createMorningEdit(day, dayNum){
+	
+	var myNode = $(".schedule_changer");
+    $(".hold_words_gm").remove();
+    $(".save_gm").remove();
 
-});
+	// find data-day-num for dayNum and get innerHTML
+    var time = $("div.schTime[data-day-num='"+dayNum+"']")[0].innerText.split(':');
+    //console.log(time)
+    
+    var d = new Date();
+	var ti = time[0];
+	var mi = time[1];
+
+	var ele_next = $("div.schedule_changer");
+	ele_next.find(".ti_tx input").val(ti);
+	ele_next.find(".mi_tx input").val(mi);
+	  
+	var  hwDiv = document.createElement('div');
+	hwDiv.className = 'hold_words hold_words_gm';
+	hwDiv.innerHTML = day+"'s Wake Up Time ("+dayNum+")";
+	
+	var sdiv = document.createElement('div');
+	sdiv.className = 'save save_gm'
+	var satt = document.createAttribute("onClick");  
+	satt.value = "sendCommand('set_morning');"
+	sdiv.setAttributeNode(satt);
+	var satt2 = document.createAttribute("data-day-num");  
+	satt2.value = dayNum
+	sdiv.setAttributeNode(satt2);
+		
+	var idiv = document.createElement('i');
+	idiv.className = 'fa fa-check-circle action-prev'
+	var iatt = document.createAttribute("aria-hidden");  
+	iatt.value = "true"
+	
+	idiv.setAttributeNode(iatt);
+
+	myNode.prepend(hwDiv);	
+	myNode.append(sdiv);
+	sdiv.append(idiv);
+}
 
 $(function() {
 	// ----- OPEN
-	$('[data-popup-open]').on('click', function(e)  {
+	$("body").on('click', '[data-popup-open]', function(e)  {
 		var targeted_popup_class = jQuery(this).attr('data-popup-open');
+		var optionalVar = jQuery(this).attr('data-var');
+		if (optionalVar != null){
+			var dayNum = jQuery(this).attr('data-day-num');
+		    createMorningEdit(optionalVar, dayNum);
+		}
 		$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
 
-		e.preventDefault();
+		e.preventDefault(optionalVar);
 	});
 
 	// ----- CLOSE

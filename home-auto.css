@@ -61,7 +61,7 @@ body {
 
 #schIcon {
 	padding-right: 12px;
-    min-width: 20px;
+    min-width: 23px;
 }
 
 #schedule_0, #schedule_1, #schedule_2{
@@ -116,9 +116,7 @@ body {
     padding-left: .1em;
     padding-right: .1em;
     margin-top: -25px;
-    margin-bottom: -25px;
-	cursor: pointer;
-   
+    margin-bottom: -25px;   
 }
 #current_inside_htsp{
 	color: #ff8181;
@@ -253,7 +251,6 @@ img.user_icon{
 }
 #lights_text, #hvac_profile_mode{
 	text-transform: capitalize;
-	cursor: pointer;
 }
 .hpelectheat{
 	margin-right: 22px;
@@ -657,8 +654,12 @@ input{
     background-color: rgb(45, 56, 93);
     border-radius: 40px;
 }
-#hvac_updating{
-	display: inline-block
+
+#updating {
+	padding-left: 12px;
+    padding-right: 12px;
+    padding: 5;
+    background-color: #ef0000;
 }
 #hvac_time_set{
 	display: inline-block;
@@ -754,12 +755,11 @@ input{
 	font-size: 2em;
 	color: #000;	
 }
-#schedule_changer{
+.schedule_changer{
 	color: #000;
 }
 
-.edit{
-	color: #000;
-	padding-left: 10px;
-	cursor: pointer;
+.edit:hover {
+    background-color: #0080ff;
+    cursor: pointer;
 }
