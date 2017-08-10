@@ -701,15 +701,21 @@ function main(configs) {
 						var att = document.createAttribute("data-datetime");  
 						att.value = nd
 						showTime.innerHTML = shows[show].starttime;
-						var showName = document.createElement('div');
-						showName.className = "schName";
-						showName.innerHTML = shows[show].title+"<br>"+shows[show].subtitle;
+						var showTitle = document.createElement('div');
+						showTitle.className = "schTitle";
+						showTitle.innerHTML = shows[show].title;
+						var showSubtitle = document.createElement('div');
+						showSubtitle.className = "schSubtitle";
+						showSubtitle.innerHTML = shows[show].subtitle;
 						var showDiv = document.createElement('div');
 						showDiv.id = 'event';
 						showDiv.setAttributeNode(att);
 						showDiv.appendChild(dvrIcon);
 						showDiv.appendChild(showTime);
-						showDiv.appendChild(showName);	
+						var showBox = document.createElement('div');
+						showBox.appendChild(showTitle);
+						showBox.appendChild(showSubtitle);
+						showDiv.appendChild(showBox);
 						dayDiv.appendChild(showDiv);
 		   			}
 		   		}
@@ -732,15 +738,21 @@ function main(configs) {
 					var att = document.createAttribute("data-datetime");  
 					att.value = nd
 					showTime.innerHTML = shows[show].starttime;
-					var showName = document.createElement('div');
-					showName.className = "schName";
-					showName.innerHTML = shows[show].title+"<br>"+shows[show].subtitle;
+					var showTitle = document.createElement('div');
+					showTitle.className = "schTitle";
+					showTitle.innerHTML = shows[show].title;
+					var showSubtitle = document.createElement('div');
+					showSubtitle.className = "schSubtitle";
+					showSubtitle.innerHTML = shows[show].subtitle;
 					var showDiv = document.createElement('div');
 					showDiv.id = 'event';
 					showDiv.setAttributeNode(att);
 					showDiv.appendChild(dvrIcon);
 					showDiv.appendChild(showTime);
-					showDiv.appendChild(showName);	
+					var showBox = document.createElement('div');
+					showBox.appendChild(showTitle);
+					showBox.appendChild(showSubtitle);
+					showDiv.appendChild(showBox);
 					dayDiv.appendChild(showDiv);
 				}
 			}
@@ -762,15 +774,21 @@ function main(configs) {
 					var att = document.createAttribute("data-datetime");  
 					att.value = nd
 					showTime.innerHTML = recordedShows[rshow].starttime;
-					var showName = document.createElement('div');
-					showName.className = "schName";
-					showName.innerHTML = recordedShows[rshow].title+"<br>"+recordedShows[rshow].subtitle;
+					var showTitle = document.createElement('div');
+					showTitle.className = "schTitle";
+					showTitle.innerHTML = recordedShows[rshow].title;
+					var showSubtitle = document.createElement('div');
+					showSubtitle.className = "schSubtitle";
+					showSubtitle.innerHTML = recordedShows[rshow].subtitle;
 					var showDiv = document.createElement('div');
 					showDiv.id = 'event';
 					showDiv.setAttributeNode(att);
 					showDiv.appendChild(dvrIcon);
 					showDiv.appendChild(showTime);
-					showDiv.appendChild(showName);	
+					var showBox = document.createElement('div');
+					showBox.appendChild(showTitle);
+					showBox.appendChild(showSubtitle);
+					showDiv.appendChild(showBox);
 					dayDiv.appendChild(showDiv);
 	   			}
 			}		
@@ -792,15 +810,21 @@ function main(configs) {
 				var att = document.createAttribute("data-datetime");  
 				att.value = nd
 				showTime.innerHTML = shows[show].starttime;
-				var showName = document.createElement('div');
-				showName.className = "schName";
-				showName.innerHTML = shows[show].title+"<br>"+shows[show].subtitle;
+				var showTitle = document.createElement('div');
+				showTitle.className = "schTitle";
+				showTitle.innerHTML = shows[show].title;
+				var showSubtitle = document.createElement('div');
+				showSubtitle.className = "schSubtitle";
+				showSubtitle.innerHTML = shows[show].subtitle;
 				var showDiv = document.createElement('div');
 				showDiv.id = 'event';
 				showDiv.setAttributeNode(att);
 				showDiv.appendChild(dvrIcon);
 				showDiv.appendChild(showTime);
-				showDiv.appendChild(showName);	
+				var showBox = document.createElement('div');
+				showBox.appendChild(showTitle);
+				showBox.appendChild(showSubtitle);
+				showDiv.appendChild(showBox);
 				dayDiv.appendChild(showDiv);
 			}
 		}

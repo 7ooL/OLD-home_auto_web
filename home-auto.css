@@ -484,7 +484,17 @@ td{
 	width: 20px;
 	padding-top: 5px;
 } 
-
+.schTitle{
+	font-size: 13px;
+    padding-right: 1em;
+    color: orange;
+}
+.schSubtitle{
+	font-size: 11px;
+    padding-right: 1em;
+    color: yellow
+	
+}
 .tv_recorded{
 	color: #00e7ff;
 	text-shadow: 2px 2px 2px #ff0000;
