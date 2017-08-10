@@ -677,35 +677,134 @@ function main(configs) {
 		}
 
 		// get dvr shows 
-		var shows = JSON.parse(settings.dvr[y+"_shows"]);
-		for (var show in shows) {
-			var dvrIcon = document.createElement('div');
-			dvrIcon.id = 'schIcon';
-			dvrIcon.className = 'tv';
-			dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
-			var showTime = document.createElement('div');
-			showTime.className = "schTime";
-			var timeSplit = shows[show].starttime.split(":");
-			var nd = new Date(d);
-		    nd.setHours(timeSplit[0])
-		    nd.setMinutes(timeSplit[1])
-		    nd.setSeconds(timeSplit[2])
-		    var att = document.createAttribute("data-datetime");  
-			att.value = nd
-			showTime.innerHTML = shows[show].starttime;
-			var showName = document.createElement('div');
-			showName.className = "schName";
-			showName.innerHTML = shows[show].title+"<br>"+shows[show].subtitle;
+		if ( y == 0 ) {
+			var shows = JSON.parse(settings.dvr[y+"_shows"]);
+			var recordedShows = JSON.parse(settings.dvrRecorded["shows"]);
+			var list = [];
 			
-			var showDiv = document.createElement('div');
-			showDiv.id = 'event';
-			showDiv.setAttributeNode(att);
-			showDiv.appendChild(dvrIcon);
-			showDiv.appendChild(showTime);
-			showDiv.appendChild(showName);	
-			dayDiv.appendChild(showDiv);
-			
+			for (var show in shows) {
+		   		for (var rshow in recordedShows) {
+		   			if (show.includes(rshow)) {
+		   				// shows are match meaning that it is currently recording
+		   				list.push(show)
+		   				var dvrIcon = document.createElement('div');
+						dvrIcon.id = 'schIcon';
+						dvrIcon.className = 'tv_recording';
+						dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
+						var showTime = document.createElement('div');
+						showTime.className = "schTime";
+						var timeSplit = shows[show].starttime.split(":");
+						var nd = new Date(d);
+						nd.setHours(timeSplit[0])
+						nd.setMinutes(timeSplit[1])
+						nd.setSeconds(timeSplit[2])
+						var att = document.createAttribute("data-datetime");  
+						att.value = nd
+						showTime.innerHTML = shows[show].starttime;
+						var showName = document.createElement('div');
+						showName.className = "schName";
+						showName.innerHTML = shows[show].title+"<br>"+shows[show].subtitle;
+						var showDiv = document.createElement('div');
+						showDiv.id = 'event';
+						showDiv.setAttributeNode(att);
+						showDiv.appendChild(dvrIcon);
+						showDiv.appendChild(showTime);
+						showDiv.appendChild(showName);	
+						dayDiv.appendChild(showDiv);
+		   			}
+		   		}
+			}
+			for (var show in shows) {
+				if (! list.includes(show)){
+					// adding a show that has yet to record
+	   				list.push(show)
+	   				var dvrIcon = document.createElement('div');
+					dvrIcon.id = 'schIcon';
+					dvrIcon.className = 'tv';
+					dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
+						var showTime = document.createElement('div');
+					showTime.className = "schTime";
+					var timeSplit = shows[show].starttime.split(":");
+					var nd = new Date(d);
+					nd.setHours(timeSplit[0])
+					nd.setMinutes(timeSplit[1])
+					nd.setSeconds(timeSplit[2])
+					var att = document.createAttribute("data-datetime");  
+					att.value = nd
+					showTime.innerHTML = shows[show].starttime;
+					var showName = document.createElement('div');
+					showName.className = "schName";
+					showName.innerHTML = shows[show].title+"<br>"+shows[show].subtitle;
+					var showDiv = document.createElement('div');
+					showDiv.id = 'event';
+					showDiv.setAttributeNode(att);
+					showDiv.appendChild(dvrIcon);
+					showDiv.appendChild(showTime);
+					showDiv.appendChild(showName);	
+					dayDiv.appendChild(showDiv);
+				}
+			}
+			for (var rshow in recordedShows) {
+				if (! list.includes(rshow)){
+					// adding a show that has already recorded
+	   				list.push(rshow)
+	   				var dvrIcon = document.createElement('div');
+					dvrIcon.id = 'schIcon';
+					dvrIcon.className = 'tv_recorded';
+					dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
+						var showTime = document.createElement('div');
+					showTime.className = "schTime";
+					var timeSplit = recordedShows[rshow].starttime.split(":");
+					var nd = new Date(d);
+					nd.setHours(timeSplit[0])
+					nd.setMinutes(timeSplit[1])
+					nd.setSeconds(timeSplit[2])
+					var att = document.createAttribute("data-datetime");  
+					att.value = nd
+					showTime.innerHTML = recordedShows[rshow].starttime;
+					var showName = document.createElement('div');
+					showName.className = "schName";
+					showName.innerHTML = recordedShows[rshow].title+"<br>"+recordedShows[rshow].subtitle;
+					var showDiv = document.createElement('div');
+					showDiv.id = 'event';
+					showDiv.setAttributeNode(att);
+					showDiv.appendChild(dvrIcon);
+					showDiv.appendChild(showTime);
+					showDiv.appendChild(showName);	
+					dayDiv.appendChild(showDiv);
+	   			}
+			}		
+		} else {
+			// read in just the shows for any day other than today, ie y > 0
+			var shows = JSON.parse(settings.dvr[y+"_shows"]);
+			for (var show in shows) {
+				var dvrIcon = document.createElement('div');
+				dvrIcon.id = 'schIcon';
+				dvrIcon.className = 'tv';
+				dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
+					var showTime = document.createElement('div');
+				showTime.className = "schTime";
+				var timeSplit = shows[show].starttime.split(":");
+				var nd = new Date(d);
+				nd.setHours(timeSplit[0])
+				nd.setMinutes(timeSplit[1])
+				nd.setSeconds(timeSplit[2])
+				var att = document.createAttribute("data-datetime");  
+				att.value = nd
+				showTime.innerHTML = shows[show].starttime;
+				var showName = document.createElement('div');
+				showName.className = "schName";
+				showName.innerHTML = shows[show].title+"<br>"+shows[show].subtitle;
+				var showDiv = document.createElement('div');
+				showDiv.id = 'event';
+				showDiv.setAttributeNode(att);
+				showDiv.appendChild(dvrIcon);
+				showDiv.appendChild(showTime);
+				showDiv.appendChild(showName);	
+				dayDiv.appendChild(showDiv);
+			}
 		}
+		
 		
 		var bc = document.createElement('div');
 		bc.className = 'box_content';

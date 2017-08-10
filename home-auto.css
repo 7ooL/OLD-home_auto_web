@@ -478,10 +478,29 @@ td{
 }
 .tv {
     color: #00e7ff;
+    text-shadow: 2px 2px 2px #030604;
 	font-size: 18px;
 	text-align: center;
 	width: 20px;
+	padding-top: 5px;
 } 
+
+.tv_recorded{
+	color: #00e7ff;
+	text-shadow: 2px 2px 2px #ff0000;
+	font-size: 18px;
+	text-align: center;
+	width: 20px;
+	padding-top: 5px;
+}
+.tv_recording{
+	color: #00e7ff;
+	text-shadow: 2px 2px 2px #004fff;
+	font-size: 18px;
+	text-align: center;
+	width: 20px;
+	padding-top: 5px;
+}
 .hvac {
 	color: #f44336;
 	font-size: 1em;
