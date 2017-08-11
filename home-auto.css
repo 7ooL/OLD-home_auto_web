@@ -484,6 +484,9 @@ td{
 	width: 20px;
 	padding-top: 5px;
 } 
+.recording{
+	background-color: rgb(7, 82, 7);
+}
 .schTitle{
 	font-size: 13px;
     padding-right: 1em;
@@ -504,12 +507,12 @@ td{
 	padding-top: 5px;
 }
 .tv_recording{
-	color: #00e7ff;
-	text-shadow: 2px 2px 2px #004fff;
-	font-size: 18px;
-	text-align: center;
-	width: 20px;
-	padding-top: 5px;
+    color: #31ff00;
+    text-shadow: 2px 2px 2px #000000;
+    font-size: 18px;
+    text-align: center;
+    width: 20px;
+    padding-top: 5px;
 }
 .hvac {
 	color: #f44336;
@@ -529,8 +532,7 @@ td{
 }
  
 .past_event {
-	display: none;
-	color: #555555;
+	opacity: .35;
 }
 
 #refresh {
@@ -791,4 +793,37 @@ input{
 .edit:hover {
     background-color: #0080ff;
     cursor: pointer;
+}
+
+.fa-beat {
+  -webkit-animation: fa-beat 1s infinite linear;
+  animation: fa-beat 1s infinite linear;
+}
+@-webkit-keyframes fa-beat {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes fa-beat {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
 }

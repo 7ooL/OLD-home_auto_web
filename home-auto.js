@@ -690,7 +690,8 @@ function main(configs) {
 		   				var dvrIcon = document.createElement('div');
 						dvrIcon.id = 'schIcon';
 						dvrIcon.className = 'tv_recording';
-						dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
+						dvrIcon.innerHTML = '<i class="fa fa-television fa-beat" aria-hidden="true" style="display: inline-block;"></i>'
+
 						var showTime = document.createElement('div');
 						showTime.className = "schTime";
 						var timeSplit = shows[show].starttime.split(":");
@@ -709,6 +710,7 @@ function main(configs) {
 						showSubtitle.innerHTML = shows[show].subtitle;
 						var showDiv = document.createElement('div');
 						showDiv.id = 'event';
+						showDiv.className = 'recording';
 						showDiv.setAttributeNode(att);
 						showDiv.appendChild(dvrIcon);
 						showDiv.appendChild(showTime);
@@ -817,7 +819,7 @@ function main(configs) {
 				showSubtitle.className = "schSubtitle";
 				showSubtitle.innerHTML = shows[show].subtitle;
 				var showDiv = document.createElement('div');
-				showDiv.id = 'event';
+				showDiv.id = 'event';					
 				showDiv.setAttributeNode(att);
 				showDiv.appendChild(dvrIcon);
 				showDiv.appendChild(showTime);
@@ -842,11 +844,11 @@ function main(configs) {
 		
 		// sort the day
 		var day = $('#day_'+y);
-		var days = day.children('#event').detach().get();	
-		days.sort(function(a, b) {
+		var eventTime = day.children('#event').detach().get();	
+		eventTime.sort(function(a, b) {
 		return new Date($(a).data("datetime")) - new Date($(b).data("datetime"));
 		  });
-		day.append(days);	
+		day.append(eventTime);	
 		//console.log('y == '+y+' md:' +mornDay + ' d:' +d);	
 	}
 	
