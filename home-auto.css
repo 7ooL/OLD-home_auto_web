@@ -1,4 +1,3 @@
-/*@font-face { font-family: FontAwesome; src: url('fonts/FontAwesome.otf'); }*/
 @font-face { font-family: Anglodavek; src: url('fonts/Anglodavek.otf'); }
 
 
@@ -36,7 +35,7 @@ body {
 
 #month{
 	display: inline-block;
-	padding-top: 0.1em;
+	padding-top: 02%;
 }
 
 #digit{
@@ -47,12 +46,23 @@ body {
 }
 
 .schTime{
-	font-size: 12px;
+	font-size: 70%;
     padding-right: 1em;
     
 }
 .schName{
-	font-size: 12px;
+	font-size: 70%;
+}
+.schTitle{
+	font-size: 70%;
+    padding-right: 1em;
+    color: orange;
+}
+.schSubtitle{
+	font-size: 50%;
+    padding-right: 1em;
+    color: yellow
+	
 }
 
 #event{
@@ -60,7 +70,7 @@ body {
 }
 
 #schIcon {
-	padding-right: 12px;
+	padding-right: .65em;
     min-width: 23px;
 }
 
@@ -78,17 +88,17 @@ body {
 .nextEvent{
     color: rgb(246, 167, 28);
     text-transform: none;
-    font-size: .6em;
+    font-size: 60%;
 }
 .nextIcon{
 	color: red;
 	padding-right: .5em;
 }
 #current_weather_degree{
-    font-size: 4em;
+    font-size: 400%;
     letter-spacing: -0.05em;
-    padding-left: .1em;
-    padding-right: .1em;
+    padding-left: 2%;
+    padding-right: 2%;
     color: #fff;
 }
 
@@ -111,12 +121,12 @@ body {
 }
 
 #current_inside_degree{
-    font-size: 6em;
+    font-size: 600%;
     letter-spacing: -0.05em;
-    padding-left: .1em;
-    padding-right: .1em;
-    margin-top: -25px;
-    margin-bottom: -25px;   
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-top: -10%;
+    margin-bottom: -10%; 
 }
 #current_inside_htsp{
 	color: #ff8181;
@@ -127,7 +137,7 @@ body {
 
 #current_weather_humid, #current_inside_humid{
 	text-transform: capitalize;
-	padding-bottom: 0.1em;
+	padding-bottom: 2%;
 }
 
 #humid_filter, #hvac_filter{
@@ -169,7 +179,7 @@ body {
 }
 
 div.icon{
-    font-size: 1.2em;
+    font-size: 120%;
     display: block;
     margin-right: 10px;
     margin-bottom: 10px;
@@ -291,7 +301,7 @@ img.user_icon{
 	text-shadow: 2px 2px 2px #008000;
 }
 #profile_box{
-	font-size: 3em;
+	font-size: 300%;
 }
 
 .profile_temps{
@@ -305,14 +315,14 @@ img.user_icon{
 
     color: red;
     margin-left: 10px;
-    font-size: .4em;
+    font-size: 40%;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0);
 }
 .clsp{
 
     color: #13d7ec;
     margin-left: 10px;
-    font-size: .4em;
+    font-size: 40%;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0);
 }
 
@@ -326,7 +336,7 @@ a[href^=tel]{color: inherit; text-decoration: none;}
     padding: 5px 5px;
     line-height: 22px;
     color: #00ff16;
-    font-size: 24px;
+    font-size: 75%;
     font-family: 'Black Ops One';
     text-transform: uppercase;
     /* text-align: center; */
@@ -482,65 +492,42 @@ td{
 .tv {
     color: #00e7ff;
     text-shadow: 2px 2px 2px #030604;
-	font-size: 18px;
+	font-size: 90%;
 	text-align: center;
-	width: 20px;
 	padding-top: 5px;
 } 
 .recording{
 	background-color: rgb(7, 82, 7);
 }
-.schTitle{
-	font-size: 13px;
-    padding-right: 1em;
-    color: orange;
-}
-.schSubtitle{
-	font-size: 11px;
-    padding-right: 1em;
-    color: yellow
-	
-}
+
 .tv_recorded{
 	color: #00e7ff;
 	text-shadow: 2px 2px 2px #ff0000;
-	font-size: 18px;
+	font-size: 90%;
 	text-align: center;
-	width: 20px;
 	padding-top: 5px;
 }
 .tv_recording{
     color: #31ff00;
     text-shadow: 2px 2px 2px #000000;
-    font-size: 18px;
+    font-size: 90%;
     text-align: center;
-    width: 20px;
     padding-top: 5px;
 }
-.hvac {
-	color: #f44336;
-	font-size: 1em;
- }
+
 .lightScene {
 	color: #ffff00;
 	font-size: 175%;
 	text-shadow: 2px 2px 2px #9e360f;
 } 
 
-.light {
-	color: #ffff00;
-	font-size: 18px;
-	text-align: center;
-
-}
- 
 .past_event {
 	opacity: .35;
 }
 
 #refresh {
     position: absolute;
-    bottom: 10;
+    bottom: 10%;
     color: #e7e7e7;
     font-size: 75%;
 }
@@ -570,7 +557,7 @@ hr{
 #autorun_indicator, #hvac_indicator, #humid_indicator, #lights_indicator
 	{
 	margin-left: 10px;
-	margin-top: -3;
+	margin-top: -3px;
 }
 
 
@@ -601,8 +588,8 @@ hr{
 
 .led-off {
 	margin: 0 auto;
-	width: 12px;
-	height: 12px;
+	width: .65em;
+	height: .65em;
 	background-color: #0c232b;
 	border-radius: 50%;
 	box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #cacbd0 0 -1px 9px,
@@ -611,8 +598,8 @@ hr{
 
 .led-blue-small {
 	margin: 0 auto;
-	width: 12px;
-	height: 12px;
+	width: .65em;
+	height: .65em;
 	background-color: #13d7ec;
 	border-radius: 50%;
 	box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #23678a 0 -1px 9px,
@@ -657,7 +644,7 @@ hr{
 }
 .hold_words {
     color: black;
-    font-size: 2em;
+    font-size: 200%;
 }
 
 .te_tx,
@@ -671,7 +658,7 @@ input{
     background-color: rgba(0, 0, 0, 0);
     border-color: rgba(0, 0, 0, 0);
     color: #68b8ff;
-    font-size: 3em;
+    font-size: 300%;
     line-height: 100%;
     -webkit-appearance: none;
     display: block;
@@ -682,7 +669,7 @@ input{
     padding: 0;
 }
 .save{
-    font-size: 4em;
+    font-size: 400%;
     color: #08fd86;
     cursor: pointer;
     background-color: rgb(45, 56, 93);
@@ -690,9 +677,9 @@ input{
 }
 
 #updating {
-	padding-left: 12px;
-    padding-right: 12px;
-    padding: 5;
+	padding-left: .65em;
+    padding-right: .65em;
+    padding: 5px;
     background-color: #ef0000;
 }
 #hvac_time_set{
@@ -706,12 +693,9 @@ input{
 .time,
 .mins {
     width: 4em;
-    /* float: left; */
     display: inline-block;
-    /* margin: 0px 50px; */
-    font-size: 1.5em;
+    font-size: 150%;
     color: #f71f95;
-    /* font-family: arial; */
     font-weight: 700;
 }
 
@@ -719,7 +703,7 @@ input{
 .next {
     cursor: pointer;
     margin: auto;
-    font-size: 2.5em;
+    font-size: 250%;
 }
 .prev:hover,
 .save:hover,
@@ -768,7 +752,7 @@ input{
     border-radius: 1000px;
     background: rgba(255,0,0,0.8);
     font-family: Arial, Sans-Serif;
-    font-size: 3em;
+    font-size: 300%;
     text-align: center;
     line-height: 100%;
     color: #fff;
@@ -786,7 +770,7 @@ input{
 }
 
 #config_text{
-	font-size: 2em;
+	font-size: 200%;
 	color: #000;	
 }
 .schedule_changer{
@@ -796,6 +780,10 @@ input{
 .edit:hover {
     background-color: #0080ff;
     cursor: pointer;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
 }
 
 .fa-beat {
