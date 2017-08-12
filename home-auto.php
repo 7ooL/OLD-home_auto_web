@@ -47,26 +47,26 @@
 		<strong>Controls</strong>
 		<div id="buttons">
 			<button id="autorun" onclick="toggleButton('autorun');">
-				&#10004&#xfe0e;
+				<div id="buttonIcon_autorun"></div>
 				<div class="button_label">AutoRun</div>
 				<div id="disabled_autorun" class="disabled">Paused</div>
 			</button>
 			<button id="morning" onclick="toggleButton('morning');">
-				&#10004&#xfe0e;
+				<div id="buttonIcon_morning"></div>
 				<div class="button_label">Morning</div>
 				<div id="disabled_morning" class="disabled">Paused</div>
 			</button>
 			<button id="evening" onclick="toggleButton('evening');">
-				&#10004&#xfe0e;
+				<div id="buttonIcon_evening"></div>
 				<div class="button_label">Evening</div>
 				<div id="disabled_evening" class="disabled">Paused</div>
 			</button>
 			<button id="movie" onclick="toggleButton('movie');">
-				&#10004&#xfe0e;
+				<div id="buttonIcon_movie"></div>
 				<div class="button_label">Movie</div>
 			</button>
 			<button id="vacation" onclick="toggleButton('vacation');">
-				&#10004&#xfe0e;
+				<div id="buttonIcon_vacation"></div>
 				<div class="button_label">Vacation</div>
 			</button>
 		</div>

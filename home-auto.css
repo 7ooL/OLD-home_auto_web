@@ -439,7 +439,10 @@ button.depth:active {
 } /* Blue */
 .button_red {
 	color: #f44336;
-} /* Red */
+} 
+.button_pink {
+	color: #c76c6c;;
+}
 .button_gray {
 	color: rgba(255, 255, 255, 0.38);
 } /* Gray */

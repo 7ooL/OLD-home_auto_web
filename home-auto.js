@@ -395,6 +395,8 @@ function main(configs) {
 
 
 	// create buttons for scenes and modes
+	var iconOn = "&#10004&#xfe0e;"
+	var iconOff = "X"
 	let options =["autorun","morning","evening","vacation","movie"]
 	for (let id of options)
 	{
@@ -402,19 +404,25 @@ function main(configs) {
 			if ( settings.settings['autorun'] == 'off' && (id == "morning" || id == "evening") ) {
 				document.getElementById(id).className = ('depth button_green_disabled');
 				$("#disabled_"+id).show();
+				$("#buttonIcon_"+id).html(iconOn);
 			}else {
 				document.getElementById(id).className = ('depth button_green ');
+				$("#buttonIcon_"+id).html(iconOn);
 				$("#disabled_"+id).hide();
 			}
 		} else {
 			if ( settings.settings['movie'] == 'on' && (id == "autorun" ) ) {
 				document.getElementById(id).className = ('depth button_green_disabled');
+				$("#buttonIcon_"+id).html(iconOff);
 				$("#disabled_"+id).show();
 			}else if (settings.settings['bed'] == 'on' && (id == "evening" ) ){
 				document.getElementById(id).className = ('depth button_green_disabled');
+				$("#buttonIcon_"+id).html(iconOff);
 				$("#disabled_"+id).show(); 
 			}else {
-				document.getElementById(id).className = ('depth button_gray');
+				document.getElementById(id).className = ('depth button_pink');
+				$("#buttonIcon_"+id).html(iconOff);
+				console.log($("#buttonIcon_"+id))
 				$("#disabled_"+id).hide();
 			}
 		}
