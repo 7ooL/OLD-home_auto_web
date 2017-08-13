@@ -224,6 +224,8 @@ function main(configs) {
 
 
 	// hvac status
+	// SEEN DEHUMIDFY AS ANOTHER OPTION
+	
 	if (settings.hvac['status'] == "error") {
 		console.log("home-auto-hvac offline")
 		document.getElementById('hvac_text').className = ('error');
@@ -393,8 +395,14 @@ function main(configs) {
 		document.getElementById('current_inside_clsp').innerHTML = settings.hvac_current['clsp'];
 	}
 
+	//'<div class="clsp"><i class="fa fa-caret-down" aria-hidden="true"></i>'+ settings.hvac_current['clsp']+'</div>' +
+	//'<div class="htsp"><i class="fa fa-caret-up" aria-hidden="true"></i>'+ settings.hvac_current['htsp']+'</div></div>');
 
 	// create buttons for scenes and modes
+	var top = $('#door').height();
+	var remaining_height = parseInt($(window).height() - top); 
+	$('#button_content').height(remaining_height); 
+	
 	var iconOn = "&#10004&#xfe0e;"
 	var iconOff = "X"
 	let options =["autorun","morning","evening","vacation","movie"]

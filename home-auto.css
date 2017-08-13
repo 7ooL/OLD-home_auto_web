@@ -1,6 +1,11 @@
 @font-face { font-family: Anglodavek; src: url('fonts/Anglodavek.otf'); }
+@-ms-viewport{
+  width: device-width;
+}
 
-
+html, body {
+    height: 100%;
+}
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	background-color: #363636;
@@ -12,30 +17,59 @@ body {
 	background-position: 0 0, 2px 2px;
 	background-size: 4px 4px;
 	color: white;
+	margin: 2px;
+    font-size: 1.5vmax;
 }
 
-#door{
-	float:left;
+.main {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+.left, .middle, .right {
+    display: table-cell;
+}
+.left {
+    width: 1vmax;
+}
+.middle {
+
+}
+.right {
+    width: 1vmax;
 }
 
+#container {
+    margin: 0 auto;
+    height: 480px
+}
+
+#left_content{
+
+}
 #button_content{
-	float:left;
-	height: 100%;
-	clear: left;
+
+}
+
+.top_size{
+	font-size: 200%;
+}
+
+#config_content {
+	text-align: center;
 }
 
 #today{
-	float: right;
-	text-align: center;
-    margin-right: 0;
-    text-transform: capitalize;
-    height: 100%;
-}
 
+	text-align: center;
+    margin-right: 0px;
+    text-transform: capitalize;
+    min-height: 100%;
+}
 
 #month{
 	display: inline-block;
-	padding-top: 02%;
+	padding-top: 2%;
 }
 
 #digit{
@@ -46,8 +80,9 @@ body {
 }
 
 .schTime{
-	font-size: 70%;
-    padding-right: 1em;
+    font-size: 70%;
+    padding-right: 3%;
+    color: #f7f783;
     
 }
 .schName{
@@ -57,6 +92,7 @@ body {
 	font-size: 70%;
     padding-right: 1em;
     color: orange;
+    max-width: 94%;
 }
 .schSubtitle{
 	font-size: 50%;
@@ -70,20 +106,22 @@ body {
 }
 
 #schIcon {
-	padding-right: .65em;
-    min-width: 23px;
+	padding-right: 2%;
+    min-width: 14px;
+    text-align: -webkit-left;
 }
 
 #schedule_0, #schedule_1, #schedule_2{
 	text-transform: none;
 	display: inline-block;
-	 padding: 5px;
+	padding: 2%;
+	font-size: 120%;
 }
 .day_box{
     text-align: left;
 }
 #the_schedule_0, #the_schedule_1, #the_schedule_2{
-	width: 100%;
+	flex-grow: 1;
 }
 .nextEvent{
     color: rgb(246, 167, 28);
@@ -95,7 +133,7 @@ body {
 	padding-right: .5em;
 }
 #current_weather_degree{
-    font-size: 400%;
+    font-size:  6vmax;
     letter-spacing: -0.05em;
     padding-left: 2%;
     padding-right: 2%;
@@ -104,6 +142,8 @@ body {
 
 #current_weather_icon img{
 	margin: auto;
+	width: 12vw;
+    height: auto;
 }
 
 #current_weather_word {
@@ -122,11 +162,9 @@ body {
 
 #current_inside_degree{
     font-size: 600%;
-    letter-spacing: -0.05em;
-    padding-left: 2%;
-    padding-right: 2%;
-    margin-top: -10%;
-    margin-bottom: -10%; 
+    letter-spacing: -6px;
+    margin-top: -6%;
+    margin-bottom: -6%;
 }
 #current_inside_htsp{
 	color: #ff8181;
@@ -137,7 +175,6 @@ body {
 
 #current_weather_humid, #current_inside_humid{
 	text-transform: capitalize;
-	padding-bottom: 2%;
 }
 
 #humid_filter, #hvac_filter{
@@ -154,14 +191,13 @@ body {
 	width: 100%;
 }
 #heatpump{
-	width: 100%;
+ 	flex-grow: 1;
 }
 #humidifer{
-	width: 100%;
+   	flex-grow: 1;
 }
 #inside{
-    min-width: 12em;
-    max-height: 10em;
+	flex-grow: 1;
 }
 #schedule_table{
 	margin-left: auto;
@@ -170,8 +206,8 @@ body {
 }
 .box_content{
 	text-transform: uppercase;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 2%;
+	padding-right: 2%;
 }
 
 #group{
@@ -179,12 +215,9 @@ body {
 }
 
 div.icon{
-    font-size: 120%;
     display: block;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    /* height: 8em; */
-    /* border-radius: 1.2em; */
+    margin-right: 5px;
+    margin-bottom: 5px;
     overflow: hidden;
     position: relative;
     border-bottom: 1px solid;
@@ -194,12 +227,10 @@ div.icon{
 }
 
 div.icon strong {
-    top: 0;
-    padding-right: 1.0em;
+    top: 0px;
     color: #2f2f2f;
     background-color: #737270;
     text-align: center;
-    width: 100%;
     letter-spacing: -0.05em;
 }
 
@@ -226,7 +257,7 @@ div.icon span p {
 	width: 370px;
 }
 img.user_icon{
-	padding: 2px;
+    width: 10vw;
 	margin: auto;
 }
 
@@ -376,14 +407,15 @@ a[href^=tel]{color: inherit; text-decoration: none;}
 }
 
 button {
-	margin-top: 10px;
+	/*margin-top: 10px;
 	margin-bottom: 20px;
 	margin-left: 15px;
-	margin-right: 15px;
+	margin-right: 15px;*/
+	    margin: 1vmax;
 }
 
 .button_label {
-	font-size: 50%;
+	font-size: 1.5vmax;
 }
 
 button:hover {
@@ -393,7 +425,10 @@ button:hover {
 button:active {
 	outline: none;
 }
-
+.buttonIcon{
+	font-size: 2.5vmax;
+    margin-top: -5px;
+}
 /* 3D Button */
 button.depth {
 	background: #444;
@@ -409,12 +444,12 @@ button.depth {
 		hsla(0, 0%, 0%, .5), 0 1px 2px 8px hsla(0, 0%, 100%, .25), 0 -1px 2px
 		8px hsla(0, 0%, 0%, .5);
 	cursor: pointer;
-	font: bold 26px/17px sans-serif;
-	height: 80px;
+	font: bold 2.6vmax sans-serif;
+	height: 8vmax;
 	padding: 0;
 	text-shadow: 0 1px 1px hsla(0, 0%, 100%, .25), 0 -1px 1px
 		hsla(0, 0%, 0%, .75);
-	width: 80px;
+	width: 8vmax;
 }
 
 button.depth:hover {
@@ -467,11 +502,7 @@ button.depth:active {
 }
 
 #lock_symbol{
-	font-size: 122%;
-    margin-top: -8px;
-}
-#vutton_lock_label{
-	margin-top: -4px;
+    font-size: 3.5vmax
 }
 
 /* dule seetings */
@@ -525,11 +556,11 @@ td{
 	opacity: .35;
 }
 
-#refresh {
+#refresh{
     position: absolute;
-    bottom: 10%;
+    bottom: 2px;
     color: #e7e7e7;
-    font-size: 75%;
+    font-size: 54%;
 }
 
 hr{
@@ -539,19 +570,15 @@ hr{
 
 .disabled {
 	color: #ffe200;
-	font-size: 50%;
+	font-size: 1.5vmax;
 	position: absolute;
-	margin-left: 16px;
+	margin-left: 2vw;
 	margin-top: 2px;
 }
 
 .led-box {
 	width: 200px;
 	margin-left: 50px;
-}
-
-#config_content {
-	text-align: center;
 }
 
 #autorun_indicator, #hvac_indicator, #humid_indicator, #lights_indicator
@@ -669,7 +696,7 @@ input{
     padding: 0;
 }
 .save{
-    font-size: 400%;
+    font-size: 6vw;
     color: #08fd86;
     cursor: pointer;
     background-color: rgb(45, 56, 93);
@@ -694,7 +721,6 @@ input{
 .mins {
     width: 4em;
     display: inline-block;
-    font-size: 150%;
     color: #f71f95;
     font-weight: 700;
 }
@@ -724,8 +750,7 @@ input{
  
 /* Inner */
 .popup-inner {
-    max-width: 700px;
-    /* width: 90%; */
+    width: 48vw;
     padding: 20px;
     position: absolute;
     top: 50%;
