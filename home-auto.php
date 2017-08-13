@@ -65,7 +65,7 @@
 		<div class="middle">
 
 			<div id="config_content">
-				<div class="rubber" style="display: none;"></div>
+				<div class="marquee" ></div>
 				<div id="updating" style="display: inline-block;">
 					Pending Changes <i class="fa fa-refresh fa-spin fa-fw"></i>
 				</div>

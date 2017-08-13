@@ -146,19 +146,18 @@ function main(configs) {
 
 	// set background color
 	if (settings.settings["vacation"] == 'on' ) {
+		settings.settings['morning'] = 'off';
 		$("body").css("background-color","#580000");
-		//$("button").css("background", "#922222");
-		$(".rubber").html("Vacation Mode Enabled");
-		$('.rubber').show();
+		$(".marquee").html("<h3>Vacation Mode Enabled</h3>");
+		$('.marquee').show();
 	} else if (settings.settings["movie"] == 'on'){
+		settings.settings['autorun'] = 'off';
 		$("body").css("background-color","#002c58");
-		//$("button").css("background", "#001325");
-		$(".rubber").html("Movie Mode Enabled");
-		$('.rubber').show();
+		$(".marquee").html("<h3>Movie Mode Enabled</h3>");
+		$('.marquee').show();
 	} else{
 		$("body").css("background-color","#363636");
-		//$("button").css("background", "#444");
-		$('.rubber').hide();
+		$('.marquee').hide();
 	}
 
 	// build people home list
@@ -403,8 +402,6 @@ function main(configs) {
 	var remaining_height = parseInt($(window).height() - top); 
 	$('#button_content').height(remaining_height); 
 	
-	var iconOn = "&#10004&#xfe0e;"
-	var iconOff = "X"
 	let options =["autorun","morning","evening","vacation","movie"]
 	for (let id of options)
 	{
@@ -412,25 +409,19 @@ function main(configs) {
 			if ( settings.settings['autorun'] == 'off' && (id == "morning" || id == "evening") ) {
 				document.getElementById(id).className = ('depth button_green_disabled');
 				$("#disabled_"+id).show();
-		//		$("#buttonIcon_"+id).html(iconOn);
 			}else {
 				document.getElementById(id).className = ('depth button_green ');
-		//		$("#buttonIcon_"+id).html(iconOn);
 				$("#disabled_"+id).hide();
 			}
 		} else {
 			if ( settings.settings['movie'] == 'on' && (id == "autorun" ) ) {
 				document.getElementById(id).className = ('depth button_green_disabled');
-	//			$("#buttonIcon_"+id).html(iconOff);
 				$("#disabled_"+id).show();
 			}else if (settings.settings['bed'] == 'on' && (id == "evening" ) ){
 				document.getElementById(id).className = ('depth button_green_disabled');
-	//			$("#buttonIcon_"+id).html(iconOff);
 				$("#disabled_"+id).show(); 
 			}else {
 				document.getElementById(id).className = ('depth button_pink');
-	//			$("#buttonIcon_"+id).html(iconOff);
-				console.log($("#buttonIcon_"+id))
 				$("#disabled_"+id).hide();
 			}
 		}
@@ -894,11 +885,16 @@ function toggleButton(thing) {
 					alert("You can't configure AutoRun while Movie mode is active.");
 				}else {
 					var action = "";
+					
+					if (thing == "lock" ) {
+						document.getElementById(thing).className = ('lock button_gold')
+					}else {
+						document.getElementById(thing).className = ('depth button_gold')
+					}
+					
 					if ( settings.settings[thing] == 'on'){
-						document.getElementById(thing).className = ('depth button_gold');
 						action = 'off';
 					}else {
-						document.getElementById(thing).className = ('depth button_gold');
 						action = 'on';
 					}
 					jQuery.ajax({

@@ -487,6 +487,7 @@ button.depth:active {
 } /* Gray */
 .button_gold {
 	color: #e5c100;
+	text-shadow: 0 -1px 0 rgb(0, 0, 0), 0 0px 30px rgb(255, 209, 209), 0 0px 50px rgb(245, 255, 7);
 } /* Gold */
 .button_black {
 	color: #555555;
@@ -831,4 +832,40 @@ input{
     -webkit-transform: scale(1);
     transform: scale(1);
   }
+}
+
+.marquee {
+    z-index: 1000;
+    top: 0;
+    position: relative;
+}
+.marquee h3{
+    width: 100%;
+    margin: 0;
+    text-align: left;
+    -moz-animation: marquee 5s linear infinite alternate;
+    -webkit-animation: marquee 5s linear infinite alternate;
+    animation: marquee 5s linear infinite alternate;
+}
+/* Move it (define the animation) */
+@-moz-keyframes marquee {
+ 0%   { -moz-transform: translateX(70%); }
+ 100% { -moz-transform: translateX(0%); }
+}
+@-webkit-keyframes marquee {
+ 0%   { -webkit-transform: translateX(70%); }
+ 100% { -webkit-transform: translateX(0%); }
+}
+@keyframes marquee {
+ 0%   { 
+ -moz-transform: translateX(70%); /* Firefox bug fix */
+ -webkit-transform: translateX(70%); /* Firefox bug fix */
+ transform: translateX(70%); 		
+ }
+ 100% { 
+ -moz-transform: translateX(0%); /* Firefox bug fix */
+ -webkit-transform: translateX(0%); /* Firefox bug fix */
+ transform: translateX(0%); 
+ }
+}
 }
