@@ -147,17 +147,17 @@ function main(configs) {
 	// set background color
 	if (settings.settings["vacation"] == 'on' ) {
 		$("body").css("background-color","#580000");
-		$("button").css("background", "#922222");
+		//$("button").css("background", "#922222");
 		$(".rubber").html("Vacation Mode Enabled");
 		$('.rubber').show();
 	} else if (settings.settings["movie"] == 'on'){
 		$("body").css("background-color","#002c58");
-		$("button").css("background", "#001325");
+		//$("button").css("background", "#001325");
 		$(".rubber").html("Movie Mode Enabled");
 		$('.rubber').show();
 	} else{
 		$("body").css("background-color","#363636");
-		$("button").css("background", "#444");
+		//$("button").css("background", "#444");
 		$('.rubber').hide();
 	}
 
@@ -412,24 +412,24 @@ function main(configs) {
 			if ( settings.settings['autorun'] == 'off' && (id == "morning" || id == "evening") ) {
 				document.getElementById(id).className = ('depth button_green_disabled');
 				$("#disabled_"+id).show();
-				$("#buttonIcon_"+id).html(iconOn);
+		//		$("#buttonIcon_"+id).html(iconOn);
 			}else {
 				document.getElementById(id).className = ('depth button_green ');
-				$("#buttonIcon_"+id).html(iconOn);
+		//		$("#buttonIcon_"+id).html(iconOn);
 				$("#disabled_"+id).hide();
 			}
 		} else {
 			if ( settings.settings['movie'] == 'on' && (id == "autorun" ) ) {
 				document.getElementById(id).className = ('depth button_green_disabled');
-				$("#buttonIcon_"+id).html(iconOff);
+	//			$("#buttonIcon_"+id).html(iconOff);
 				$("#disabled_"+id).show();
 			}else if (settings.settings['bed'] == 'on' && (id == "evening" ) ){
 				document.getElementById(id).className = ('depth button_green_disabled');
-				$("#buttonIcon_"+id).html(iconOff);
+	//			$("#buttonIcon_"+id).html(iconOff);
 				$("#disabled_"+id).show(); 
 			}else {
 				document.getElementById(id).className = ('depth button_pink');
-				$("#buttonIcon_"+id).html(iconOff);
+	//			$("#buttonIcon_"+id).html(iconOff);
 				console.log($("#buttonIcon_"+id))
 				$("#disabled_"+id).hide();
 			}
@@ -437,15 +437,12 @@ function main(configs) {
 	}
 
 	// create buttons for lock status
-	document.getElementById('button_label_lock').innerHTML = settings.lock['status'];
 	if ( settings.lock['status'] == 'Locked' ) {
-		document.getElementById('lock').className = ('depth button_green');
-		document.getElementById('lock_symbol').innerHTML = '<i class="fa fa-lock" aria-hidden="true"></i>';
+	document.getElementById('lock').className = ('lock button_green');
+		document.getElementById('lock_symbol').innerHTML = '<i class="fa fa-2x fa-lock" aria-hidden="true"></i>';
 	} else if ( settings.lock['status'] == 'Unlocked' ) {
-		document.getElementById('lock').className = ('depth button_red');
-		document.getElementById('lock_symbol').innerHTML = '<i class="fa fa-unlock" aria-hidden="true"></i>';
-	}else {
-		document.getElementById('lock').className = ('depth button_gold');
+		document.getElementById('lock').className = ('lock button_red');
+		document.getElementById('lock_symbol').innerHTML = '<i class="fa fa-2x fa-unlock" aria-hidden="true"></i>';
 	}
 
 	

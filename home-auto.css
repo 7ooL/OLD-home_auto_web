@@ -403,7 +403,6 @@ a[href^=tel]{color: inherit; text-decoration: none;}
 
 #buttons {
 	text-align: center;
-	padding-top: .2em;
 }
 
 button {
@@ -429,33 +428,34 @@ button:active {
 	font-size: 2.5vmax;
     margin-top: -5px;
 }
+
+button.lock {
+    background: rgba(68, 68, 68, 0);
+    border: none;
+	cursor: pointer;
+    width: 8vmax;
+}
+
+button.lock:hover{
+	background: rgba(68, 68, 68, 0);
+	text-shadow: 0 -1px 0 rgb(0, 0, 0), 0 0px 30px rgb(255, 209, 209), 0 0px 50px rgb(245, 255, 7);
+}
 /* 3D Button */
 button.depth {
 	background: #444;
 	border: none;
-	border-radius: 80px;
-	box-shadow: inset 0 0 2px 2px hsla(0, 0%, 0%, .2), inset 0 0 2px 4px
-		hsla(0, 0%, 0%, .2), inset 0 0 2px 6px hsla(0, 0%, 0%, .2), inset 0 0
-		1px 8px hsla(0, 0%, 0%, .5), inset 0 -4px 2px 4px hsla(0, 0%, 0%, .5),
-		inset 0 1px 1px 8px hsla(0, 0%, 100%, .25), inset 0 -30px 30px
-		hsla(0, 0%, 0%, .2), 0 -4px 8px 4px hsla(0, 0%, 0%, .5), 0 10px 10px
-		hsla(0, 0%, 0%, .25), 0 0 2px 2px hsla(0, 0%, 0%, .2), 0 0 2px 4px
-		hsla(0, 0%, 0%, .2), 0 0 2px 6px hsla(0, 0%, 0%, .2), 0 0 2px 8px
-		hsla(0, 0%, 0%, .5), 0 1px 2px 8px hsla(0, 0%, 100%, .25), 0 -1px 2px
-		8px hsla(0, 0%, 0%, .5);
+	border-radius: 10px;
 	cursor: pointer;
 	font: bold 2.6vmax sans-serif;
-	height: 8vmax;
+	height: 4vmax;
 	padding: 0;
-	text-shadow: 0 1px 1px hsla(0, 0%, 100%, .25), 0 -1px 1px
-		hsla(0, 0%, 0%, .75);
 	width: 8vmax;
 }
 
 button.depth:hover {
-	color: #0ab;
-	text-shadow: 0 0 20px hsla(240, 75%, 75%, .5), 0 1px 1px
-		hsla(0, 0%, 100%, .25), 0 -1px 1px hsla(0, 0%, 0%, .75);
+    -webkit-box-shadow: inset 0 0 0 1px #3c4248,0 5px 15px #0c0e10;
+    -moz-box-shadow: inset 0 0 0 1px #3c4248,0 5px 15px #0c0e10;
+    box-shadow: inset 0 0 0 1px #3c4248, 0 5px 15px #0c0e10;
 }
 
 button.focus {
@@ -463,30 +463,24 @@ button.focus {
 }
 
 button.depth:active {
-	box-shadow: inset 0 0 2px 2px hsla(0, 0%, 0%, .2), inset 0 0 2px 4px
-		hsla(0, 0%, 0%, .2), inset 0 0 2px 6px hsla(0, 0%, 0%, .2), inset 0 0
-		1px 7px hsla(0, 0%, 0%, .5), inset 0 5px 15px 7px hsla(0, 0%, 0%, .15),
-		inset 0 -4px 2px 3px hsla(0, 0%, 0%, .5), inset 0 1px 1px 7px
-		hsla(0, 0%, 100%, .25), inset 0 -30px 30px hsla(0, 0%, 0%, .1), inset
-		0 30px 30px hsla(0, 0%, 0%, .2), 0 -4px 8px 4px hsla(0, 0%, 0%, .5), 0
-		5px 10px hsla(0, 0%, 0%, .25), 0 0 2px 2px hsla(0, 0%, 0%, .2), 0 0
-		2px 4px hsla(0, 0%, 0%, .2), 0 0 2px 6px hsla(0, 0%, 0%, .2), 0 0 2px
-		8px hsla(0, 0%, 0%, .5), 0 1px 2px 8px hsla(0, 0%, 100%, .25), 0 -1px
-		2px 8px hsla(0, 0%, 0%, .5);
-	line-height: 19px;
+	-webkit-box-shadow: inset 0 0 0 1px #3c4248,inset 0 5px 30px #0c0e10;
+	-moz-box-shadow: inset 0 0 0 1px #3c4248,inset 0 5px 30px #0c0e10;
+  	box-shadow: inset 0 0 0 1px #3c4248,inset 0 5px 30px #0c0e10;
 }
 
 .button_green {
-	color: #4CAF50;
+	color: #01ff0a;
+    text-shadow: 0 -1px 0 rgba(0,0,0,1), 0 0px 30px rgb(0, 255, 26), 0 0px 50px rgba(0, 255, 67, 0.45);
 } /* Blue */
 .button_blue {
 	color: #008CBA;
 } /* Blue */
 .button_red {
 	color: #f44336;
+	text-shadow: 0 -1px 0 rgba(0,0,0,1), 0 0px 30px rgb(255, 0, 0), 0 0px 50px rgba(255, 0, 0, 0.45);
 } 
 .button_pink {
-	color: #c76c6c;;
+	color: #c76c6c;
 }
 .button_gray {
 	color: rgba(255, 255, 255, 0.38);
@@ -498,7 +492,7 @@ button.depth:active {
 	color: #555555;
 } /* Black */
 .button_green_disabled{
-	color: rgba(76,175,80,0.17);
+    color: rgba(0, 255, 10, 0.48);
 }
 
 #lock_symbol{
@@ -514,9 +508,6 @@ button.depth:active {
 	color: white;
 }
 
-.active {
-	color: red;
-}
 td{
 	text-transform: capitalize;
 }
@@ -570,10 +561,8 @@ hr{
 
 .disabled {
 	color: #ffe200;
-	font-size: 1.5vmax;
-	position: absolute;
-	margin-left: 2vw;
-	margin-top: 2px;
+    font-size: 1.5vmax;
+    text-shadow: 0 -1px 0 rgba(0,0,0,1), 0 0px 30px rgb(255, 242, 0), 0 0px 50px rgba(245, 255, 8, 0.45);
 }
 
 .led-box {

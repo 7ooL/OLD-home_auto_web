@@ -18,12 +18,9 @@
 
 			<div id="door" class="icon">
 				<strong>Front Door</strong>
-				<div id="buttons">
 					<button id="lock" onclick="toggleButton('lock');">
 						<div id='lock_symbol'></div>
-						<div id="button_label_lock" class="button_label"></div>
 					</button>
-				</div>
 			</div>
 			<div id="button_content" class="icon">
 				<strong>Controls</strong>
@@ -33,26 +30,35 @@
 						<div class="button_label">AutoRun</div>
 						<div id="disabled_autorun" class="disabled">Paused</div>
 					</button>
+					</div>
+					<div id="buttons">
 					<button id="morning" onclick="toggleButton('morning');">
 						<div id="buttonIcon_morning" class="buttonIcon"></div>
 						<div class="button_label">Morning</div>
 						<div id="disabled_morning" class="disabled">Paused</div>
 					</button>
+					</div>
+					<div id="buttons">
 					<button id="evening" onclick="toggleButton('evening');">
 						<div id="buttonIcon_evening" class="buttonIcon"></div>
 						<div class="button_label">Evening</div>
 						<div id="disabled_evening" class="disabled">Paused</div>
 					</button>
+					</div>
+					<div id="buttons">
 					<button id="movie" onclick="toggleButton('movie');">
 						<div id="buttonIcon_movie" class="buttonIcon"></div>
 						<div class="button_label">Movie</div>
 					</button>
+					</div>
+					<div id="buttons">
 					<button id="vacation" onclick="toggleButton('vacation');">
 						<div id="buttonIcon_vacation" class="buttonIcon"></div>
 						<div class="button_label">Vacation</div>
 					</button>
+					</div>
 
-				</div>
+				
 			</div>
 
 		</div>
