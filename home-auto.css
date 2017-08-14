@@ -92,17 +92,15 @@ body {
 	font-size: 70%;
     padding-right: 1em;
     color: orange;
-    max-width: 94%;
 }
 .schSubtitle{
 	font-size: 50%;
     padding-right: 1em;
     color: yellow
-	
 }
 
 #event{
-    display: -webkit-box;
+    display: inline-flex;
 }
 
 #schIcon {
