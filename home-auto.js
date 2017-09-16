@@ -840,12 +840,13 @@ function main(configs) {
 		bc.className = 'box_content';
 		var sc = document.createElement('div');
 		sc.id = 'schedule_'+y;
+		
+		sc.appendChild(dayDiv);
+		bc.appendChild(sc);
 			
 		document.getElementById('the_schedule_'+y).appendChild(dayHeader);
 		document.getElementById('the_schedule_'+y).appendChild(bc);
-		document.getElementById('the_schedule_'+y).appendChild(sc);
-		document.getElementById('schedule_'+y).appendChild(dayDiv);
-		
+				
 		// sort the day
 		var day = $('#day_'+y);
 		var eventTime = day.children('#event').detach().get();	

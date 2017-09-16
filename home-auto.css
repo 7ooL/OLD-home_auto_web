@@ -87,11 +87,13 @@ body {
 }
 .schName{
 	font-size: 70%;
+	text-transform: capitalize;
 }
 .schTitle{
 	font-size: 70%;
     padding-right: 1em;
     color: orange;
+    text-transform: capitalize;
 }
 .schSubtitle{
 	font-size: 50%;
@@ -100,19 +102,19 @@ body {
 }
 
 #event{
-    display: inline-flex;
+ /*   display: inline-flex;*/
+     display: -webkit-inline-box;
+     padding: 3px 0;
 }
 
 #schIcon {
-	padding-right: 2%;
-    min-width: 14px;
+	/*padding-right: 2%;*/
+    min-width: 25px;
     text-align: -webkit-left;
 }
 
 #schedule_0, #schedule_1, #schedule_2{
 	text-transform: none;
-	display: inline-block;
-	padding: 2%;
 	font-size: 120%;
 }
 .day_box{
@@ -120,6 +122,7 @@ body {
 }
 #the_schedule_0, #the_schedule_1, #the_schedule_2{
 	flex-grow: 1;
+	-webkit-flex-grow: 1;
 }
 .nextEvent{
     color: rgb(246, 167, 28);
@@ -515,25 +518,22 @@ td{
     text-shadow: 2px 2px 2px #030604;
 	font-size: 90%;
 	text-align: center;
-	padding-top: 5px;
 } 
 .recording{
-	background-color: rgb(7, 82, 7);
+	/*background-color: rgb(7, 82, 7);*/
 }
 
 .tv_recorded{
-	color: #00e7ff;
-	text-shadow: 2px 2px 2px #ff0000;
+	color: #ff0000;
+	text-shadow: 2px 2px 2px #800000;
 	font-size: 90%;
 	text-align: center;
-	padding-top: 5px;
 }
 .tv_recording{
     color: #31ff00;
-    text-shadow: 2px 2px 2px #000000;
+    text-shadow: 2px 2px 2px #008000;
     font-size: 90%;
     text-align: center;
-    padding-top: 5px;
 }
 
 .lightScene {
