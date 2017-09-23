@@ -498,13 +498,31 @@ function main(configs) {
 //	document.getElementById("lightIcon").innerHTML = '<i class="fa fa-lightbulb-o light" aria-hidden="true" style="display: inline-block;"></i>'
 //	document.getElementById("hvacIcon").innerHTML = '<i class="fa fa-thermometer-full hvac" aria-hidden="true" style="display: inline-block;"></i>'
 	
-	// remove dvr content before adding it again on reload
+	// remove schedules content before adding it again on reload
 	for ( var y = 0; y < 3 ; y++) {
-		var myNode = document.getElementById("the_schedule_"+y);
+		var myNode = document.getElementById('schedules');
 		while (myNode.firstChild) {
-			myNode.removeChild(myNode.firstChild);
-		}
+			myNode.removeChild(myNode.firstChild);		}
 	}
+	// create schedule framework
+	var schDiv = document.createElement('div');
+	schDiv.id = 'schDays';
+	schDiv.className = 'icon';
+	var schUL = document.createElement('ul');
+	
+	for ( var y = 0; y < 3 ; y++) {
+		var schLI = document.createElement('LI');
+		var schA = document.createElement('a');
+		schA.id = 'schDays-'+y;
+		var att = document.createAttribute("href");
+		att.value = '#tabs-'+y;
+		schA.setAttributeNode(att); 
+		schLI.appendChild(schA);
+		schUL.appendChild(schLI);
+	}
+	schDiv.appendChild(schUL);
+	document.getElementById('schedules').appendChild(schDiv);
+
 	// get schedule data for a few days
 	for ( var y = 0; y < 3 ; y++) {
 
@@ -519,12 +537,10 @@ function main(configs) {
 		var dayDiv = document.createElement('div');
 		dayDiv.id = 'day_'+y;
 		dayDiv.className = 'day_box';
-				
-		var dayHeader = document.createElement('strong');
-			
+						
 		if ( y == 0) {
 
-			dayHeader.innerHTML = "Today";
+			document.getElementById('schDays-'+y).innerHTML = "Today";
 			
 			// made impossible so not to run
 			for ( var x = 7; x < 6; x++) {
@@ -559,7 +575,7 @@ function main(configs) {
 			
 		}
 		if ( y == 1) {
-			dayHeader.innerHTML = "Tomorrow";
+			document.getElementById('schDays-'+y).innerHTML = "Tomorrow";
 			
 			mornDay = mornDay+1
 	
@@ -588,7 +604,7 @@ function main(configs) {
 			
 	
 			d.setDate(d.getDate() + 2);
-			dayHeader.innerHTML = weekday[d.getDay()];
+			document.getElementById('schDays-'+y).innerHTML = weekday[d.getDay()];
 		}
 
 		// add wake event based on global morning times			
@@ -598,7 +614,7 @@ function main(configs) {
 			
 		var mornName = document.createElement('div');
 		mornName.className = 'schName';
-		mornName.innerHTML = 'Wake up time';
+		mornName.innerHTML = 'Wake up';
 			
 		var mornTime = document.createElement('div');
 		mornTime.className = 'schTime';
@@ -616,7 +632,7 @@ function main(configs) {
 		var att2 = document.createAttribute("data-popup-open");
 		att2.value = "popup-4";
 		var att3 = document.createAttribute("data-var");
-		att3.value = dayHeader.innerHTML;
+		att3.value = document.getElementById('schDays-'+y).innerHTML
 		var dayAtt2 = document.createAttribute("data-day-num"); 
 		dayAtt2.value = mornDay;
 					
@@ -688,7 +704,7 @@ function main(configs) {
 			
 			for (var show in shows) {
 		   		for (var rshow in recordedShows) {
-		   			if (show.includes(rshow)) {
+		   			if (shows[show].title == recordedShows[rshow].title) {
 		   				// shows are match meaning that it is currently recording
 		   				list.push(show)
 		   				var dvrIcon = document.createElement('div');
@@ -838,15 +854,14 @@ function main(configs) {
 		
 		var bc = document.createElement('div');
 		bc.className = 'box_content';
+		bc.id = "tabs-"+y
+
 		var sc = document.createElement('div');
 		sc.id = 'schedule_'+y;
 		
 		sc.appendChild(dayDiv);
 		bc.appendChild(sc);
-			
-		document.getElementById('the_schedule_'+y).appendChild(dayHeader);
-		document.getElementById('the_schedule_'+y).appendChild(bc);
-				
+		document.getElementById('schDays').appendChild(bc);
 		// sort the day
 		var day = $('#day_'+y);
 		var eventTime = day.children('#event').detach().get();	
@@ -858,6 +873,10 @@ function main(configs) {
 	}
 	
 
+	$( function() {
+	    $( "#schDays" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+	    $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );;
+	  } );
 
 	// show all ids that are based on reading the config file
 	$("#config_content").show();
@@ -1181,6 +1200,7 @@ function createMorningEdit(day, dayNum){
 	myNode.append(sdiv);
 	sdiv.append(idiv);
 }
+
 
 $(function() {
 	// ----- OPEN

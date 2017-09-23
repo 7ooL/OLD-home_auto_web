@@ -7,8 +7,19 @@
 <link rel="stylesheet" type="text/css" href="fonts/font-awesome.min.css">
 <link rel="shortcut icon" href="home-auto.ico">
 
+
 <script type="text/javascript" src="jquery-3.2.1.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
 <script type="text/javascript" src="home-auto.js"></script>
+
+ <style>
+
+  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left;}
+  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%;}
+  .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+ 
+  </style>
+
 </head>
 <body>
 
@@ -18,9 +29,9 @@
 
 			<div id="door" class="icon">
 				<strong>Front Door</strong>
-					<button id="lock" onclick="toggleButton('lock');">
-						<div id='lock_symbol'></div>
-					</button>
+				<button id="lock" onclick="toggleButton('lock');">
+					<div id='lock_symbol'></div>
+				</button>
 			</div>
 			<div id="button_content" class="icon">
 				<strong>Controls</strong>
@@ -30,42 +41,42 @@
 						<div class="button_label">AutoRun</div>
 						<div id="disabled_autorun" class="disabled">Paused</div>
 					</button>
-					</div>
-					<div id="buttons">
+				</div>
+				<div id="buttons">
 					<button id="morning" onclick="toggleButton('morning');">
 						<div id="buttonIcon_morning" class="buttonIcon"></div>
 						<div class="button_label">Morning</div>
 						<div id="disabled_morning" class="disabled">Paused</div>
 					</button>
-					</div>
-					<div id="buttons">
+				</div>
+				<div id="buttons">
 					<button id="evening" onclick="toggleButton('evening');">
 						<div id="buttonIcon_evening" class="buttonIcon"></div>
 						<div class="button_label">Evening</div>
 						<div id="disabled_evening" class="disabled">Paused</div>
 					</button>
-					</div>
-					<div id="buttons">
+				</div>
+				<div id="buttons">
 					<button id="movie" onclick="toggleButton('movie');">
 						<div id="buttonIcon_movie" class="buttonIcon"></div>
 						<div class="button_label">Movie</div>
 					</button>
-					</div>
-					<div id="buttons">
+				</div>
+				<div id="buttons">
 					<button id="vacation" onclick="toggleButton('vacation');">
 						<div id="buttonIcon_vacation" class="buttonIcon"></div>
 						<div class="button_label">Vacation</div>
 					</button>
-					</div>
+				</div>
 
-				
+
 			</div>
 
 		</div>
 		<div class="middle">
 
 			<div id="config_content">
-				<div class="marquee" ></div>
+				<div class="marquee"></div>
 				<div id="updating" style="display: inline-block;">
 					Pending Changes <i class="fa fa-refresh fa-spin fa-fw"></i>
 				</div>
@@ -124,12 +135,10 @@
 					</div>
 				</div>
 
+			
+			<div id="schedules"></div>
 
-				<div id="group">
-					<div id="the_schedule_0" class="icon"></div>
-					<div id="the_schedule_1" class="icon"></div>
-					<div id="the_schedule_2" class="icon"></div>
-				</div>
+
 
 
 				<div class="popup" data-popup="popup-1">
