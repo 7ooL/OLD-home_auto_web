@@ -713,6 +713,7 @@ function main(configs) {
 		   			if (shows[show].title+" - "+shows[show].subtitle == recordedShows[rshow].title+" - "+recordedShows[rshow].subtitle) {
 		   				// shows are match meaning that it is currently recording
 		   				list.push(shows[show].title+" - "+shows[show].subtitle)
+		   				console.log("adding match = "+shows[show].title+" - "+shows[show].subtitle);
 		   				var dvrIcon = document.createElement('div');
 						dvrIcon.id = 'schIcon';
 						dvrIcon.className = 'tv_recording';
@@ -746,75 +747,81 @@ function main(configs) {
 						showDiv.appendChild(showBox);
 						dayDiv.appendChild(showDiv);
 		   			}
-					if (! list.includes(recordedShows[rshow].title+" - "+recordedShows[rshow].subtitle)){
-						// adding a show that has already recorded
-		   				list.push(recordedShows[rshow].title+" - "+recordedShows[rshow].subtitle)
-		   				var dvrIcon = document.createElement('div');
-						dvrIcon.id = 'schIcon';
-						dvrIcon.className = 'tv_recorded';
-						dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
-							var showTime = document.createElement('div');
-						showTime.className = "schTime";
-						var timeSplit = recordedShows[rshow].starttime.split(":");
-						var nd = new Date(d);
-						nd.setHours(timeSplit[0])
-						nd.setMinutes(timeSplit[1])
-						nd.setSeconds(timeSplit[2])
-						var att = document.createAttribute("data-datetime");  
-						att.value = nd
-						showTime.innerHTML = recordedShows[rshow].starttime;
-						var showTitle = document.createElement('div');
-						showTitle.className = "schTitle";
-						showTitle.innerHTML = recordedShows[rshow].title;
-						var showSubtitle = document.createElement('div');
-						showSubtitle.className = "schSubtitle";
-						showSubtitle.innerHTML = recordedShows[rshow].subtitle;
-						var showDiv = document.createElement('div');
-						showDiv.id = 'event';
-						showDiv.setAttributeNode(att);
-						showDiv.appendChild(dvrIcon);
-						showDiv.appendChild(showTime);
-						var showBox = document.createElement('div');
-						showBox.appendChild(showTitle);
-						showBox.appendChild(showSubtitle);
-						showDiv.appendChild(showBox);
-						dayDiv.appendChild(showDiv);
-		   			}
-					if (! list.includes(shows[show].title+" - "+shows[show].subtitle)){
-						// adding a show that has yet to record
-		   				list.push(shows[show].title+" - "+shows[show].subtitle)
-		   				var dvrIcon = document.createElement('div');
-						dvrIcon.id = 'schIcon';
-						dvrIcon.className = 'tv';
-						dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
-							var showTime = document.createElement('div');
-						showTime.className = "schTime";
-						var timeSplit = shows[show].starttime.split(":");
-						var nd = new Date(d);
-						nd.setHours(timeSplit[0])
-						nd.setMinutes(timeSplit[1])
-						nd.setSeconds(timeSplit[2])
-						var att = document.createAttribute("data-datetime");  
-						att.value = nd
-						showTime.innerHTML = shows[show].starttime;
-						var showTitle = document.createElement('div');
-						showTitle.className = "schTitle";
-						showTitle.innerHTML = shows[show].title;
-						var showSubtitle = document.createElement('div');
-						showSubtitle.className = "schSubtitle";
-						showSubtitle.innerHTML = shows[show].subtitle;
-						var showDiv = document.createElement('div');
-						showDiv.id = 'event';
-						showDiv.setAttributeNode(att);
-						showDiv.appendChild(dvrIcon);
-						showDiv.appendChild(showTime);
-						var showBox = document.createElement('div');
-						showBox.appendChild(showTitle);
-						showBox.appendChild(showSubtitle);
-						showDiv.appendChild(showBox);
-						dayDiv.appendChild(showDiv);
-					}
 		   		}
+			}
+   			for (var show in shows) {
+	   			 if (! list.includes(shows[show].title+" - "+shows[show].subtitle)){
+					// adding a show that has yet to record
+	   				list.push(shows[show].title+" - "+shows[show].subtitle)
+	   				console.log("adding show = "+shows[show].title+" - "+shows[show].subtitle);
+	   				var dvrIcon = document.createElement('div');
+					dvrIcon.id = 'schIcon';
+					dvrIcon.className = 'tv';
+					dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
+						var showTime = document.createElement('div');
+					showTime.className = "schTime";
+					var timeSplit = shows[show].starttime.split(":");
+					var nd = new Date(d);
+					nd.setHours(timeSplit[0])
+					nd.setMinutes(timeSplit[1])
+					nd.setSeconds(timeSplit[2])
+					var att = document.createAttribute("data-datetime");  
+					att.value = nd
+					showTime.innerHTML = shows[show].starttime;
+					var showTitle = document.createElement('div');
+					showTitle.className = "schTitle";
+					showTitle.innerHTML = shows[show].title;
+					var showSubtitle = document.createElement('div');
+					showSubtitle.className = "schSubtitle";
+					showSubtitle.innerHTML = shows[show].subtitle;
+					var showDiv = document.createElement('div');
+					showDiv.id = 'event';
+					showDiv.setAttributeNode(att);
+					showDiv.appendChild(dvrIcon);
+					showDiv.appendChild(showTime);
+					var showBox = document.createElement('div');
+					showBox.appendChild(showTitle);
+					showBox.appendChild(showSubtitle);
+					showDiv.appendChild(showBox);
+					dayDiv.appendChild(showDiv);
+				}
+	   		}
+   			for (var rshow in recordedShows) {
+		   		if (! list.includes(recordedShows[rshow].title+" - "+recordedShows[rshow].subtitle)){
+		   		// adding a show that has already recorded
+	   				list.push(recordedShows[rshow].title+" - "+recordedShows[rshow].subtitle)
+	   				console.log("adding rshow = "+recordedShows[rshow].title+" - "+recordedShows[rshow].subtitle);
+	   				var dvrIcon = document.createElement('div');
+					dvrIcon.id = 'schIcon';
+					dvrIcon.className = 'tv_recorded';
+					dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
+						var showTime = document.createElement('div');
+					showTime.className = "schTime";
+					var timeSplit = recordedShows[rshow].starttime.split(":");
+					var nd = new Date(d);
+					nd.setHours(timeSplit[0])
+					nd.setMinutes(timeSplit[1])
+					nd.setSeconds(timeSplit[2])
+					var att = document.createAttribute("data-datetime");  
+					att.value = nd
+					showTime.innerHTML = recordedShows[rshow].starttime;
+					var showTitle = document.createElement('div');
+					showTitle.className = "schTitle";
+					showTitle.innerHTML = recordedShows[rshow].title;
+					var showSubtitle = document.createElement('div');
+					showSubtitle.className = "schSubtitle";
+					showSubtitle.innerHTML = recordedShows[rshow].subtitle;
+					var showDiv = document.createElement('div');
+					showDiv.id = 'event';
+					showDiv.setAttributeNode(att);
+					showDiv.appendChild(dvrIcon);
+					showDiv.appendChild(showTime);
+					var showBox = document.createElement('div');
+					showBox.appendChild(showTitle);
+					showBox.appendChild(showSubtitle);
+					showDiv.appendChild(showBox);
+					dayDiv.appendChild(showDiv);
+	   			}
 			}
 		
 		} else {
