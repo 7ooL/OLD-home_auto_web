@@ -93,10 +93,10 @@ body {
 .schTime {
     /* padding-right: 1em; */
 	color: #f7f783;
+	font-size: 90%;
 }
 
 .schName {
-
 	text-transform: capitalize;
 }
 
@@ -111,6 +111,7 @@ body {
 
     /* padding-right: 1em; */
 	color: yellow
+	font-size: 85%;
 }
 
 #event {
@@ -122,7 +123,7 @@ body {
 
 #schIcon {
     /* padding-right: 1em; */
-
+    font-size: 150%;
 }
 
 #schedule_0, #schedule_1, #schedule_2 {

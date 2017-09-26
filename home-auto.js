@@ -627,6 +627,8 @@ function main(configs) {
 	    d.setHours(timeSplit[0]);
 	    d.setMinutes(timeSplit[1]);
 	    d.setSeconds(timeSplit[2]);
+	    
+	    // set moringing pop up data fields
 	    var att = document.createAttribute("data-datetime");
 		att.value = d;
 		var att2 = document.createAttribute("data-popup-open");
@@ -638,11 +640,11 @@ function main(configs) {
 					
 		var lightDiv = document.createElement('div');
 		lightDiv.id = 'event';
-		lightDiv.className = 'edit';
-		lightDiv.setAttributeNode(att);
-		lightDiv.setAttributeNode(att2);
-		lightDiv.setAttributeNode(att3);
-		lightDiv.setAttributeNode(dayAtt2);
+		dayDiv.className = 'edit';
+		dayDiv.setAttributeNode(att);
+		dayDiv.setAttributeNode(att2); // make whole day the button for set morning.
+		dayDiv.setAttributeNode(att3);
+		dayDiv.setAttributeNode(dayAtt2);
 		lightDiv.appendChild(lightIcon);
 		lightDiv.appendChild(mornTime);
 		lightDiv.appendChild(mornName);
@@ -704,9 +706,13 @@ function main(configs) {
 			
 			for (var show in shows) {
 		   		for (var rshow in recordedShows) {
-		   			if (shows[show].title == recordedShows[rshow].title) {
+		   			
+		   			//console.log("show = "+shows[show].title+" - "+shows[show].subtitle);
+		   			//console.log("rshow = "+recordedShows[rshow].title+" - "+recordedShows[rshow].subtitle);
+		   			
+		   			if (shows[show].title+" - "+shows[show].subtitle == recordedShows[rshow].title+" - "+recordedShows[rshow].subtitle) {
 		   				// shows are match meaning that it is currently recording
-		   				list.push(show)
+		   				list.push(shows[show].title+" - "+shows[show].subtitle)
 		   				var dvrIcon = document.createElement('div');
 						dvrIcon.id = 'schIcon';
 						dvrIcon.className = 'tv_recording';
@@ -740,80 +746,77 @@ function main(configs) {
 						showDiv.appendChild(showBox);
 						dayDiv.appendChild(showDiv);
 		   			}
+					if (! list.includes(recordedShows[rshow].title+" - "+recordedShows[rshow].subtitle)){
+						// adding a show that has already recorded
+		   				list.push(recordedShows[rshow].title+" - "+recordedShows[rshow].subtitle)
+		   				var dvrIcon = document.createElement('div');
+						dvrIcon.id = 'schIcon';
+						dvrIcon.className = 'tv_recorded';
+						dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
+							var showTime = document.createElement('div');
+						showTime.className = "schTime";
+						var timeSplit = recordedShows[rshow].starttime.split(":");
+						var nd = new Date(d);
+						nd.setHours(timeSplit[0])
+						nd.setMinutes(timeSplit[1])
+						nd.setSeconds(timeSplit[2])
+						var att = document.createAttribute("data-datetime");  
+						att.value = nd
+						showTime.innerHTML = recordedShows[rshow].starttime;
+						var showTitle = document.createElement('div');
+						showTitle.className = "schTitle";
+						showTitle.innerHTML = recordedShows[rshow].title;
+						var showSubtitle = document.createElement('div');
+						showSubtitle.className = "schSubtitle";
+						showSubtitle.innerHTML = recordedShows[rshow].subtitle;
+						var showDiv = document.createElement('div');
+						showDiv.id = 'event';
+						showDiv.setAttributeNode(att);
+						showDiv.appendChild(dvrIcon);
+						showDiv.appendChild(showTime);
+						var showBox = document.createElement('div');
+						showBox.appendChild(showTitle);
+						showBox.appendChild(showSubtitle);
+						showDiv.appendChild(showBox);
+						dayDiv.appendChild(showDiv);
+		   			}
+					if (! list.includes(shows[show].title+" - "+shows[show].subtitle)){
+						// adding a show that has yet to record
+		   				list.push(shows[show].title+" - "+shows[show].subtitle)
+		   				var dvrIcon = document.createElement('div');
+						dvrIcon.id = 'schIcon';
+						dvrIcon.className = 'tv';
+						dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
+							var showTime = document.createElement('div');
+						showTime.className = "schTime";
+						var timeSplit = shows[show].starttime.split(":");
+						var nd = new Date(d);
+						nd.setHours(timeSplit[0])
+						nd.setMinutes(timeSplit[1])
+						nd.setSeconds(timeSplit[2])
+						var att = document.createAttribute("data-datetime");  
+						att.value = nd
+						showTime.innerHTML = shows[show].starttime;
+						var showTitle = document.createElement('div');
+						showTitle.className = "schTitle";
+						showTitle.innerHTML = shows[show].title;
+						var showSubtitle = document.createElement('div');
+						showSubtitle.className = "schSubtitle";
+						showSubtitle.innerHTML = shows[show].subtitle;
+						var showDiv = document.createElement('div');
+						showDiv.id = 'event';
+						showDiv.setAttributeNode(att);
+						showDiv.appendChild(dvrIcon);
+						showDiv.appendChild(showTime);
+						var showBox = document.createElement('div');
+						showBox.appendChild(showTitle);
+						showBox.appendChild(showSubtitle);
+						showDiv.appendChild(showBox);
+						dayDiv.appendChild(showDiv);
+					}
 		   		}
 			}
-			for (var show in shows) {
-				if (! list.includes(show)){
-					// adding a show that has yet to record
-	   				list.push(show)
-	   				var dvrIcon = document.createElement('div');
-					dvrIcon.id = 'schIcon';
-					dvrIcon.className = 'tv';
-					dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
-						var showTime = document.createElement('div');
-					showTime.className = "schTime";
-					var timeSplit = shows[show].starttime.split(":");
-					var nd = new Date(d);
-					nd.setHours(timeSplit[0])
-					nd.setMinutes(timeSplit[1])
-					nd.setSeconds(timeSplit[2])
-					var att = document.createAttribute("data-datetime");  
-					att.value = nd
-					showTime.innerHTML = shows[show].starttime;
-					var showTitle = document.createElement('div');
-					showTitle.className = "schTitle";
-					showTitle.innerHTML = shows[show].title;
-					var showSubtitle = document.createElement('div');
-					showSubtitle.className = "schSubtitle";
-					showSubtitle.innerHTML = shows[show].subtitle;
-					var showDiv = document.createElement('div');
-					showDiv.id = 'event';
-					showDiv.setAttributeNode(att);
-					showDiv.appendChild(dvrIcon);
-					showDiv.appendChild(showTime);
-					var showBox = document.createElement('div');
-					showBox.appendChild(showTitle);
-					showBox.appendChild(showSubtitle);
-					showDiv.appendChild(showBox);
-					dayDiv.appendChild(showDiv);
-				}
-			}
-			for (var rshow in recordedShows) {
-				if (! list.includes(rshow)){
-					// adding a show that has already recorded
-	   				list.push(rshow)
-	   				var dvrIcon = document.createElement('div');
-					dvrIcon.id = 'schIcon';
-					dvrIcon.className = 'tv_recorded';
-					dvrIcon.innerHTML = '<i class="fa fa-television" aria-hidden="true" style="display: inline-block;"></i>'
-						var showTime = document.createElement('div');
-					showTime.className = "schTime";
-					var timeSplit = recordedShows[rshow].starttime.split(":");
-					var nd = new Date(d);
-					nd.setHours(timeSplit[0])
-					nd.setMinutes(timeSplit[1])
-					nd.setSeconds(timeSplit[2])
-					var att = document.createAttribute("data-datetime");  
-					att.value = nd
-					showTime.innerHTML = recordedShows[rshow].starttime;
-					var showTitle = document.createElement('div');
-					showTitle.className = "schTitle";
-					showTitle.innerHTML = recordedShows[rshow].title;
-					var showSubtitle = document.createElement('div');
-					showSubtitle.className = "schSubtitle";
-					showSubtitle.innerHTML = recordedShows[rshow].subtitle;
-					var showDiv = document.createElement('div');
-					showDiv.id = 'event';
-					showDiv.setAttributeNode(att);
-					showDiv.appendChild(dvrIcon);
-					showDiv.appendChild(showTime);
-					var showBox = document.createElement('div');
-					showBox.appendChild(showTitle);
-					showBox.appendChild(showSubtitle);
-					showDiv.appendChild(showBox);
-					dayDiv.appendChild(showDiv);
-	   			}
-			}		
+		
 		} else {
 			// read in just the shows for any day other than today, ie y > 0
 			var shows = JSON.parse(settings.dvr[y+"_shows"]);
