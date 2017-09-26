@@ -640,11 +640,11 @@ function main(configs) {
 					
 		var lightDiv = document.createElement('div');
 		lightDiv.id = 'event';
-		dayDiv.className = 'edit';
-		dayDiv.setAttributeNode(att);
-		dayDiv.setAttributeNode(att2); // make whole day the button for set morning.
-		dayDiv.setAttributeNode(att3);
-		dayDiv.setAttributeNode(dayAtt2);
+		lightDiv.className = 'edit';
+		lightDiv.setAttributeNode(att);
+		lightDiv.setAttributeNode(att2); // make whole day the button for set morning.
+		lightDiv.setAttributeNode(att3);
+		lightDiv.setAttributeNode(dayAtt2);
 		lightDiv.appendChild(lightIcon);
 		lightDiv.appendChild(mornTime);
 		lightDiv.appendChild(mornName);

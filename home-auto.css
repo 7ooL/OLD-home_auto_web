@@ -118,7 +118,6 @@ body {
     display: table-cell;
     padding: 3px 0;
     padding-right: 1em;
-
 }
 
 #schIcon {
@@ -131,7 +130,7 @@ body {
     /* font-size: 120%; */
     /* display: table-caption; */
     /* width: 68%; */
-    overflow: hidden;
+    overflow-y: scroll;
 }
 
 #accordion {
@@ -1100,7 +1099,10 @@ input {
 
 .edit:hover {
 	background-color: #0080ff;
+}
+.edit{
 	cursor: pointer;
+	z-index: 997;
 }
 
 ::-webkit-scrollbar {
