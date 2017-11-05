@@ -289,6 +289,8 @@ div.icon span p {
 img.user_icon {
 	width: 10vw;
 	margin: auto;
+	border: 2px solid #ea7001; 
+	margin-bottom: 5px;
 }
 
 .home {
