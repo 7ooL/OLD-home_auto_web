@@ -929,7 +929,7 @@ function toggleButton(thing) {
 					}
 					jQuery.ajax({
 						type: "POST",
-						url: 'home-auto.php',
+						url: 'functions.php',
 						dataType: 'json',
 						data: {functionname: action, arguments: thing},
 						success: function (obj, textstatus) {
@@ -971,7 +971,7 @@ function sendCommand(job) {
 	console.log(args);
 	jQuery.ajax({
 		type: "POST",
-		url: 'home-auto.php',
+		url: 'functions.php',
 		dataType: 'json',
 		data: {functionname: job, arguments: args},
 		success: function (obj, textstatus) {
