@@ -36,7 +36,13 @@ if (! isset ( $aResult ['error'] )) {
 					$myfile = fopen ( "vacation/vacation.txt", "w" ) or die ( "ON: Unable to open file! vacation.txt" );
 					break;
 				case 'lock' :
-					$myfile = fopen ( "lock/lock.txt", "w" ) or die ( "ON: Unable to open file! vacation.txt" );
+					$myfile = fopen ( "lock/lock.txt", "w" ) or die ( "ON: Unable to open file! lock.txt" );
+					break;
+				case 'bed' :
+					$myfile = fopen ( "bed/bed.txt", "w" ) or die ( "ON: Unable to open file! bed.txt" );
+					break;
+				case 'clean' :
+					$myfile = fopen ( "clean/clean.txt", "w" ) or die ( "ON: Unable to open file! clean.txt" );
 					break;
 				default :
 					try {
