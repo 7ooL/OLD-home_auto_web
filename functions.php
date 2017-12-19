@@ -31,18 +31,23 @@ if (! isset ( $aResult ['error'] )) {
 			switch ($_POST ['arguments']) {
 				case 'movie' :
 					$myfile = fopen ( "movie/movie.txt", "w" ) or die ( "ON: Unable to open file! movie.txt" );
+					$aResult ['alert'] = 'Movie mode successfully triggered ON';
 					break;
 				case 'vacation' :
 					$myfile = fopen ( "vacation/vacation.txt", "w" ) or die ( "ON: Unable to open file! vacation.txt" );
+					$aResult ['alert'] = 'Vacation mode successfully triggered ON';
 					break;
 				case 'lock' :
 					$myfile = fopen ( "lock/lock.txt", "w" ) or die ( "ON: Unable to open file! lock.txt" );
+					$aResult ['alert'] = 'Door Lock successfully triggered ON';
 					break;
 				case 'bed' :
 					$myfile = fopen ( "bed/bed.txt", "w" ) or die ( "ON: Unable to open file! bed.txt" );
+					$aResult ['alert'] = 'Bed mode successfully triggered ON';
 					break;
 				case 'clean' :
 					$myfile = fopen ( "clean/clean.txt", "w" ) or die ( "ON: Unable to open file! clean.txt" );
+					$aResult ['alert'] = 'Clean mode successfully triggered ON';
 					break;
 				default :
 					try {
@@ -71,12 +76,15 @@ if (! isset ( $aResult ['error'] )) {
 			switch ($_POST ['arguments']) {
 				case 'movie' :
 					$myfile = fopen ( "movie/movie.txt", "w" ) or die ( "OFF: Unable to open file! movie.txt" );
+					$aResult ['alert'] = 'Movie mode successfully triggered OFF';
 					break;
 				case 'vacation' :
 					$myfile = fopen ( "vacation/vacation.txt", "w" ) or die ( "OFF: Unable to open file! vacation.txt" );
+					$aResult ['alert'] = 'Vacation mode successfully triggered OFF';
 					break;
 				case 'lock' :
 					$myfile = fopen ( "lock/lock.txt", "w" ) or die ( "OFF: Unable to open file! vacation.txt" );
+					$aResult ['alert'] = 'Door file successfully triggered OFF';
 					break;
 				default :
 					try {
