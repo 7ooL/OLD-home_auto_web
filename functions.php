@@ -86,6 +86,10 @@ if (! isset ( $aResult ['error'] )) {
 					$myfile = fopen ( "lock/lock.txt", "w" ) or die ( "OFF: Unable to open file! vacation.txt" );
 					$aResult ['alert'] = 'Door file successfully triggered OFF';
 					break;
+				case 'clean' :
+					$myfile = fopen ( "clean/clean.txt", "w" ) or die ( "ON: Unable to open file! clean.txt" );
+					$aResult ['alert'] = 'Clean mode successfully triggered OFF';
+					break;
 				default :
 					try {
 						if (! file_exists ( $fileName )) {
